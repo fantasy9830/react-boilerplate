@@ -1,0 +1,29 @@
+{
+  "notice": {
+    "notice": "通知事項",
+    "noticeEmpty": "您已查看所有通知事項。",
+    "message": "訊息",
+    "messageEmpty": "您已讀完所有訊息。",
+    "todo": "待辦事項",
+    "todoEmpty": "您已完成所有待辦事項。",
+    "emptyText": "暫無資料",
+    "clear": "清空"
+  },
+  "setting": {
+    "logout": "登出"
+  },
+  "menu": {
+    "sidermenu1": "SiderMenu1",
+    "sidermenu1-1": "SiderMenu1-1",
+    "sidermenu1-2": "SiderMenu1-2",
+    "sidermenu1-3": "SiderMenu1-3",
+    "sidermenu1-3-1": "SiderMenu1-3-1",
+    "sidermenu1-3-2": "SiderMenu1-3-2",
+    "sidermenu1-3-3": "SiderMenu1-3-3",
+    "sidermenu2": "SiderMenu2",
+    "sidermenu2-1": "SiderMenu2-1",
+    "sidermenu2-2": "SiderMenu2-2",
+    "sidermenu2-3": "SiderMenu2-3",
+    "sidermenu3": "SiderMenu3"
+  }
+}
