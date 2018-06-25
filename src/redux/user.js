@@ -1,3 +1,6 @@
+import auth from './../requests/auth';
+import jwtDecode from 'jwt-decode';
+
 // Action Type
 export const types = {
   LOGIN: 'user/LOGIN',
@@ -14,26 +17,34 @@ export const actions = {
   login(username, password) {
     return async dispatch => {
       try {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        const res = await auth.post('/signin', { username, password });
 
-        dispatch({
-          type: types.LOGIN,
-          id: '001',
-          name: 'Ricky',
-          token: 'token!!!',
-        });
+        if (res.data && res.data.token) {
+          const decoded = jwtDecode(res.data.token);
+          dispatch({
+            type: types.LOGIN,
+            id: decoded.jti,
+            name: decoded.name,
+            username: decoded.username,
+            email: decoded.email,
+            address: decoded.address,
+            token: res.data.token,
+          });
 
-        localStorage.setItem('token', 'token!!!');
+          localStorage.setItem('token', res.data.token);
 
-        return {
-          status: 200,
-          statusText: 'success',
-        };
+          return {
+            status: res.status,
+            statusText: res.statusText,
+          };
+        }
       } catch (error) {
-        return {
-          status: 500,
-          statusText: 'fail',
-        };
+        if (error.response) {
+          return {
+            status: error.response.status,
+            statusText: error.response.data.status,
+          };
+        }
       }
     };
   },
@@ -56,6 +67,9 @@ const initialState = {
   login: false,
   id: 0,
   name: '',
+  username: '',
+  email: '',
+  address: '',
   token: null,
 };
 
@@ -68,6 +82,9 @@ export default (state = initialState, action) => {
         id: action.id,
         login: true,
         name: action.name,
+        username: action.username,
+        email: action.email,
+        address: action.address,
         token: action.token,
       };
 
@@ -77,6 +94,9 @@ export default (state = initialState, action) => {
         id: 0,
         login: false,
         name: '',
+        username: '',
+        email: '',
+        address: '',
         token: null,
       };
 

@@ -1,6 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+import jwtDecode from "jwt-decode";
 
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
@@ -31,11 +32,16 @@ const stores = createStore(reducers, enhancer);
 
 const token = localStorage.getItem('token');
 if (token) {
+  const decoded = jwtDecode(token);
+
   stores.dispatch({
     type: types.LOGIN,
+    id: decoded.jti,
+    name: decoded.name,
+    username: decoded.username,
+    email: decoded.email,
+    address: decoded.address,
     token: token,
-    id: '001',
-    name: 'Ricky',
   });
 }
 
