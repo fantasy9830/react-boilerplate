@@ -1,3 +1,3 @@
-import Basic from "./Basic";
+import Basic from './Basic';
 
 export default Basic;

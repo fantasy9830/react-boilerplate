@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import MobileLogo from './LogoBox/MobileLogo';
-import Notice from "./Notice";
-import SettingMenu from "./SettingMenu";
+import Notice from './Notice';
+import SettingMenu from './SettingMenu';
 import SiderMenu from './SiderMenu';
 import ContentRoute from './../../utils/ContentRoute';
 import container from './container';
 import menus from './menus';
 import logo from './../../images/logo.png';
 import { Header, Content, MenuBar, Right } from './style';
-import GlobalFooter from "./GlobalFooter";
+import GlobalFooter from './GlobalFooter';
 
 let isMobile = false;
 enquireScreen(mobile => (isMobile = mobile));

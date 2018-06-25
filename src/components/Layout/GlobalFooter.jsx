@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'antd';
-import { Footer } from "./style";
+import { Footer } from './style';
 
 const GlobalFooter = () => {
   return (

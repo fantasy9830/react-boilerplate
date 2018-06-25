@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Login from 'ant-design-pro/lib/Login';
 import { Alert } from 'antd';
-import { translate } from "react-i18next";
+import { translate } from 'react-i18next';
 import { Container, Content, Main } from './style';
 import LoginHeader from './LoginHeader';
 import GlobalFooter from './../Layout/GlobalFooter';

@@ -1,7 +1,8 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import jwtDecode from "jwt-decode";
+import moment from 'moment';
+import jwtDecode from 'jwt-decode';
 
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
@@ -34,15 +35,24 @@ const token = localStorage.getItem('token');
 if (token) {
   const decoded = jwtDecode(token);
 
-  stores.dispatch({
-    type: types.LOGIN,
-    id: decoded.jti,
-    name: decoded.name,
-    username: decoded.username,
-    email: decoded.email,
-    address: decoded.address,
-    token: token,
-  });
+  // token過期
+  if (moment.unix(decoded.exp).isBefore(moment())) {
+    stores.dispatch({
+      type: types.LOGOUT,
+    });
+
+    localStorage.removeItem('token');
+  } else {
+    stores.dispatch({
+      type: types.LOGIN,
+      id: decoded.jti,
+      name: decoded.name,
+      username: decoded.username,
+      email: decoded.email,
+      address: decoded.address,
+      token: token,
+    });
+  }
 }
 
 export default stores;
