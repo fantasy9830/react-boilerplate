@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, Avatar, Menu } from 'antd';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { translate } from 'react-i18next';
 import { Action } from './style';
 import container from './container';

@@ -7,10 +7,10 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { I18nextProvider } from 'react-i18next';
 import { LocaleProvider } from 'antd';
-import fontawesome from '@fortawesome/fontawesome';
-import solid from '@fortawesome/fontawesome-free-solid';
-import regular from '@fortawesome/fontawesome-free-regular';
-import brands from '@fortawesome/fontawesome-free-brands';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 // 相關語系檔
 import zhTW from 'antd/lib/locale-provider/zh_TW';
@@ -23,7 +23,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 locales.changeLanguage('zh-TW');
-fontawesome.library.add(solid, regular, brands);
+library.add(fab, far, fas);
 
 const Index = () => (
   <Provider store={stores}>

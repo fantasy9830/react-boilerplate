@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import { Sider } from './style';
 import LogoBox from './../LogoBox';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { SubMenu, Item } = Menu;
 
