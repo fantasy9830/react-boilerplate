@@ -31,7 +31,7 @@ export const actions = {
             token: res.data.token,
           });
 
-          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('@Ricky:token', res.data.token);
 
           return {
             status: res.status,
@@ -42,7 +42,7 @@ export const actions = {
         if (error.response) {
           return {
             status: error.response.status,
-            statusText: error.response.data.status,
+            statusText: error.response.data.message,
           };
         }
       }
@@ -58,14 +58,14 @@ export const actions = {
         type: types.LOGOUT,
       });
 
-      localStorage.removeItem('token');
+      localStorage.removeItem('@Ricky:token');
     };
   },
 };
 
 const initialState = {
   login: false,
-  id: 0,
+  id: '',
   name: '',
   username: '',
   email: '',

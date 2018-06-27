@@ -31,7 +31,7 @@ const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
 const stores = createStore(reducers, enhancer);
 
-const token = localStorage.getItem('token');
+const token = localStorage.getItem('@Ricky:token');
 if (token) {
   const decoded = jwtDecode(token);
 
@@ -41,7 +41,7 @@ if (token) {
       type: types.LOGOUT,
     });
 
-    localStorage.removeItem('token');
+    localStorage.removeItem('@Ricky:token');
   } else {
     stores.dispatch({
       type: types.LOGIN,
