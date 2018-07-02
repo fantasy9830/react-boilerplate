@@ -22,7 +22,7 @@ import stores, { history } from './stores';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-locales.changeLanguage('zh-TW');
+// locales.changeLanguage('zh-TW');
 library.add(fab, far, fas);
 
 const Index = () => (

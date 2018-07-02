@@ -23,20 +23,20 @@ class LoginPage extends Component {
     };
   }
 
-  handleSubmit(err, values) {
+  async handleSubmit(err, values) {
     if (!err) {
-      this.props.login(values.username, values.password).then(res => {
-        if (this.props.user.login) {
-          const pathname =
-            (this.props.location.state.from &&
-              this.props.location.state.from.pathname) ||
-            '/';
+      const res = await this.props.login(values.username, values.password);
 
-          this.props.redirect(pathname);
-        } else {
-          this.setState({ notice: res.statusText });
-        }
-      });
+      if (this.props.user.login) {
+        const pathname =
+          (this.props.location.state.from &&
+            this.props.location.state.from.pathname) ||
+          '/';
+
+        this.props.redirect(pathname);
+      } else if (res) {
+        this.setState({ notice: res.statusText });
+      }
     }
   }
 

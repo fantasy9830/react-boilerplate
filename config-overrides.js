@@ -7,6 +7,7 @@ module.exports = function override(config, env) {
 
   // 自定義主題
   config = rewireLess.withLoaderOptions({
+    javascriptEnabled: true,
     modifyVars: {
       '@font-size-base': '14px',
       '@input-height-base': '36px',

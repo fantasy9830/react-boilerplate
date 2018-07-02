@@ -44,6 +44,11 @@ export const actions = {
             status: error.response.status,
             statusText: error.response.data.message,
           };
+        } else if (error.request) {
+          return {
+            status: error.request.status,
+            statusText: error.request.statusText === '' && 'no response',
+          };
         }
       }
     };
