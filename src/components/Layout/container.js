@@ -4,6 +4,7 @@ import { actions } from './../../redux/layout';
 
 const mapStateToProps = state => ({
   layout: state.layout,
+  user: state.user,
 });
 
 const mapDispatchToProps = dispatch =>

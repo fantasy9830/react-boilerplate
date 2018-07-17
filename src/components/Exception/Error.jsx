@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import Exception from 'ant-design-pro/lib/Exception';
 
-const NoMatch = props => (
+const Error = props => (
   <Exception
-    type="404"
-    desc={props.t('NoMatch.404')}
+    type="500"
+    desc={props.t('500')}
     actions={
       <Link to="/">
         <Button type="primary">{props.t('back')}</Button>
@@ -16,4 +16,4 @@ const NoMatch = props => (
   />
 );
 
-export default translate()(NoMatch);
+export default translate('exception')(Error);

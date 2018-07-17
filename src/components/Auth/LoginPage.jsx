@@ -35,7 +35,7 @@ class LoginPage extends Component {
 
         this.props.redirect(pathname);
       } else if (res) {
-        this.setState({ notice: res.statusText });
+        this.setState(() => ({ notice: res.statusText }));
       }
     }
   }
@@ -55,7 +55,7 @@ class LoginPage extends Component {
                   type="error"
                   showIcon
                   closable
-                  onClose={() => this.setState({ notice: '' })}
+                  onClose={() => this.setState(() => ({ notice: '' }))}
                 />
               )}
               <UserName name="username" placeholder={t('username')} />

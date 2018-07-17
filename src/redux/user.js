@@ -5,6 +5,8 @@ import jwtDecode from 'jwt-decode';
 export const types = {
   LOGIN: 'user/LOGIN',
   LOGOUT: 'user/LOGOUT',
+  SET_ROLES: 'user/SET_ROLES',
+  SET_PERMISSIONS: 'user/SET_PERMISSIONS',
 };
 
 // Action
@@ -29,6 +31,8 @@ export const actions = {
             email: decoded.email,
             address: decoded.address,
             token: res.data.token,
+            roles: decoded.roles,
+            permissions: decoded.permissions,
           });
 
           localStorage.setItem('@Ricky:token', res.data.token);
@@ -66,6 +70,34 @@ export const actions = {
       localStorage.removeItem('@Ricky:token');
     };
   },
+
+  /**
+   * Get Roles
+   */
+  getRoles() {
+    return async dispatch => {
+      const { data } = await auth.get('/roles/web');
+
+      dispatch({
+        type: types.SET_ROLES,
+        roles: data.roles,
+      });
+    };
+  },
+
+  /**
+   * Get Permissions
+   */
+  getPermissions() {
+    return async dispatch => {
+      const { data } = await auth.get('/permissions/web');
+
+      dispatch({
+        type: types.SET_PERMISSIONS,
+        permissions: data.permissions,
+      });
+    };
+  },
 };
 
 const initialState = {
@@ -76,6 +108,8 @@ const initialState = {
   email: '',
   address: '',
   token: null,
+  roles: [],
+  permissions: {},
 };
 
 // reducer
@@ -91,6 +125,8 @@ export default (state = initialState, action) => {
         email: action.email,
         address: action.address,
         token: action.token,
+        roles: action.roles,
+        permissions: action.permissions,
       };
 
     case types.LOGOUT:
@@ -103,6 +139,20 @@ export default (state = initialState, action) => {
         email: '',
         address: '',
         token: null,
+        roles: [],
+        permissions: {},
+      };
+
+    case types.SET_ROLES:
+      return {
+        ...state,
+        roles: action.roles,
+      };
+
+    case types.SET_PERMISSIONS:
+      return {
+        ...state,
+        permissions: action.permissions,
       };
 
     default:

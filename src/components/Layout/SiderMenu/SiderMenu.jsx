@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import { Sider } from './style';
 import LogoBox from './../LogoBox';
+import container from './container';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { SubMenu, Item } = Menu;
@@ -32,14 +33,14 @@ class SiderMenu extends Component {
     const moreThanOne =
       openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
 
-    this.setState({
+    this.setState(() => ({
       openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
-    });
+    }));
   }
 
   handleItemClick({ key, keyPath }) {
     this.props.changeActive(key);
-    keyPath.length === 1 && this.setState({ openKeys: [] });
+    keyPath.length === 1 && this.setState(() => ({ openKeys: [] }));
   }
 
   getNavMenuItems(menus) {
@@ -47,13 +48,16 @@ class SiderMenu extends Component {
       return [];
     }
 
-    return (
-      menus
-        .filter(item => item.key)
-        //.filter(item => this.props.checkPermission(item.key))
-        .map(item => this.getSubMenuOrItem(item))
-        .filter(item => !!item)
-    );
+    const permissions = this.props.permissions.read;
+
+    return menus
+      .filter(item => item.key)
+      .filter(
+        item =>
+          Array.isArray(permissions) && permissions.indexOf(item.key) >= 0,
+      )
+      .map(item => this.getSubMenuOrItem(item))
+      .filter(item => !!item);
   }
 
   getSubMenuOrItem(item) {
@@ -151,4 +155,4 @@ SiderMenu.propTypes = {
   logo: PropTypes.string.isRequired,
 };
 
-export default translate('layout')(SiderMenu);
+export default container(translate('layout')(SiderMenu));

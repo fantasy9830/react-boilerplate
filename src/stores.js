@@ -50,6 +50,8 @@ if (token) {
       username: decoded.username,
       email: decoded.email,
       address: decoded.address,
+      roles: decoded.roles,
+      permissions: decoded.permissions,
       token: token,
     });
   }

@@ -26,7 +26,7 @@ class Basic extends Component {
 
   componentDidMount() {
     this.enquireHandler = enquireScreen(mobile =>
-      this.setState({ isMobile: mobile }),
+      this.setState(() => ({ isMobile: mobile })),
     );
   }
 
@@ -35,21 +35,24 @@ class Basic extends Component {
   }
 
   render() {
+    const { user, layout, collapse } = this.props;
+    const permissions = user.permissions.read ? user.permissions.read : [];
+
     return (
       <Layout>
         <SiderMenu
           menus={menus}
           isMobile={this.state.isMobile}
-          collapsed={this.props.layout.collapsed}
-          collapse={this.props.collapse}
+          collapsed={layout.collapsed}
+          collapse={collapse}
           logo={logo}
         />
         <Layout>
           <Header>
             {this.state.isMobile && <MobileLogo to="/" image={logo} />}
             <MenuBar
-              type={this.props.layout.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={() => this.props.collapse(!this.props.layout.collapsed)}
+              type={layout.collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={() => collapse(!layout.collapsed)}
             />
             <Right>
               <Notice />
@@ -58,7 +61,7 @@ class Basic extends Component {
           </Header>
 
           <Content>
-            <ContentRoute menus={menus} />
+            <ContentRoute menus={menus} permissions={permissions} />
           </Content>
 
           <GlobalFooter />
