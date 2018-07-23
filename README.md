@@ -34,6 +34,7 @@
 * [x] i18next多國語系
 * [x] 登入認證功能(JWT)
 * [x] 權限管理功能
+* [x] husky + lint-staged + prettier
 * [ ] RxJS + redux-observable
 * [ ] TypeScript
 
