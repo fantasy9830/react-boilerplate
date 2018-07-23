@@ -9,7 +9,7 @@ export const types = {
   SET_PERMISSIONS: 'user/SET_PERMISSIONS',
 };
 
-// Action
+// Action Creators
 export const actions = {
   /**
    * 登入

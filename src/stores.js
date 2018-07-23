@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
 import moment from 'moment';
 import jwtDecode from 'jwt-decode';
 
@@ -13,7 +13,7 @@ import reducers from './reducers';
 export const history = createHistory();
 
 // middlewares
-let middlewares = [thunkMiddleware, routerMiddleware(history)];
+let middlewares = [thunk, routerMiddleware(history)];
 
 // logger
 const loggerMiddleware = createLogger({

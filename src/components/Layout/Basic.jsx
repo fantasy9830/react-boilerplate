@@ -36,7 +36,7 @@ class Basic extends Component {
 
   render() {
     const { user, layout, collapse } = this.props;
-    const permissions = user.permissions.read ? user.permissions.read : [];
+    const permissions = user.permissions ? user.permissions.read : [];
 
     return (
       <Layout>

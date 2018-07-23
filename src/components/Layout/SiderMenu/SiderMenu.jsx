@@ -48,7 +48,7 @@ class SiderMenu extends Component {
       return [];
     }
 
-    const permissions = this.props.permissions.read;
+    const permissions = this.props.permissions ? this.props.permissions.read : [];
 
     return menus
       .filter(item => item.key)

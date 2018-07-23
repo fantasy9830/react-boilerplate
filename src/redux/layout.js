@@ -5,17 +5,15 @@ export const types = {
   COLLAPSE: 'layout/COLLAPSE',
 };
 
-// Action
+// Action Creators
 export const actions = {
   /**
    * 改變sidebar所在的位置
    */
   changeActive(current) {
-    return dispatch => {
-      dispatch({
-        type: types.CHANGE_ACTIVE,
-        current,
-      });
+    return {
+      type: types.CHANGE_ACTIVE,
+      current,
     };
   },
 
@@ -24,11 +22,9 @@ export const actions = {
    * @param {bool} collapsed - 是否摺疊
    */
   collapse(collapsed) {
-    return dispatch => {
-      dispatch({
-        type: types.COLLAPSE,
-        collapsed,
-      });
+    return {
+      type: types.COLLAPSE,
+      collapsed,
     };
   },
 
@@ -37,11 +33,9 @@ export const actions = {
    * @param {string} noticeType 類型 notice/message/todo
    */
   clearNotice(noticeType) {
-    return dispatch => {
-      dispatch({
-        type: types.CLEAR_NOTICE,
-        noticeType,
-      });
+    return {
+      type: types.CLEAR_NOTICE,
+      noticeType,
     };
   },
 };
