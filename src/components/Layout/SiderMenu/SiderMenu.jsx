@@ -40,7 +40,9 @@ class SiderMenu extends Component {
 
   handleItemClick({ key, keyPath }) {
     this.props.changeActive(key);
-    keyPath.length === 1 && this.setState(() => ({ openKeys: [] }));
+    if (keyPath.length === 1) {
+      this.setState(() => ({ openKeys: [] }));
+    }
   }
 
   getNavMenuItems(menus) {
