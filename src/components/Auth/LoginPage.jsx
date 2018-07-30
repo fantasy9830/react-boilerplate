@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Login from 'ant-design-pro/lib/Login';
 import { Alert } from 'antd';
 import { translate } from 'react-i18next';
@@ -12,18 +12,13 @@ import logo from './../../images/logo.png';
 
 const { UserName, Password, Submit } = Login;
 
-class LoginPage extends Component {
-  constructor(props) {
-    super(props);
+class LoginPage extends React.Component {
+  state = {
+    notice: '',
+    loading: false,
+  };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.state = {
-      notice: '',
-    };
-  }
-
-  async handleSubmit(err, values) {
+  handleSubmit = async (err, values) => {
     if (!err) {
       const res = await this.props.login(values.username, values.password);
 
@@ -38,10 +33,13 @@ class LoginPage extends Component {
         this.setState(() => ({ notice: res.statusText }));
       }
     }
-  }
+  };
+
+  handleClose = () => this.setState(() => ({ notice: '' }));
 
   render() {
     const { t } = this.props;
+
     return (
       <Container background={background}>
         <Content>
@@ -55,7 +53,7 @@ class LoginPage extends Component {
                   type="error"
                   showIcon
                   closable
-                  onClose={() => this.setState(() => ({ notice: '' }))}
+                  onClose={this.handleClose}
                 />
               )}
               <UserName name="username" placeholder={t('username')} />

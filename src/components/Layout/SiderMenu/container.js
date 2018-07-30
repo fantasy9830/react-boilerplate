@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { actions } from './../../../redux/layout';
 
 const mapStateToProps = state => ({
-  current: state.layout.sider.current,
+  current: state.layout.current,
   permissions: state.user.permissions,
 });
 

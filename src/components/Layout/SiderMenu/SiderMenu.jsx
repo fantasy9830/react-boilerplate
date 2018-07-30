@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
@@ -10,25 +10,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const { SubMenu, Item } = Menu;
 
-class SiderMenu extends Component {
-  constructor(props) {
-    super(props);
+class SiderMenu extends React.Component {
+  static propTypes = {
+    menus: PropTypes.array.isRequired,
+    current: PropTypes.string.isRequired,
+    logo: PropTypes.string.isRequired,
+  };
 
-    this.handleOpenChange = this.handleOpenChange.bind(this);
-    this.handleItemClick = this.handleItemClick.bind(this);
+  state = { openKeys: [] };
 
-    this.state = {
-      openKeys: [],
-    };
-  }
-
-  isMainMenu(openKey) {
-    return this.props.menus.some(
-      item => openKey && (item.key === openKey || item.path === openKey),
-    );
-  }
-
-  handleOpenChange(openKeys) {
+  handleOpenChange = openKeys => {
     const lastOpenKey = openKeys[openKeys.length - 1];
     const moreThanOne =
       openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
@@ -36,21 +27,29 @@ class SiderMenu extends Component {
     this.setState(() => ({
       openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
     }));
-  }
+  };
 
-  handleItemClick({ key, keyPath }) {
+  handleItemClick = ({ key, keyPath }) => {
     this.props.changeActive(key);
     if (keyPath.length === 1) {
       this.setState(() => ({ openKeys: [] }));
     }
-  }
+  };
 
-  getNavMenuItems(menus) {
+  isMainMenu = openKey => {
+    return this.props.menus.some(
+      item => openKey && (item.key === openKey || item.path === openKey),
+    );
+  };
+
+  getNavMenuItems = menus => {
     if (!menus) {
       return [];
     }
 
-    const permissions = this.props.permissions ? this.props.permissions.read : [];
+    const permissions = this.props.permissions
+      ? this.props.permissions.read
+      : [];
 
     return menus
       .filter(item => item.key)
@@ -60,9 +59,9 @@ class SiderMenu extends Component {
       )
       .map(item => this.getSubMenuOrItem(item))
       .filter(item => !!item);
-  }
+  };
 
-  getSubMenuOrItem(item) {
+  getSubMenuOrItem = item => {
     const { t } = this.props;
     if (item.children && item.children.some(child => child.key)) {
       return (
@@ -85,9 +84,9 @@ class SiderMenu extends Component {
     } else {
       return <Item key={item.key}>{this.getMenuItemPath(item)}</Item>;
     }
-  }
+  };
 
-  getMenuItemPath(item) {
+  getMenuItemPath = item => {
     const { t } = this.props;
     if (/^https?:\/\//.test(item.path)) {
       return (
@@ -104,9 +103,9 @@ class SiderMenu extends Component {
         </Link>
       );
     }
-  }
+  };
 
-  getIcon(icon) {
+  getIcon = icon => {
     if (typeof icon === 'string') {
       if (icon.indexOf('fa-') === 0) {
         icon = icon.replace(/^fa-/i, '');
@@ -118,7 +117,7 @@ class SiderMenu extends Component {
     }
 
     return icon;
-  }
+  };
 
   render() {
     const { menus, current, collapsed, collapse, logo } = this.props;
@@ -150,11 +149,5 @@ class SiderMenu extends Component {
     );
   }
 }
-
-SiderMenu.propTypes = {
-  menus: PropTypes.array.isRequired,
-  current: PropTypes.string.isRequired,
-  logo: PropTypes.string.isRequired,
-};
 
 export default container(translate('layout')(SiderMenu));

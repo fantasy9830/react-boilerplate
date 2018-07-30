@@ -9,6 +9,7 @@ export const types = {
 export const actions = {
   /**
    * 改變sidebar所在的位置
+   * @param {string} current - 現在頁面所在位置
    */
   changeActive(current) {
     return {
@@ -43,9 +44,7 @@ export const actions = {
 const initialState = {
   collapsed: false,
   notice: [],
-  sider: {
-    current: 'home',
-  },
+  current: 'home',
 };
 
 // reducer
@@ -54,10 +53,7 @@ export default (state = initialState, action) => {
     case types.CHANGE_ACTIVE:
       return {
         ...state,
-        sider: {
-          ...state.sider,
-          current: action.current,
-        },
+        current: action.current,
       };
 
     case types.COLLAPSE:

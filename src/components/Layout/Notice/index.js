@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import container from './container';
 import { translate } from 'react-i18next';
 import { NoticeIcon } from './style';
@@ -7,19 +7,12 @@ import noticeImage from './../../../images/notice.svg';
 import messageImage from './../../../images/message.svg';
 import todoImage from './../../../images/todo.svg';
 
-class Notice extends Component {
-  constructor(props) {
-    super(props);
+class Notice extends React.Component {
+  handleItemClick = (item, tabProps) => {
+    // console.log(item, tabProps);
+  };
 
-    this.handleItemClick = this.handleItemClick.bind(this);
-    this.handleClear = this.handleClear.bind(this);
-  }
-
-  handleItemClick(item, tabProps) {
-    console.log(item, tabProps);
-  }
-
-  handleClear(tabTitle) {
+  handleClear = tabTitle => {
     let type = '';
     if (tabTitle === this.props.t('notice.notice')) {
       type = 'notice';
@@ -30,11 +23,12 @@ class Notice extends Component {
     }
 
     this.props.clearNotice(type);
-  }
+  };
 
   render() {
     const { t } = this.props;
     const noticeData = this.props.data;
+
     return (
       <NoticeIcon
         count={this.props.data.length}

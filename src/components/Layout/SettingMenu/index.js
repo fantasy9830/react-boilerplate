@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Dropdown, Avatar, Menu } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { translate } from 'react-i18next';
@@ -7,14 +7,8 @@ import container from './container';
 
 const { Item } = Menu;
 
-class SettingMenu extends Component {
-  constructor(props) {
-    super(props);
-
-    this.logout = this.logout.bind(this);
-  }
-
-  logout() {
+class SettingMenu extends React.Component {
+  logout = () => {
     this.props.logout();
     this.props.redirect('/');
   }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Layout } from 'antd';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import MobileLogo from './LogoBox/MobileLogo';
@@ -15,14 +15,10 @@ import GlobalFooter from './GlobalFooter';
 let isMobile = false;
 enquireScreen(mobile => (isMobile = mobile));
 
-class Basic extends Component {
-  constructor(props) {
-    super(props);
+class Basic extends React.Component {
+  enquireHandler = null;
 
-    this.enquireHandler = null;
-
-    this.state = { isMobile };
-  }
+  state = { isMobile };
 
   componentDidMount() {
     this.enquireHandler = enquireScreen(mobile =>
@@ -33,6 +29,11 @@ class Basic extends Component {
   componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
   }
+
+  handleMenuBarClick = () => {
+    const { layout, collapse } = this.props;
+    collapse(!layout.collapsed);
+  };
 
   render() {
     const { user, layout, collapse } = this.props;
@@ -52,7 +53,7 @@ class Basic extends Component {
             {this.state.isMobile && <MobileLogo to="/" image={logo} />}
             <MenuBar
               type={layout.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={() => collapse(!layout.collapsed)}
+              onClick={this.handleMenuBarClick}
             />
             <Right>
               <Notice />
