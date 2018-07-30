@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from 'ant-design-pro/lib/Login';
-import { Alert } from 'antd';
+import { Alert, Spin } from 'antd';
 import { translate } from 'react-i18next';
 import { Container, Content, Main } from './style';
 import LoginHeader from './LoginHeader';
@@ -20,7 +20,11 @@ class LoginPage extends React.Component {
 
   handleSubmit = async (err, values) => {
     if (!err) {
+      this.setState(() => ({ loading: true }));
+
       const res = await this.props.login(values.username, values.password);
+
+      this.setState(() => ({ loading: false }));
 
       if (this.props.user.login) {
         const pathname =
@@ -41,29 +45,31 @@ class LoginPage extends React.Component {
     const { t } = this.props;
 
     return (
-      <Container background={background}>
-        <Content>
-          <LoginHeader title={t('title')} logo={logo} />
-          <Main>
-            <Login onSubmit={this.handleSubmit}>
-              {this.state.notice && (
-                <Alert
-                  style={{ marginBottom: 24 }}
-                  message={this.state.notice}
-                  type="error"
-                  showIcon
-                  closable
-                  onClose={this.handleClose}
-                />
-              )}
-              <UserName name="username" placeholder={t('username')} />
-              <Password name="password" placeholder={t('password')} />
-              <Submit>{t('submit')}</Submit>
-            </Login>
-          </Main>
-        </Content>
-        <GlobalFooter />
-      </Container>
+      <Spin spinning={this.state.loading}>
+        <Container background={background}>
+          <Content>
+            <LoginHeader title={t('title')} logo={logo} />
+            <Main>
+              <Login onSubmit={this.handleSubmit}>
+                {this.state.notice && (
+                  <Alert
+                    style={{ marginBottom: 24 }}
+                    message={this.state.notice}
+                    type="error"
+                    showIcon
+                    closable
+                    onClose={this.handleClose}
+                  />
+                )}
+                <UserName name="username" placeholder={t('username')} />
+                <Password name="password" placeholder={t('password')} />
+                <Submit>{t('submit')}</Submit>
+              </Login>
+            </Main>
+          </Content>
+          <GlobalFooter />
+        </Container>
+      </Spin>
     );
   }
 }
