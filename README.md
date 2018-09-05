@@ -18,11 +18,11 @@
 
 ### Routing
 
-* `/src/components/Layout/menus.js`
+* `/src/layouts/menus.js`
 
 ### Auth
 
-* 使用後端 [go-boilerplate](https://github.com/fantasy9830/go-boilerplate) 設定權限，對應`/src/components/Layout/menus.js`的key值。
+* 使用後端 [go-boilerplate](https://github.com/fantasy9830/go-boilerplate) 設定權限，對應`/src/layouts/menus.js`的key值。
 
 ## Features
 
