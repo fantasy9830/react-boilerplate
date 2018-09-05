@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 
 import LoginPage from './components/Auth/LoginPage';
-import Layout from './components/Layout';
+import Layout from './layouts';
 
 const App = () => (
   <Switch>

@@ -13,8 +13,8 @@ export const types = {
 export const actions = {
   /**
    * 登入
-   * @param {string} username 帳號
-   * @param {string} password 密碼
+   * @param {string} username - 帳號
+   * @param {string} password - 密碼
    */
   login(username, password) {
     return async dispatch => {

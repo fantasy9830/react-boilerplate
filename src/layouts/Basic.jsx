@@ -5,10 +5,10 @@ import MobileLogo from './LogoBox/MobileLogo';
 import Notice from './Notice';
 import SettingMenu from './SettingMenu';
 import SiderMenu from './SiderMenu';
-import ContentRoute from './../../utils/ContentRoute';
+import ContentRoute from './../utils/ContentRoute';
 import container from './container';
 import menus from './menus';
-import logo from './../../images/logo.png';
+import logo from './../images/logo.png';
 import { Header, Content, MenuBar, Right } from './style';
 import GlobalFooter from './GlobalFooter';
 

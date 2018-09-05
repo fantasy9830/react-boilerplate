@@ -4,7 +4,7 @@ import { Alert, Spin } from 'antd';
 import { translate } from 'react-i18next';
 import { Container, Content, Main } from './style';
 import LoginHeader from './LoginHeader';
-import GlobalFooter from './../Layout/GlobalFooter';
+import GlobalFooter from './../../layouts/GlobalFooter';
 import container from './container';
 
 import background from './../../images/background.svg';

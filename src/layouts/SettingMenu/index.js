@@ -11,7 +11,7 @@ class SettingMenu extends React.Component {
   logout = () => {
     this.props.logout();
     this.props.redirect('/');
-  }
+  };
 
   render() {
     const { t } = this.props;
@@ -20,7 +20,8 @@ class SettingMenu extends React.Component {
       <Menu>
         <Item key="logout">
           <a onClick={this.logout}>
-          <FontAwesomeIcon icon="sign-out-alt" />&nbsp; {t('setting.logout')}
+            <FontAwesomeIcon icon="sign-out-alt" />
+            &nbsp; {t('setting.logout')}
           </a>
         </Item>
       </Menu>
@@ -29,7 +30,9 @@ class SettingMenu extends React.Component {
     return (
       <Dropdown overlay={MenuItem} trigger={['click']} placement="bottomRight">
         <Action>
-          <Avatar size="large" icon="user" style={{ marginRight: '8px' }} />
+          <Avatar style={{ marginRight: '8px' }}>
+            <FontAwesomeIcon icon="user" />
+          </Avatar>
           <span style={{ verticalAlign: 'middle' }}>
             {this.props.user.name}
           </span>

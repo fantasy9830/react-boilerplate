@@ -1,5 +1,5 @@
 import 'sanitize.css/sanitize.css';
-import 'ant-design-pro/dist/ant-design-pro.css'
+import 'ant-design-pro/dist/ant-design-pro.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -13,10 +13,10 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 // 相關語系檔
-import zhTW from 'antd/lib/locale-provider/zh_TW';
 import 'moment/locale/zh-tw';
-
+import zhTW from 'antd/lib/locale-provider/zh_TW';
 import locales from './locales';
+
 import stores, { history } from './stores';
 
 import App from './App';

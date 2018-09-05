@@ -31,7 +31,7 @@ export const actions = {
 
   /**
    * 清空通知訊息
-   * @param {string} noticeType 類型 notice/message/todo
+   * @param {string} noticeType - 類型 notice/message/todo
    */
   clearNotice(noticeType) {
     return {
