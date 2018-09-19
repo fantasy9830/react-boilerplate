@@ -2,7 +2,7 @@
 
 ## Quick Start
 
-1. 請先將後端 [go-boilerplate](https://github.com/fantasy9830/go-boilerplate) Run起來。
+1. 請先將後端 [go-boilerplate](https://github.com/fantasy9830/go-boilerplate) 或是 [laravel-boilerplate](https://github.com/fantasy9830/laravel-boilerplate) Run起來。
 
 1. `git clone https://github.com/fantasy9830/react-boilerplate.git`
 
@@ -22,7 +22,7 @@
 
 ### Auth
 
-* 使用後端 [go-boilerplate](https://github.com/fantasy9830/go-boilerplate) 設定權限，對應`/src/layouts/menus.js`的key值。
+* 使用後端 [go-boilerplate](https://github.com/fantasy9830/go-boilerplate) 或是 [laravel-boilerplate](https://github.com/fantasy9830/laravel-boilerplate) 設定權限，對應`/src/layouts/menus.js`的key值。
 
 ## Features
 
