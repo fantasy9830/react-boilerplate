@@ -1,31 +1,27 @@
-import 'rc-drawer/assets/index.css';
 import React from 'react';
 import PropTypes from 'prop-types';
-import DrawerMenu from 'rc-drawer';
+import { Drawer } from 'antd';
 import SiderMenu from './SiderMenu';
 import container from './container';
 
 const SiderMenuWrapper = props =>
   props.isMobile ? (
-    <DrawerMenu
-      getContainer={null}
-      level={null}
-      handleChild={<i className="drawer-handle-icon" />}
-      onHandleClick={() => props.collapse(!props.collapsed)}
-      open={!props.collapsed}
-      onMaskClick={() => props.collapse(true)}
+    <Drawer
+      visible={!props.collapsed}
+      placement="left"
+      onClose={() => props.collapse(true)}
+      style={{ padding: 0, height: '100vh' }}
     >
       <SiderMenu
         {...props}
         collapsed={props.isMobile ? false : props.collapsed}
       />
-    </DrawerMenu>
+    </Drawer>
   ) : (
     <SiderMenu {...props} />
   );
 
 SiderMenuWrapper.propTypes = {
-  menus: PropTypes.array.isRequired,
   isMobile: PropTypes.bool.isRequired,
   collapsed: PropTypes.bool.isRequired,
   collapse: PropTypes.func.isRequired,

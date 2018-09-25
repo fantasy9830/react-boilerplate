@@ -23,7 +23,7 @@ export const MenuBar = styled(Icon)`
   line-height: 64px;
   cursor: pointer;
   transition: all 0.3s;
-  padding: 22px 24px;
+  padding: 0px 24px;
   &:hover {
     background: #e6f7ff;
   }

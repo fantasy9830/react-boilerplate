@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Image, Title } from './style';
 
-const LogoBox = props => (
+const LogoBox = ({ image, title, ...passThroughProps }) => (
   <Container>
-    <Link to={props.to}>
-      <Image src={props.image} />
-      <Title>{props.title}</Title>
+    <Link {...passThroughProps}>
+      <Image src={image} />
+      <Title>{title}</Title>
     </Link>
   </Container>
 );
