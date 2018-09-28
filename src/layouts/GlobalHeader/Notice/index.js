@@ -3,9 +3,9 @@ import container from './container';
 import { translate } from 'react-i18next';
 import { NoticeIcon } from './style';
 
-import noticeImage from './../../images/notice.svg';
-import messageImage from './../../images/message.svg';
-import todoImage from './../../images/todo.svg';
+import noticeImage from './../../../images/notice.svg';
+import messageImage from './../../../images/message.svg';
+import todoImage from './../../../images/todo.svg';
 
 class Notice extends React.Component {
   handleItemClick = (item, tabProps) => {

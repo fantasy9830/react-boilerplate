@@ -19,7 +19,7 @@ class SettingMenu extends React.Component {
     const MenuItem = (
       <Menu>
         <Item key="logout">
-          <a onClick={this.logout}>
+          <a onClick={this.logout} onTouchStart={this.logout}>
             <FontAwesomeIcon icon="sign-out-alt" />
             &nbsp; {t('setting.logout')}
           </a>

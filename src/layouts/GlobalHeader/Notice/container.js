@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from './../../redux/layout';
+import { actions } from './../../../redux/layout';
 
 const mapStateToProps = state => ({
   data: state.layout.notice,

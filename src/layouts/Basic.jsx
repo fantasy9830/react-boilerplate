@@ -1,16 +1,14 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
-import MobileLogo from './LogoBox/MobileLogo';
-import Notice from './Notice';
-import SettingMenu from './SettingMenu';
-import SiderMenu from './SiderMenu';
+import GlobalHeader from './GlobalHeader';
+import GlobalSider from './GlobalSider';
+import GlobalFooter from './GlobalFooter';
 import ContentRoute from './../utils/ContentRoute';
 import container from './container';
 import menus from './menus';
 import logo from './../images/logo.png';
-import { Header, Content, MenuBar, Right } from './style';
-import GlobalFooter from './GlobalFooter';
+import { Content } from './style';
 
 let isMobile = false;
 enquireScreen(mobile => (isMobile = mobile));
@@ -30,36 +28,26 @@ class Basic extends React.Component {
     unenquireScreen(this.enquireHandler);
   }
 
-  handleMenuBarClick = () => {
-    const { layout, collapse } = this.props;
-    collapse(!layout.collapsed);
-  };
-
   render() {
     const { user, layout, collapse } = this.props;
     const permissions = user.permissions ? user.permissions.read : [];
 
     return (
       <Layout>
-        <SiderMenu
+        <GlobalSider
           menus={menus}
           isMobile={this.state.isMobile}
           collapsed={layout.collapsed}
           collapse={collapse}
           logo={logo}
         />
-        <Layout>
-          <Header>
-            {this.state.isMobile && <MobileLogo to="/" image={logo} />}
-            <MenuBar
-              type={layout.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={this.handleMenuBarClick}
-            />
-            <Right>
-              <Notice />
-              <SettingMenu />
-            </Right>
-          </Header>
+        <Layout style={{ minHeight: '100vh' }}>
+          <GlobalHeader
+            isMobile={this.state.isMobile}
+            collapsed={layout.collapsed}
+            collapse={collapse}
+            logo={logo}
+          />
 
           <Content>
             <ContentRoute menus={menus} permissions={permissions} />
