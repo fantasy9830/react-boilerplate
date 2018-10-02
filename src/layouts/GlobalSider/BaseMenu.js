@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import container from './container';
@@ -139,4 +139,4 @@ class BaseMenu extends React.Component {
   }
 }
 
-export default container(translate('layout')(BaseMenu));
+export default container(withNamespaces('layout')(BaseMenu));

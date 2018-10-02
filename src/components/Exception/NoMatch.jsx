@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
-import { translate } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import Exception from 'ant-design-pro/lib/Exception';
 
 const NoMatch = props => (
@@ -16,4 +16,4 @@ const NoMatch = props => (
   />
 );
 
-export default translate('exception')(NoMatch);
+export default withNamespaces('exception')(NoMatch);

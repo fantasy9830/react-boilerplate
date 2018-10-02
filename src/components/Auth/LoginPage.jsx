@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from 'ant-design-pro/lib/Login';
 import { Alert, Spin } from 'antd';
-import { translate } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import { Container, Content, Main } from './style';
 import LoginHeader from './LoginHeader';
 import GlobalFooter from './../../layouts/GlobalFooter';
@@ -74,4 +74,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default translate('auth')(container(LoginPage));
+export default withNamespaces('auth')(container(LoginPage));

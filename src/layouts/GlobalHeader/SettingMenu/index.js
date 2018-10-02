@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, Avatar, Menu } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { translate } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import { Action } from './style';
 import container from './container';
 
@@ -42,4 +42,4 @@ class SettingMenu extends React.Component {
   }
 }
 
-export default translate('layout')(container(SettingMenu));
+export default withNamespaces('layout')(container(SettingMenu));

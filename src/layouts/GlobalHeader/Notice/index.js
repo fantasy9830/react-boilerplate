@@ -1,6 +1,6 @@
 import React from 'react';
 import container from './container';
-import { translate } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import { NoticeIcon } from './style';
 
 import noticeImage from './../../../images/notice.svg';
@@ -65,4 +65,4 @@ class Notice extends React.Component {
   }
 }
 
-export default translate('layout')(container(Notice));
+export default withNamespaces('layout')(container(Notice));
