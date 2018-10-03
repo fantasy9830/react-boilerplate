@@ -7,7 +7,7 @@ import LoginHeader from './LoginHeader';
 import GlobalFooter from './../../layouts/GlobalFooter';
 import container from './container';
 
-import background from './../../images/background.svg';
+import background from './images/background.svg';
 import logo from './../../images/logo.png';
 
 const { UserName, Password, Submit } = Login;

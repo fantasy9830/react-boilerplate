@@ -8,21 +8,25 @@ import container from './container';
 const { Item } = Menu;
 
 class SettingMenu extends React.Component {
-  logout = () => {
-    this.props.logout();
-    this.props.redirect('/');
+  handleMenuClick = ({ key }) => {
+    switch (key) {
+      case 'logout':
+        this.props.logout();
+        this.props.redirect('/');
+        break;
+      default:
+        break;
+    }
   };
 
   render() {
     const { t } = this.props;
 
     const MenuItem = (
-      <Menu>
+      <Menu onClick={this.handleMenuClick} onTouchStart={this.handleMenuClick}>
         <Item key="logout">
-          <a onClick={this.logout} onTouchStart={this.logout}>
-            <FontAwesomeIcon icon="sign-out-alt" />
-            &nbsp; {t('setting.logout')}
-          </a>
+          <FontAwesomeIcon icon="sign-out-alt" />
+          &nbsp; {t('setting.logout')}
         </Item>
       </Menu>
     );
