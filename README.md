@@ -12,7 +12,7 @@
 
 1. 測試用帳密：`demo:8888` or `demo2:8888`，兩者權限不同。
 
-    **注意：記得把所有相關 [.env](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#what-other-env-files-can-be-used) 檔案中的 REACT_APP_AUTH_API_URL 修改成你後端的路徑。**
+    **注意：記得把所有相關 [.env](https://bit.ly/2RVBLmN) 檔案中的 REACT_APP_AUTH_API_URL 修改成你後端的路徑。**
 
 ### build
 
