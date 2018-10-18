@@ -4,8 +4,6 @@
 
 1. 請先將後端 [go-boilerplate](https://github.com/fantasy9830/go-boilerplate) 或是 [laravel-boilerplate](https://github.com/fantasy9830/laravel-boilerplate) Run起來。
 
-    **注意：記得把所有相關的 [.env](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#what-other-env-files-can-be-used) 檔案中的 REACT_APP_AUTH_API_URL 修改成你後端的路徑。**
-
 1. `git clone https://github.com/fantasy9830/react-boilerplate.git`
 
 1. `cd react-boilerplate`
@@ -13,6 +11,8 @@
 1. `npm install && npm start`
 
 1. 測試用帳密：`demo:8888` or `demo2:8888`，兩者權限不同。
+
+    **注意：記得把所有相關 [.env](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#what-other-env-files-can-be-used) 檔案中的 REACT_APP_AUTH_API_URL 修改成你後端的路徑。**
 
 ### build
 
