@@ -1,15 +1,19 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import PrivateRoute from './utils/PrivateRoute';
-
-import LoginPage from './components/Auth/LoginPage';
-import Layout from './layouts';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import { LocaleProvider } from 'antd';
+import stores, { history } from './stores';
+import zhTW from 'antd/lib/locale-provider/zh_TW';
+import Routes from './Routes';
 
 const App = () => (
-  <Switch>
-    <Route exact path="/login" component={LoginPage} />
-    <PrivateRoute component={Layout} />
-  </Switch>
+  <Provider store={stores}>
+    <LocaleProvider locale={zhTW}>
+      <ConnectedRouter history={history}>
+        <Routes />
+      </ConnectedRouter>
+    </LocaleProvider>
+  </Provider>
 );
 
 export default App;
