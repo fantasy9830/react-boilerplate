@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Notice from 'ant-design-pro/lib/NoticeIcon';
+import { NoticeIcon } from 'ant-design-pro';
 
-export const NoticeIcon = styled(Notice)`
+export const Notification = styled(NoticeIcon)`
   cursor: pointer;
   padding: 0 12px;
   display: inline-block;

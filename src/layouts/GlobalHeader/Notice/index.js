@@ -1,7 +1,7 @@
 import React from 'react';
 import container from './container';
 import { withNamespaces } from 'react-i18next';
-import { NoticeIcon } from './style';
+import { Notification } from './style';
 
 import noticeImage from './images/notice.svg';
 import messageImage from './images/message.svg';
@@ -30,7 +30,7 @@ class Notice extends React.Component {
     const noticeData = this.props.data;
 
     return (
-      <NoticeIcon
+      <Notification
         count={this.props.data.length}
         onItemClick={this.handleItemClick}
         onClear={this.handleClear}
@@ -38,7 +38,7 @@ class Notice extends React.Component {
         popupAlign={{ offset: [20, -16] }}
       >
         {/* 通知事項 */}
-        <NoticeIcon.Tab
+        <Notification.Tab
           list={noticeData['notice']}
           title={t('notice.notice')}
           emptyText={t('notice.noticeEmpty')}
@@ -46,7 +46,7 @@ class Notice extends React.Component {
         />
 
         {/* 訊息 */}
-        <NoticeIcon.Tab
+        <Notification.Tab
           list={noticeData['message']}
           title={t('notice.message')}
           emptyText={t('notice.messageEmpty')}
@@ -54,13 +54,13 @@ class Notice extends React.Component {
         />
 
         {/* 待辦事項 */}
-        <NoticeIcon.Tab
+        <Notification.Tab
           list={noticeData['todo']}
           title={t('notice.todo')}
           emptyText={t('notice.todoEmpty')}
           emptyImage={todoImage}
         />
-      </NoticeIcon>
+      </Notification>
     );
   }
 }

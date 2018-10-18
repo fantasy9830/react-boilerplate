@@ -1,5 +1,4 @@
 import 'sanitize.css/sanitize.css';
-import 'ant-design-pro/dist/ant-design-pro.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

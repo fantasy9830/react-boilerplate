@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from 'ant-design-pro/lib/Login';
 import { Alert, Spin } from 'antd';
+import { Login } from 'ant-design-pro';
 import { withNamespaces } from 'react-i18next';
 import { Container, Content, Main } from './style';
 import LoginHeader from './LoginHeader';

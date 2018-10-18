@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-import RenderAuthorized from 'ant-design-pro/lib/Authorized';
+import { Authorized } from 'ant-design-pro';
 import Home from './../components/Home';
 import NoMatch from './../components/Exception/NoMatch';
 import Forbidden from './../components/Exception/Forbidden';
@@ -23,7 +23,7 @@ const ContentRoute = ({ menus, permissions }) => {
     <Switch>
       <Route exact path="/" component={Home} />
       {formatter(menus).map(route => {
-        const { Secured } = RenderAuthorized(route.key);
+        const { Secured } = Authorized(route.key);
 
         return (
           <Route

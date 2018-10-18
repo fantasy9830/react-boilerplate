@@ -1,6 +1,6 @@
 {
   "name": "react-boilerplate",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "React Boilerplate",
   "author": "Ricky <fantasy9830@gmail.com>",
   "private": true,
@@ -10,7 +10,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.4.1",
     "@fortawesome/free-solid-svg-icons": "^5.4.1",
     "@fortawesome/react-fontawesome": "0.1.3",
-    "ant-design-pro": "^1.4.4",
+    "ant-design-pro": "^2.1.0",
     "antd": "^3.10.1",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
@@ -19,11 +19,10 @@
     "i18next": "^11.9.1",
     "i18next-browser-languagedetector": "^2.2.3",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-i18next": "^8.0.7",
+    "react-i18next": "^8.0.8",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.9",
@@ -33,15 +32,22 @@
     "redux-thunk": "^2.3.0",
     "sanitize.css": "^8.0.0",
     "source-map-explorer": "^1.6.0",
-    "styled-components": "^3.4.10"
+    "styled-components": "^4.0.1"
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.10.0",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.14.3",
+    "react-app-rewire-less": "^2.1.3",
+    "react-app-rewired": "^1.6.2"
   },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "analyze": "source-map-explorer build/static/js/main.*",
-    "precommit": "lint-staged"
+    "analyze": "source-map-explorer build/static/js/main.*"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,18 +58,15 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "src/**/*.{js,mjs,jsx,json,css}": [
+    "src/**/*.{js,mjs,jsx,json,css,md}": [
       "prettier --single-quote --trailingComma all --write",
       "git add"
     ]
-  },
-  "devDependencies": {
-    "babel-plugin-import": "^1.9.1",
-    "husky": "^1.1.2",
-    "lint-staged": "^7.3.0",
-    "prettier": "^1.14.3",
-    "react-app-rewire-less": "^2.1.3",
-    "react-app-rewired": "^1.6.2"
   }
 }
