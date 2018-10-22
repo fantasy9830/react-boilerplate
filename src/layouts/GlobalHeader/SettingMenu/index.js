@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown, Avatar, Menu } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { withRouter } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { Action } from './style';
 import container from './container';
@@ -12,7 +13,7 @@ class SettingMenu extends React.Component {
     switch (key) {
       case 'logout':
         this.props.logout();
-        this.props.redirect('/');
+        this.props.history.push('/');
         break;
       default:
         break;
@@ -46,4 +47,4 @@ class SettingMenu extends React.Component {
   }
 }
 
-export default withNamespaces('layout')(container(SettingMenu));
+export default withNamespaces('layout')(withRouter(container(SettingMenu)));

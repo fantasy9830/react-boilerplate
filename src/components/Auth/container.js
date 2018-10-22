@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { replace } from 'react-router-redux';
 import { actions } from './../../redux/user';
 
 const mapStateToProps = state => ({
@@ -11,7 +10,6 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       ...actions,
-      redirect: pathname => replace(pathname),
     },
     dispatch,
   );

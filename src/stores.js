@@ -4,16 +4,11 @@ import thunk from 'redux-thunk';
 import moment from 'moment';
 import jwtDecode from 'jwt-decode';
 
-import createHistory from 'history/createBrowserHistory';
-import { routerMiddleware } from 'react-router-redux';
-
 import { types } from './redux/user';
 import reducers from './reducers';
 
-export const history = createHistory();
-
 // middlewares
-let middlewares = [thunk, routerMiddleware(history)];
+let middlewares = [thunk];
 
 // logger
 const loggerMiddleware = createLogger({
