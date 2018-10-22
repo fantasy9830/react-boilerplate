@@ -1,4 +1,5 @@
-import React from 'react';
+import Loadable from 'react-loadable';
+import PageLoading from './PageLoading';
 
 export default [
   {
@@ -9,13 +10,19 @@ export default [
         icon: 'star',
         key: 'sidermenu1-1',
         path: '/sidermenu1-1',
-        component: () => <div>SiderMenu1-1</div>
+        component: Loadable({
+          loader: () => import('./../components/Demo'),
+          loading: PageLoading,
+        }),
       },
       {
         icon: 'star',
         key: 'sidermenu1-2',
         path: '/sidermenu1-2',
-        component: () => <div>SiderMenu1-2</div>
+        component: Loadable({
+          loader: () => import('./../components/Demo'),
+          loading: PageLoading,
+        }),
       },
       {
         icon: 'star',
@@ -25,13 +32,19 @@ export default [
             icon: 'rocket',
             key: 'sidermenu1-3-1',
             path: '/sidermenu1-3-1',
-            component: () => <div>SiderMenu1-3-1</div>
+            component: Loadable({
+              loader: () => import('./../components/Demo'),
+              loading: PageLoading,
+            }),
           },
           {
             icon: 'rocket',
             key: 'sidermenu1-3-2',
             path: '/sidermenu1-3-2',
-            component: () => <div>SiderMenu1-3-2</div>
+            component: Loadable({
+              loader: () => import('./../components/Demo'),
+              loading: PageLoading,
+            }),
           },
         ],
       },
@@ -45,19 +58,28 @@ export default [
         icon: 'star',
         key: 'sidermenu2-1',
         path: '/sidermenu2-1',
-        component: () => <div>SiderMenu2-1</div>
+        component: Loadable({
+          loader: () => import('./../components/Demo'),
+          loading: PageLoading,
+        }),
       },
       {
         icon: 'star',
         key: 'sidermenu2-2',
         path: '/sidermenu2-2',
-        component: () => <div>SiderMenu2-2</div>
+        component: Loadable({
+          loader: () => import('./../components/Demo'),
+          loading: PageLoading,
+        }),
       },
       {
         icon: 'star',
         key: 'sidermenu2-3',
         path: '/sidermenu2-3',
-        component: () => <div>SiderMenu2-3</div>
+        component: Loadable({
+          loader: () => import('./../components/Demo'),
+          loading: PageLoading,
+        }),
       },
     ],
   },
@@ -65,6 +87,9 @@ export default [
     icon: 'fa-cogs',
     key: 'sidermenu3',
     path: '/sidermenu3',
-    component: () => <div>SiderMenu3</div>
+    component: Loadable({
+      loader: () => import('./../components/Demo'),
+      loading: PageLoading,
+    }),
   },
 ];
