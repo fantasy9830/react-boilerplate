@@ -1,20 +1,16 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from './../../redux/user';
-
-const mapStateToProps = state => ({
-  user: state.user,
-});
+import { actions } from './../../redux/layout';
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      login: actions.login,
+      changeActive: actions.changeActive,
     },
     dispatch,
   );
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 );

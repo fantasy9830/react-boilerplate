@@ -2,10 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Container, Image, Title } from './style';
+import container from './container';
 
-const LogoBox = ({ image, title, ...passThroughProps }) => (
+const LogoBox = ({ image, title, changeActive, ...passThroughProps }) => (
   <Container>
-    <Link {...passThroughProps}>
+    <Link
+      {...passThroughProps}
+      onClick={() => {
+        passThroughProps.onClick();
+        changeActive('home');
+      }}
+    >
       <Image src={image} />
       <Title>{title}</Title>
     </Link>
@@ -18,4 +25,4 @@ LogoBox.propTypes = {
   title: PropTypes.string,
 };
 
-export default LogoBox;
+export default container(LogoBox);

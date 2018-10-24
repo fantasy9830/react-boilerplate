@@ -20,19 +20,19 @@ class LoginPage extends React.Component {
 
   handleSubmit = async (err, values) => {
     if (!err) {
+      const { login, user, location, history } = this.props;
+
       this.setState(() => ({ loading: true }));
 
-      const res = await this.props.login(values.username, values.password);
+      const res = await login(values.username, values.password);
 
       this.setState(() => ({ loading: false }));
 
-      if (this.props.user.login) {
+      if (user.login) {
         const pathname =
-          (this.props.location.state.from &&
-            this.props.location.state.from.pathname) ||
-          '/';
+          (location.state.from && location.state.from.pathname) || '/';
 
-        this.props.history.push(pathname);
+        history.push(pathname);
       } else if (res) {
         this.setState(() => ({ notice: res.statusText }));
       }
