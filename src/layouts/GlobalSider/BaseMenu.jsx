@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withNamespaces } from 'react-i18next';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import container from './container';
@@ -59,7 +58,6 @@ class BaseMenu extends React.Component {
   };
 
   getSubMenuOrItem = item => {
-    const { t } = this.props;
     if (item.children && item.children.some(child => child.key)) {
       return (
         <SubMenu
@@ -68,10 +66,10 @@ class BaseMenu extends React.Component {
             item.icon ? (
               <span>
                 {this.getIcon(item.icon)}
-                <span>{t(`menu.${item.key}`)}</span>
+                <span>{item.name}</span>
               </span>
             ) : (
-              t(`menu.${item.key}`)
+              item.name
             )
           }
         >
@@ -84,12 +82,12 @@ class BaseMenu extends React.Component {
   };
 
   getMenuItemPath = item => {
-    const { isMobile, t, collapse } = this.props;
+    const { isMobile, collapse } = this.props;
     if (/^https?:\/\//.test(item.path)) {
       return (
         <a href={item.path}>
           {this.getIcon(item.icon)}
-          <span>{t(`menu.${item.key}`)}</span>
+          <span>{item.name}</span>
         </a>
       );
     } else {
@@ -99,7 +97,7 @@ class BaseMenu extends React.Component {
           onClick={isMobile ? () => collapse(true) : undefined}
         >
           {this.getIcon(item.icon)}
-          <span>{t(`menu.${item.key}`)}</span>
+          <span>{item.name}</span>
         </Link>
       );
     }
@@ -139,4 +137,4 @@ class BaseMenu extends React.Component {
   }
 }
 
-export default container(withNamespaces('layout')(BaseMenu));
+export default container(BaseMenu);
