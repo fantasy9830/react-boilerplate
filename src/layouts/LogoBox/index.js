@@ -9,7 +9,10 @@ const LogoBox = ({ image, title, changeActive, ...passThroughProps }) => (
     <Link
       {...passThroughProps}
       onClick={() => {
-        passThroughProps.onClick();
+        if (passThroughProps.onClick) {
+          passThroughProps.onClick();
+        }
+
         changeActive('home');
       }}
     >
