@@ -1,10 +1,12 @@
+import React from 'react';
 import Loadable from 'react-loadable';
 import PageLoading from './PageLoading';
 import locales from './../locales';
+import { FaHome, FaChartLine, FaCogs } from 'react-icons/fa';
 
 export default [
   {
-    icon: 'fa-home',
+    icon: <FaHome />,
     key: 'sidermenu1',
     name: locales.t('layout:menu.sidermenu1'),
     children: [
@@ -58,7 +60,7 @@ export default [
     ],
   },
   {
-    icon: 'fa-chart-line',
+    icon: <FaChartLine />,
     key: 'sidermenu2',
     name: locales.t('layout:menu.sidermenu2'),
     children: [
@@ -95,7 +97,7 @@ export default [
     ],
   },
   {
-    icon: 'fa-cogs',
+    icon: <FaCogs />,
     key: 'sidermenu3',
     name: locales.t('layout:menu.sidermenu3'),
     path: '/sidermenu3',

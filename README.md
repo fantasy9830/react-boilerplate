@@ -31,7 +31,7 @@
 * [x] Redux
 * [x] React Router
 * [x] Ant Design + Ant Design Pro
-* [x] FortAwesome
+* [x] React Icons
 * [x] Styled Components
 * [x] i18next多國語系
 * [x] 登入認證功能(JWT)

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Dropdown, Avatar, Menu } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withRouter } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
+import { FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import { Action } from './style';
 import container from './container';
 
@@ -26,7 +26,7 @@ class SettingMenu extends React.Component {
     const MenuItem = (
       <Menu onClick={this.handleMenuClick} onTouchStart={this.handleMenuClick}>
         <Item key="logout">
-          <FontAwesomeIcon icon="sign-out-alt" />
+          <FaSignOutAlt />
           &nbsp; {t('setting.logout')}
         </Item>
       </Menu>
@@ -36,7 +36,7 @@ class SettingMenu extends React.Component {
       <Dropdown overlay={MenuItem} trigger={['click']} placement="bottomRight">
         <Action>
           <Avatar style={{ marginRight: '8px' }}>
-            <FontAwesomeIcon icon="user" />
+            <FaUserAlt />
           </Avatar>
           <span style={{ verticalAlign: 'middle' }}>
             {this.props.user.name}

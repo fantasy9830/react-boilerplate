@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import container from './container';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconContext } from 'react-icons';
 
 const { SubMenu, Item } = Menu;
 
@@ -105,13 +105,7 @@ class BaseMenu extends React.Component {
 
   getIcon = icon => {
     if (typeof icon === 'string') {
-      if (icon.indexOf('fa-') === 0) {
-        icon = icon.replace(/^fa-/i, '');
-
-        return <FontAwesomeIcon icon={icon} className="anticon" />;
-      } else {
-        return <Icon type={icon} />;
-      }
+      return <Icon type={icon} />;
     }
 
     return icon;
@@ -122,17 +116,19 @@ class BaseMenu extends React.Component {
     const menuProps = collapsed ? {} : { openKeys: this.state.openKeys };
 
     return (
-      <Menu
-        theme="dark"
-        mode="inline"
-        {...menuProps}
-        selectedKeys={[current]}
-        onOpenChange={this.handleOpenChange}
-        onClick={this.handleItemClick}
-        style={{ margin: '16px 0', width: '100%' }}
-      >
-        {this.getNavMenuItems(menus)}
-      </Menu>
+      <IconContext.Provider value={{ className: 'anticon' }}>
+        <Menu
+          theme="dark"
+          mode="inline"
+          {...menuProps}
+          selectedKeys={[current]}
+          onOpenChange={this.handleOpenChange}
+          onClick={this.handleItemClick}
+          style={{ margin: '16px 0', width: '100%' }}
+        >
+          {this.getNavMenuItems(menus)}
+        </Menu>
+      </IconContext.Provider>
     );
   }
 }
