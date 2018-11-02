@@ -20,19 +20,19 @@ class LoginPage extends React.Component {
 
   handleSubmit = async (err, values) => {
     if (!err) {
-      const { login, user, location, history } = this.props;
-
       this.setState(() => ({ loading: true }));
 
-      const res = await login(values.username, values.password);
+      const res = await this.props.login(values.username, values.password);
 
       this.setState(() => ({ loading: false }));
 
-      if (user.login) {
+      if (this.props.user.login) {
         const pathname =
-          (location.state.from && location.state.from.pathname) || '/';
+          (this.props.location.state.from &&
+            this.props.location.state.from.pathname) ||
+          '/';
 
-        history.push(pathname);
+        this.props.history.push(pathname);
       } else if (res) {
         this.setState(() => ({ notice: res.statusText }));
       }
@@ -40,6 +40,12 @@ class LoginPage extends React.Component {
   };
 
   handleClose = () => this.setState(() => ({ notice: '' }));
+
+  componentDidMount() {
+    if (this.props.user.login) {
+      this.props.history.push('/');
+    }
+  };
 
   render() {
     const { t } = this.props;
