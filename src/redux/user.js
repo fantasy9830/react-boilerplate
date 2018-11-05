@@ -1,5 +1,4 @@
 import auth from './../requests/auth';
-import localforage from 'localforage';
 import jwtDecode from 'jwt-decode';
 
 // Action Type
@@ -36,7 +35,7 @@ export const actions = {
             permissions: decoded.permissions,
           });
 
-          localforage.setItem('@Ricky:token', res.data.token);
+          localStorage.setItem('@Ricky:token', res.data.token);
 
           return {
             status: res.status,
@@ -68,7 +67,7 @@ export const actions = {
         type: types.LOGOUT,
       });
 
-      localforage.removeItem('@Ricky:token');
+      localStorage.removeItem('@Ricky:token');
     };
   },
 

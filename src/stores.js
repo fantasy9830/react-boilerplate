@@ -2,7 +2,6 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import moment from 'moment';
-import localforage from 'localforage';
 import jwtDecode from 'jwt-decode';
 
 import { types } from './redux/user';
@@ -27,32 +26,30 @@ const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
 const stores = createStore(reducers, enhancer);
 
-(async () => {
-  const token = await localforage.getItem('@Ricky:token');
-  if (token) {
-    const decoded = jwtDecode(token);
+const token = localStorage.getItem('@Ricky:token');
+if (token) {
+  const decoded = jwtDecode(token);
 
-    // token過期
-    if (moment.unix(decoded.exp).isBefore(moment())) {
-      stores.dispatch({
-        type: types.LOGOUT,
-      });
+  // token過期
+  if (moment.unix(decoded.exp).isBefore(moment())) {
+    stores.dispatch({
+      type: types.LOGOUT,
+    });
 
-      localforage.removeItem('@Ricky:token');
-    } else {
-      stores.dispatch({
-        type: types.LOGIN,
-        id: decoded.jti,
-        name: decoded.name,
-        username: decoded.username,
-        email: decoded.email,
-        address: decoded.address,
-        roles: decoded.roles,
-        permissions: decoded.permissions,
-        token: token,
-      });
-    }
+    localStorage.removeItem('@Ricky:token');
+  } else {
+    stores.dispatch({
+      type: types.LOGIN,
+      id: decoded.jti,
+      name: decoded.name,
+      username: decoded.username,
+      email: decoded.email,
+      address: decoded.address,
+      roles: decoded.roles,
+      permissions: decoded.permissions,
+      token: token,
+    });
   }
-})();
+}
 
 export default stores;

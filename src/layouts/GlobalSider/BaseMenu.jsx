@@ -116,7 +116,7 @@ class BaseMenu extends React.Component {
     const menuProps = collapsed ? {} : { openKeys: this.state.openKeys };
 
     return (
-      <IconContext.Provider value={{ className: 'anticon' }}>
+      <IconContext.Provider value={{ className: 'anticon', style: { fontSize: '20px' } }}>
         <Menu
           theme="dark"
           mode="inline"

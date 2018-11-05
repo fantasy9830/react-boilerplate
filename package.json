@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "ant-design-pro": "^2.1.0",
-    "antd": "^3.10.3",
+    "antd": "^3.10.4",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "enquire.js": "^2.1.6",
