@@ -76,7 +76,9 @@ export const actions = {
    */
   getRoles() {
     return async dispatch => {
-      const { data } = await auth.get(`/roles/${process.env.REACT_APP_SYSTEM_NAME}`);
+      const { data } = await auth.get(
+        `/roles/${process.env.REACT_APP_SYSTEM_NAME}`,
+      );
 
       dispatch({
         type: types.SET_ROLES,
@@ -90,7 +92,9 @@ export const actions = {
    */
   getPermissions() {
     return async dispatch => {
-      const { data } = await auth.get(`/permissions/${process.env.REACT_APP_SYSTEM_NAME}`);
+      const { data } = await auth.get(
+        `/permissions/${process.env.REACT_APP_SYSTEM_NAME}`,
+      );
 
       dispatch({
         type: types.SET_PERMISSIONS,

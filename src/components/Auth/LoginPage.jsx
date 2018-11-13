@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Spin } from 'antd';
+import { Alert } from 'antd';
 import { Login } from 'ant-design-pro';
 import { withNamespaces } from 'react-i18next';
 import { Container, Content, Main } from './style';
@@ -45,37 +45,51 @@ class LoginPage extends React.Component {
     if (this.props.user.login) {
       this.props.history.push('/');
     }
-  };
+  }
 
   render() {
     const { t } = this.props;
 
     return (
-      <Spin spinning={this.state.loading}>
-        <Container background={background}>
-          <Content>
-            <LoginHeader title={t('title')} logo={logo} />
-            <Main>
-              <Login onSubmit={this.handleSubmit}>
-                {this.state.notice && (
-                  <Alert
-                    style={{ marginBottom: 24 }}
-                    message={this.state.notice}
-                    type="error"
-                    showIcon
-                    closable
-                    onClose={this.handleClose}
-                  />
-                )}
-                <UserName name="username" placeholder={t('username')} />
-                <Password name="password" placeholder={t('password')} />
-                <Submit>{t('submit')}</Submit>
-              </Login>
-            </Main>
-          </Content>
-          <GlobalFooter />
-        </Container>
-      </Spin>
+      <Container background={background}>
+        <Content>
+          <LoginHeader title={t('title')} logo={logo} />
+          <Main>
+            <Login
+              onSubmit={this.handleSubmit}
+              ref={form => {
+                this.loginForm = form;
+              }}
+            >
+              {this.state.notice && (
+                <Alert
+                  style={{ marginBottom: 24 }}
+                  message={this.state.notice}
+                  type="error"
+                  showIcon
+                  closable
+                  onClose={this.handleClose}
+                />
+              )}
+              <UserName name="username" placeholder={t('username')} />
+              <Password
+                name="password"
+                placeholder={t('password')}
+                onPressEnter={() =>
+                  this.loginForm.validateFields(this.handleSubmit)
+                }
+              />
+              <Submit
+                loading={this.state.loading}
+                style={{ width: '100%', marginTop: '16px' }}
+              >
+                {t('submit')}
+              </Submit>
+            </Login>
+          </Main>
+        </Content>
+        <GlobalFooter />
+      </Container>
     );
   }
 }
