@@ -7,7 +7,10 @@ const MobileLogo = props => (
   <MobileLink
     to={props.to}
     key="logo"
-    onClick={() => props.changeActive('home')}
+    onClick={() => {
+      props.clearOpenKeys();
+      props.changeActive('home');
+    }}
   >
     <Image src={props.image} />
   </MobileLink>

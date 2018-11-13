@@ -13,22 +13,17 @@ class BaseMenu extends React.Component {
     current: PropTypes.string.isRequired,
   };
 
-  state = { openKeys: [] };
-
   handleOpenChange = openKeys => {
-    const lastOpenKey = openKeys[openKeys.length - 1];
     const moreThanOne =
       openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
 
-    this.setState(() => ({
-      openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
-    }));
+    this.props.setOpenKeys(moreThanOne ? [openKeys.pop()] : [...openKeys]);
   };
 
   handleItemClick = ({ key, keyPath }) => {
     this.props.changeActive(key);
     if (keyPath.length === 1) {
-      this.setState(() => ({ openKeys: [] }));
+      this.props.clearOpenKeys();
     }
   };
 
@@ -108,15 +103,15 @@ class BaseMenu extends React.Component {
       return <Icon type={icon} />;
     }
 
-    return icon;
+    return <i className="anticon">{icon}</i>;
   };
 
   render() {
     const { menus, current, collapsed } = this.props;
-    const menuProps = collapsed ? {} : { openKeys: this.state.openKeys };
+    const menuProps = collapsed ? {} : { openKeys: this.props.openKeys };
 
     return (
-      <IconContext.Provider value={{ className: 'anticon', style: { fontSize: '20px' } }}>
+      <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
         <Menu
           theme="dark"
           mode="inline"

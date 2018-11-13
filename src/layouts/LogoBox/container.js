@@ -6,6 +6,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       changeActive: actions.changeActive,
+      clearOpenKeys: actions.clearOpenKeys,
     },
     dispatch,
   );

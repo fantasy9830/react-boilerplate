@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, Image, Title } from './style';
 import container from './container';
 
-const LogoBox = ({ image, title, changeActive, ...passThroughProps }) => (
+const LogoBox = ({ image, title, changeActive, clearOpenKeys, ...passThroughProps }) => (
   <Container>
     <Link
       {...passThroughProps}
@@ -13,6 +13,7 @@ const LogoBox = ({ image, title, changeActive, ...passThroughProps }) => (
           passThroughProps.onClick();
         }
 
+        clearOpenKeys();
         changeActive('home');
       }}
     >
