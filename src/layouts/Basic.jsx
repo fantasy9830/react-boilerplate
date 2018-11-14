@@ -14,8 +14,6 @@ let isMobile = false;
 enquireScreen(mobile => (isMobile = mobile));
 
 class Basic extends React.Component {
-  enquireHandler = null;
-
   state = { isMobile };
 
   componentDidMount() {

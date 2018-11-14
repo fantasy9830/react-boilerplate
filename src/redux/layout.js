@@ -21,6 +21,15 @@ export const actions = {
   },
 
   /**
+   * 清空sider menu展開的欄位
+   */
+  clearOpenKeys() {
+    return {
+      type: types.CLEAR_OPENKEYS,
+    };
+  },
+
+  /**
    * 改變sidebar所在的位置
    * @param {string} current - 現在頁面所在位置
    */
@@ -52,15 +61,6 @@ export const actions = {
       noticeType,
     };
   },
-
-  /**
-   * 清空sider menu展開的欄位
-   */
-  clearOpenKeys() {
-    return {
-      type: types.CLEAR_OPENKEYS,
-    };
-  },
 };
 
 const initialState = {
@@ -79,6 +79,12 @@ export default (state = initialState, action) => {
         openKeys: action.keys,
       };
 
+    case types.CLEAR_OPENKEYS:
+      return {
+        ...state,
+        openKeys: [],
+      };
+
     case types.CHANGE_ACTIVE:
       return {
         ...state,
@@ -95,12 +101,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         notice: state.notice.filter(item => item.type !== action.noticeType),
-      };
-
-    case types.CLEAR_OPENKEYS:
-      return {
-        ...state,
-        openKeys: [],
       };
 
     default:

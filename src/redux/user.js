@@ -3,8 +3,8 @@ import jwtDecode from 'jwt-decode';
 
 // Action Type
 export const types = {
-  LOGIN: 'user/LOGIN',
-  LOGOUT: 'user/LOGOUT',
+  SIGN_IN: 'user/SIGN_IN',
+  SIGN_OUT: 'user/SIGN_OUT',
   SET_ROLES: 'user/SET_ROLES',
   SET_PERMISSIONS: 'user/SET_PERMISSIONS',
 };
@@ -16,15 +16,16 @@ export const actions = {
    * @param {string} username - 帳號
    * @param {string} password - 密碼
    */
-  login(username, password) {
+  signIn(username, password) {
     return async dispatch => {
       try {
         const res = await auth.post('/signin', { username, password });
 
         if (res.data && res.data.token) {
           const decoded = jwtDecode(res.data.token);
+
           dispatch({
-            type: types.LOGIN,
+            type: types.SIGN_IN,
             id: decoded.jti,
             name: decoded.name,
             username: decoded.username,
@@ -61,10 +62,10 @@ export const actions = {
   /**
    * 登出
    */
-  logout() {
+  signOut() {
     return dispatch => {
       dispatch({
-        type: types.LOGOUT,
+        type: types.SIGN_OUT,
       });
 
       localStorage.removeItem('@Ricky:token');
@@ -119,7 +120,7 @@ const initialState = {
 // reducer
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.LOGIN:
+    case types.SIGN_IN:
       return {
         ...state,
         id: action.id,
@@ -133,7 +134,7 @@ export default (state = initialState, action) => {
         permissions: action.permissions,
       };
 
-    case types.LOGOUT:
+    case types.SIGN_OUT:
       return {
         ...state,
         id: 0,

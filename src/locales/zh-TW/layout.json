@@ -11,7 +11,7 @@
     "clear": "清空"
   },
   "setting": {
-    "logout": "登出"
+    "signOut": "登出"
   },
   "menu": {
     "sidermenu1": "SiderMenu1",

@@ -11,7 +11,7 @@ const Routes = () => (
   <Router history={history}>
     <Switch>
       {/* public */}
-      <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/signin" component={LoginPage} />
       {/* private */}
       <PrivateRoute component={Layout} />
     </Switch>

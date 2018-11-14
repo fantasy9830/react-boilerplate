@@ -22,7 +22,7 @@ class LoginPage extends React.Component {
     if (!err) {
       this.setState(() => ({ loading: true }));
 
-      const res = await this.props.login(values.username, values.password);
+      const res = await this.props.signIn(values.username, values.password);
 
       this.setState(() => ({ loading: false }));
 
@@ -71,10 +71,15 @@ class LoginPage extends React.Component {
                   onClose={this.handleClose}
                 />
               )}
-              <UserName name="username" placeholder={t('username')} />
+              <UserName
+                name="username"
+                placeholder={t('username')}
+                readOnly={this.state.loading}
+              />
               <Password
                 name="password"
                 placeholder={t('password')}
+                readOnly={this.state.loading}
                 onPressEnter={() =>
                   this.loginForm.validateFields(this.handleSubmit)
                 }

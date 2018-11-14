@@ -11,8 +11,8 @@ const { Item } = Menu;
 class SettingMenu extends React.Component {
   handleMenuClick = ({ key }) => {
     switch (key) {
-      case 'logout':
-        this.props.logout();
+      case 'signOut':
+        this.props.signOut();
         this.props.history.push('/');
         break;
       default:
@@ -25,9 +25,9 @@ class SettingMenu extends React.Component {
 
     const MenuItem = (
       <Menu onClick={this.handleMenuClick} onTouchStart={this.handleMenuClick}>
-        <Item key="logout">
+        <Item key="signOut">
           <FaSignOutAlt />
-          &nbsp; {t('setting.logout')}
+          &nbsp; {t('setting.signOut')}
         </Item>
       </Menu>
     );

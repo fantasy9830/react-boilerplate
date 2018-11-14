@@ -14,16 +14,20 @@ class BaseMenu extends React.Component {
   };
 
   handleOpenChange = openKeys => {
-    const moreThanOne =
-      openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
+    if (!this.props.collapsed) {
+      const moreThanOne =
+        openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
 
-    this.props.setOpenKeys(moreThanOne ? [openKeys.pop()] : [...openKeys]);
+      this.props.setOpenKeys(moreThanOne ? [openKeys.pop()] : [...openKeys]);
+    }
   };
 
   handleItemClick = ({ key, keyPath }) => {
     this.props.changeActive(key);
     if (keyPath.length === 1) {
       this.props.clearOpenKeys();
+    } else {
+      this.props.setOpenKeys(keyPath);
     }
   };
 
