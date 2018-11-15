@@ -1,6 +1,7 @@
 import React from 'react';
 import container from './container';
 import { withNamespaces } from 'react-i18next';
+import { Icon } from 'antd';
 import { Notification } from './style';
 
 import noticeImage from './images/notice.svg';
@@ -31,6 +32,7 @@ class Notice extends React.Component {
 
     return (
       <Notification
+        bell={<Icon type="bell" style={{ fontSize: '20px' }} />}
         count={this.props.data.length}
         onItemClick={this.handleItemClick}
         onClear={this.handleClear}

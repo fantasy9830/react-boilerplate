@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import container from './container';
-import { IconContext } from 'react-icons';
 
 const { SubMenu, Item } = Menu;
 
@@ -104,10 +103,10 @@ class BaseMenu extends React.Component {
 
   getIcon = icon => {
     if (typeof icon === 'string') {
-      return <Icon type={icon} />;
+      return <Icon type={icon} style={{ fontSize: '20px' }} />;
     }
 
-    return <i className="anticon">{icon}</i>;
+    return <Icon component={icon} style={{ fontSize: '20px' }} />;
   };
 
   render() {
@@ -115,19 +114,17 @@ class BaseMenu extends React.Component {
     const menuProps = collapsed ? {} : { openKeys: this.props.openKeys };
 
     return (
-      <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
-        <Menu
-          theme="dark"
-          mode="inline"
-          {...menuProps}
-          selectedKeys={[current]}
-          onOpenChange={this.handleOpenChange}
-          onClick={this.handleItemClick}
-          style={{ margin: '16px 0', width: '100%' }}
-        >
-          {this.getNavMenuItems(menus)}
-        </Menu>
-      </IconContext.Provider>
+      <Menu
+        theme="dark"
+        mode="inline"
+        {...menuProps}
+        selectedKeys={[current]}
+        onOpenChange={this.handleOpenChange}
+        onClick={this.handleItemClick}
+        style={{ margin: '16px 0', width: '100%' }}
+      >
+        {this.getNavMenuItems(menus)}
+      </Menu>
     );
   }
 }

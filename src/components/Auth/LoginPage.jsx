@@ -18,11 +18,11 @@ class LoginPage extends React.Component {
     loading: false,
   };
 
-  handleSubmit = async (err, values) => {
+  handleSubmit = async (err, { username, password }) => {
     if (!err) {
       this.setState(() => ({ loading: true }));
 
-      const res = await this.props.signIn(values.username, values.password);
+      const res = await this.props.signIn(username, password);
 
       this.setState(() => ({ loading: false }));
 
