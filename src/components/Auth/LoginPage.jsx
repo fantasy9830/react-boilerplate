@@ -8,7 +8,7 @@ import GlobalFooter from './../../layouts/GlobalFooter';
 import container from './container';
 
 import background from './images/background.svg';
-import logo from './../../images/logo.png';
+import logo from './../../assets/images/logo.png';
 
 const { UserName, Password, Submit } = Login;
 

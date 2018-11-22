@@ -7,7 +7,7 @@ import GlobalFooter from './GlobalFooter';
 import ContentRoute from './../utils/ContentRoute';
 import container from './container';
 import menus from './menus';
-import logo from './../images/logo.png';
+import logo from './../assets/images/logo.png';
 import { Content } from './style';
 
 let isMobile = false;

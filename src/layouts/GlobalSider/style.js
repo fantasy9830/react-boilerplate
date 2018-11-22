@@ -7,4 +7,3 @@ export const Sider = styled(Layout.Sider)`
   position: relative;
   z-index: 10;
 `;
-
