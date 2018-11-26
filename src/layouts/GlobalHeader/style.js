@@ -9,15 +9,16 @@ export const Header = styled(Layout.Header)`
 
 export const MenuBar = styled(Icon)`
   font-size: 20px;
-  line-height: 64px;
+  height: 64px;
   cursor: pointer;
-  transition: all 0.3s;
-  padding: 0px 24px;
+  transition: all 0.3s, padding 0s;
+  padding: 22px 24px;
+  vertical-align: inherit !important;
   &:hover {
     background: #e6f7ff;
   }
   @media (max-width: 768px) {
-    padding: 0 12px;
+    padding: 22px 12px;
   }
 `;
 

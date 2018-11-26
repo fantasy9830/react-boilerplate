@@ -4,14 +4,14 @@ import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import history from './history';
 
-import LoginPage from './components/Auth/LoginPage';
+import Login from './screens/Login';
 import Layout from './layouts';
 
 const Routes = () => (
   <Router history={history}>
     <Switch>
       {/* public */}
-      <Route exact path="/signin" component={LoginPage} />
+      <Route exact path="/signin" component={Login} />
       {/* private */}
       <PrivateRoute component={Layout} />
     </Switch>

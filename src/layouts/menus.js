@@ -15,7 +15,7 @@ export default [
         name: locales.t('layout:menu.sidermenu1-1'),
         path: '/sidermenu1-1',
         component: Loadable({
-          loader: () => import('./../components/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -25,7 +25,7 @@ export default [
         name: locales.t('layout:menu.sidermenu1-2'),
         path: '/sidermenu1-2',
         component: Loadable({
-          loader: () => import('./../components/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -40,7 +40,7 @@ export default [
             name: locales.t('layout:menu.sidermenu1-3-1'),
             path: '/sidermenu1-3-1',
             component: Loadable({
-              loader: () => import('./../components/Demo'),
+              loader: () => import('./../screens/Demo'),
               loading: PageLoading,
             }),
           },
@@ -50,7 +50,7 @@ export default [
             name: locales.t('layout:menu.sidermenu1-3-2'),
             path: '/sidermenu1-3-2',
             component: Loadable({
-              loader: () => import('./../components/Demo'),
+              loader: () => import('./../screens/Demo'),
               loading: PageLoading,
             }),
           },
@@ -69,7 +69,7 @@ export default [
         name: locales.t('layout:menu.sidermenu2-1'),
         path: '/sidermenu2-1',
         component: Loadable({
-          loader: () => import('./../components/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -79,7 +79,7 @@ export default [
         name: locales.t('layout:menu.sidermenu2-2'),
         path: '/sidermenu2-2',
         component: Loadable({
-          loader: () => import('./../components/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -89,7 +89,7 @@ export default [
         name: locales.t('layout:menu.sidermenu2-3'),
         path: '/sidermenu2-3',
         component: Loadable({
-          loader: () => import('./../components/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -101,7 +101,7 @@ export default [
     name: locales.t('layout:menu.sidermenu3'),
     path: '/sidermenu3',
     component: Loadable({
-      loader: () => import('./../components/Demo'),
+      loader: () => import('./../screens/Demo'),
       loading: PageLoading,
     }),
   },

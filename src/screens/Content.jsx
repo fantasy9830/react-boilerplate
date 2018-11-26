@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
 import { Authorized } from 'ant-design-pro';
-import Home from './../components/Home';
-import NoMatch from './../components/Exception/NoMatch';
-import Forbidden from './../components/Exception/Forbidden';
+import HomeScreen from './Home';
+import NoMatch from './Exception/NoMatch';
+import Forbidden from './Exception/Forbidden';
 
 function formatter(menus = []) {
   return menus.reduce((router, item) => {
@@ -18,10 +18,10 @@ function formatter(menus = []) {
   }, []);
 }
 
-const ContentRoute = ({ menus, permissions }) => {
+const Content = ({ menus, permissions }) => {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route exact path="/" component={HomeScreen} />
       {formatter(menus).map(route => {
         const { Secured } = Authorized(route.key);
 
@@ -39,9 +39,9 @@ const ContentRoute = ({ menus, permissions }) => {
   );
 };
 
-ContentRoute.propTypes = {
+Content.propTypes = {
   menus: PropTypes.array.isRequired,
   permissions: PropTypes.array.isRequired,
 };
 
-export default ContentRoute;
+export default Content;

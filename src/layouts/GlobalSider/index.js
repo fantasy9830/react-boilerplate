@@ -4,7 +4,7 @@ import { Drawer } from 'antd';
 import SiderMenu from './SiderMenu';
 import container from './container';
 
-const SiderMenuWrapper = props =>
+const GlobalSider = props =>
   props.isMobile ? (
     <Drawer
       visible={!props.collapsed}
@@ -21,10 +21,10 @@ const SiderMenuWrapper = props =>
     <SiderMenu {...props} />
   );
 
-SiderMenuWrapper.propTypes = {
+GlobalSider.propTypes = {
   isMobile: PropTypes.bool.isRequired,
   collapsed: PropTypes.bool.isRequired,
   collapse: PropTypes.func.isRequired,
 };
 
-export default container(SiderMenuWrapper);
+export default container(GlobalSider);

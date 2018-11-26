@@ -4,7 +4,7 @@ import { enquireScreen, unenquireScreen } from 'enquire-js';
 import GlobalHeader from './GlobalHeader';
 import GlobalSider from './GlobalSider';
 import GlobalFooter from './GlobalFooter';
-import ContentRoute from './../utils/ContentRoute';
+import ContentScreen from './../screens/Content';
 import container from './container';
 import menus from './menus';
 import logo from './../assets/images/logo.png';
@@ -48,7 +48,7 @@ class Basic extends React.Component {
           />
 
           <Content>
-            <ContentRoute menus={menus} permissions={permissions} />
+            <ContentScreen menus={menus} permissions={permissions} />
           </Content>
 
           <GlobalFooter />
