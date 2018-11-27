@@ -5,7 +5,7 @@ import container from './container';
 
 const MobileLogo = props => (
   <MobileLink
-    to={props.to}
+    to="/"
     key="logo"
     onClick={() => {
       props.clearOpenKeys();
@@ -17,7 +17,6 @@ const MobileLogo = props => (
 );
 
 MobileLogo.propTypes = {
-  to: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
 };
 

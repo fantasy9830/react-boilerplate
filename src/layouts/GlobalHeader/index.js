@@ -8,7 +8,7 @@ import { Header, MenuBar, Right } from './style';
 const GlobalHeader = ({ isMobile, collapsed, collapse, logo }) => {
   return (
     <Header>
-      {isMobile && <MobileLogo to="/" image={logo} />}
+      {isMobile && <MobileLogo image={logo} />}
       <MenuBar
         type={collapsed ? 'menu-unfold' : 'menu-fold'}
         onClick={() => collapse(!collapsed)}

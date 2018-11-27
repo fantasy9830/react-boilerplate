@@ -23,7 +23,6 @@ class SiderMenu extends React.Component {
         width={256}
       >
         <LogoBox
-          to="/"
           image={logo}
           title="Logo"
           onClick={isMobile ? () => collapse(true) : undefined}

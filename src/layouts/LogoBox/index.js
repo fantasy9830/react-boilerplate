@@ -8,6 +8,7 @@ const LogoBox = ({ image, title, changeActive, clearOpenKeys, ...passThroughProp
   <Container>
     <Link
       {...passThroughProps}
+      to="/"
       onClick={() => {
         if (passThroughProps.onClick) {
           passThroughProps.onClick();
@@ -24,7 +25,6 @@ const LogoBox = ({ image, title, changeActive, clearOpenKeys, ...passThroughProp
 );
 
 LogoBox.propTypes = {
-  to: PropTypes.string,
   image: PropTypes.string,
   title: PropTypes.string,
 };
