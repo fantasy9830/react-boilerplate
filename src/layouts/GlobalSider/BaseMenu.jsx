@@ -102,11 +102,13 @@ class BaseMenu extends React.Component {
   };
 
   getIcon = icon => {
+    const iconStyle = { fontSize: '20px' };
+
     if (typeof icon === 'string') {
-      return <Icon type={icon} style={{ fontSize: '20px' }} />;
+      return <Icon type={icon} style={iconStyle} />;
     }
 
-    return <Icon component={icon} style={{ fontSize: '20px' }} />;
+    return <Icon component={icon} style={iconStyle} />;
   };
 
   render() {
