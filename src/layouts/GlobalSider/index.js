@@ -22,9 +22,10 @@ const GlobalSider = props =>
   );
 
 GlobalSider.propTypes = {
-  isMobile: PropTypes.bool.isRequired,
-  collapsed: PropTypes.bool.isRequired,
   collapse: PropTypes.func.isRequired,
+  collapsed: PropTypes.bool.isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  permissions: PropTypes.array.isRequired,
 };
 
 export default container(GlobalSider);

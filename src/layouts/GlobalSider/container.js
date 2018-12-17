@@ -5,7 +5,6 @@ import { actions } from './../../redux/layout';
 const mapStateToProps = state => ({
   current: state.layout.current,
   openKeys: state.layout.openKeys,
-  permissions: state.user.permissions,
 });
 
 const mapDispatchToProps = dispatch =>

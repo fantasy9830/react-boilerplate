@@ -38,6 +38,7 @@ class Basic extends React.Component {
           collapsed={layout.collapsed}
           collapse={collapse}
           logo={logo}
+          permissions={permissions}
         />
         <Layout style={{ minHeight: '100vh' }}>
           <GlobalHeader

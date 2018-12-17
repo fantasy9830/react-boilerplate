@@ -7,7 +7,7 @@ export const Container = styled.div`
   overflow: auto;
   background: #f0f2f5;
   @media (min-width: 768px) {
-    background-image: url(${props => props.background});
+    background-image: url(${({ background }) => background});
     background-repeat: no-repeat;
     background-position: center 110px;
     background-size: 100%;

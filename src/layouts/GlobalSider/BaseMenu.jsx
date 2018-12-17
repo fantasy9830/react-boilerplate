@@ -37,22 +37,16 @@ class BaseMenu extends React.Component {
   };
 
   getNavMenuItems = menus => {
-    if (!menus) {
+    const { permissions } = this.props;
+
+    if (menus && Array.isArray(permissions)) {
+      return menus
+        .filter(item => item.key && permissions.indexOf(item.key) >= 0)
+        .map(item => this.getSubMenuOrItem(item))
+        .filter(item => !!item);
+    } else {
       return [];
     }
-
-    const permissions = this.props.permissions
-      ? this.props.permissions.read
-      : [];
-
-    return menus
-      .filter(item => item.key)
-      .filter(
-        item =>
-          Array.isArray(permissions) && permissions.indexOf(item.key) >= 0,
-      )
-      .map(item => this.getSubMenuOrItem(item))
-      .filter(item => !!item);
   };
 
   getSubMenuOrItem = item => {
@@ -84,7 +78,7 @@ class BaseMenu extends React.Component {
     if (/^https?:\/\//.test(item.path)) {
       return (
         <a href={item.path}>
-          {this.getIcon(item.icon)}
+          {item.icon && this.getIcon(item.icon)}
           <span>{item.name}</span>
         </a>
       );
@@ -94,7 +88,7 @@ class BaseMenu extends React.Component {
           to={item.path}
           onClick={isMobile ? () => collapse(true) : undefined}
         >
-          {this.getIcon(item.icon)}
+          {item.icon && this.getIcon(item.icon)}
           <span>{item.name}</span>
         </Link>
       );
