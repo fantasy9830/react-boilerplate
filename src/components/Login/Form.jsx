@@ -18,7 +18,7 @@ class LoginForm extends React.Component {
     if (!err) {
       this.setState(() => ({ loading: true }));
 
-      const res = await this.props.signIn(username, password);
+      const res = await this.props.login(username, password);
 
       this.setState(() => ({ loading: false }));
 

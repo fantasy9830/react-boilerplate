@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      signIn: actions.signIn,
+      login: actions.login,
     },
     dispatch,
   );

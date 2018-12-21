@@ -33,13 +33,13 @@ if (token) {
   // token過期
   if (moment.unix(decoded.exp).isBefore(moment())) {
     stores.dispatch({
-      type: types.SIGN_OUT,
+      type: types.LOG_OUT,
     });
 
     localStorage.removeItem('@Ricky:token');
   } else {
     stores.dispatch({
-      type: types.SIGN_IN,
+      type: types.LOG_IN,
       id: decoded.jti,
       name: decoded.name,
       username: decoded.username,
