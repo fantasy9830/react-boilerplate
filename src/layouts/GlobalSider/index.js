@@ -1,24 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Drawer } from 'antd';
 import SiderMenu from './SiderMenu';
 import container from './container';
+import { MobileDrawer } from './style';
 
-const GlobalSider = props =>
+function authorized(menus, permissions) {
+  return menus.map(item => {
+    if (item.path && item.component) {
+      item.auth = permissions.indexOf(item.key) >= 0;
+    } else if (item.children) {
+      item.auth = authorized(item.children, permissions).some(
+        child => child.auth,
+      );
+    }
+
+    return item;
+  });
+}
+
+const GlobalSider = ({ menus, permissions, ...props }) =>
   props.isMobile ? (
-    <Drawer
+    <MobileDrawer
       visible={!props.collapsed}
       placement="left"
       onClose={() => props.collapse(true)}
-      style={{ padding: 0, height: '100vh' }}
     >
       <SiderMenu
         {...props}
+        menus={authorized(menus, permissions)}
         collapsed={props.isMobile ? false : props.collapsed}
       />
-    </Drawer>
+    </MobileDrawer>
   ) : (
-    <SiderMenu {...props} />
+    <SiderMenu {...props} menus={authorized(menus, permissions)} />
   );
 
 GlobalSider.propTypes = {

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Dropdown, Avatar, Menu } from 'antd';
+import { Dropdown, Avatar, Menu, Icon } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
-import { Icon } from 'antd';
 import { IconContext } from 'react-icons';
 import { FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import { Action } from './style';
@@ -29,13 +28,13 @@ class SettingMenu extends React.Component {
       <Menu onClick={this.handleMenuClick} onTouchStart={this.handleMenuClick}>
         <Item key="logout">
           <Icon component={FaSignOutAlt} />
-          <span>{t('setting.signOut')}</span>
+          <span>{t('setting.logout')}</span>
         </Item>
       </Menu>
     );
 
     return (
-      <IconContext.Provider value={{ style: { verticalAlign: 'initial' } }}>
+      <IconContext.Provider value={{ style: { verticalAlign: 'unset' } }}>
         <Dropdown
           overlay={MenuItem}
           trigger={['click']}

@@ -3,7 +3,6 @@ import i18n from 'i18next';
 // import Cache from 'i18next-localstorage-cache';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { reactI18nextModule } from 'react-i18next';
-
 import tw from './zh-TW';
 
 i18n
@@ -12,23 +11,13 @@ i18n
   .use(reactI18nextModule)
   .use(LanguageDetector)
   .init({
-    resources: {
-      'zh-TW': tw,
-    },
-
+    resources: { 'zh-TW': tw },
     fallbackLng: 'zh-TW',
     // wait: true, // globally set to wait for loaded translations in translate hoc
-
-    // have a common namespace used around the full app
-    ns: ['common'],
+    ns: ['common'], // have a common namespace used around the full app
     defaultNS: 'common',
-
     debug: process.env.NODE_ENV !== 'production',
-
-    // cache: {
-    //   enabled: true
-    // },
-
+    // cache: { enabled: true },
     interpolation: {
       escapeValue: false, // not needed for react!!
       formatSeparator: ',',
