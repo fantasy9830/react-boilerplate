@@ -22,7 +22,7 @@ export const Logo = styled.img`
 
 export const Title = styled.span`
   font-size: 33px;
-  color: fade(#000, 85%);
+  color: rgba(0, 0, 0, 0.85);
   font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 600;
   position: relative;
@@ -31,7 +31,7 @@ export const Title = styled.span`
 
 export const Desc = styled.div`
   font-size: 14px;
-  color: fade(#000, 45%);
+  color: rgba(0, 0, 0, 0.45);
   margin-top: 12px;
   margin-bottom: 40px;
 `;

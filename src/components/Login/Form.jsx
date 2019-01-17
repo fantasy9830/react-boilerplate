@@ -45,6 +45,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { t } = this.props;
+    const { notice, loading } = this.state;
 
     return (
       <Main>
@@ -54,10 +55,10 @@ class LoginForm extends React.Component {
             this.loginForm = form;
           }}
         >
-          {this.state.notice && (
+          {notice && (
             <Alert
               style={{ marginBottom: 24 }}
-              message={this.state.notice}
+              message={notice}
               type="error"
               showIcon
               closable
@@ -67,18 +68,18 @@ class LoginForm extends React.Component {
           <UserName
             name="username"
             placeholder={t('username')}
-            readOnly={this.state.loading}
+            readOnly={loading}
           />
           <Password
             name="password"
             placeholder={t('password')}
-            readOnly={this.state.loading}
+            readOnly={loading}
             onPressEnter={() =>
               this.loginForm.validateFields(this.handleSubmit)
             }
           />
           <Submit
-            loading={this.state.loading}
+            loading={loading}
             style={{ width: '100%', marginTop: '16px' }}
           >
             {t('submit')}

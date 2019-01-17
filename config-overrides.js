@@ -1,30 +1,15 @@
-const { injectBabelPlugin } = require('react-app-rewired');
+const { override, fixBabelImports } = require('customize-cra');
 
-module.exports = function override(config, env) {
-  // 使用 babel-plugin-import - [antd]
-  config = injectBabelPlugin(
-    [
-      'import',
-      { libraryName: 'antd', libraryDirectory: 'es', style: 'css' },
-      'antd',
-    ],
-    config,
-  );
-
-  // 使用 babel-plugin-import - [ant-design-pro]
-  config = injectBabelPlugin(
-    [
-      'import',
-      {
-        libraryName: 'ant-design-pro',
-        libraryDirectory: 'lib',
-        style: 'css',
-        camel2DashComponentName: false,
-      },
-      'ant-design-pro',
-    ],
-    config,
-  );
-
-  return config;
-};
+module.exports = override(
+  fixBabelImports('antd', {
+    libraryName: 'antd',
+    libraryDirectory: 'es',
+    style: 'css',
+  }),
+  fixBabelImports('ant-design-pro', {
+    libraryName: 'ant-design-pro',
+    libraryDirectory: 'lib',
+    style: 'css',
+    camel2DashComponentName: false,
+  }),
+);
