@@ -39,7 +39,7 @@ class BaseMenu extends React.Component {
   getNavMenuItems = menus => {
     if (menus) {
       return menus
-        .filter(item => item.key && item.auth)
+        .filter(item => item.key && item.authority)
         .map(item => this.getSubMenuOrItem(item))
         .filter(item => !!item);
     } else {

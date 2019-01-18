@@ -5,6 +5,8 @@ import { withNamespaces } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
 import { Main } from './style';
 import container from './container';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
 const { UserName, Password, Submit } = Login;
 
@@ -16,11 +18,13 @@ class LoginForm extends React.Component {
 
   handleSubmit = async (err, { username, password }) => {
     if (!err) {
+      NProgress.start();
       this.setState(() => ({ loading: true }));
 
       const res = await this.props.login(username, password);
 
       this.setState(() => ({ loading: false }));
+      NProgress.done();
 
       if (this.props.user.login) {
         const pathname =

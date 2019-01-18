@@ -33,11 +33,11 @@ class Basic extends React.Component {
     return (
       <Layout>
         <GlobalSider
-          menus={menus}
           isMobile={this.state.isMobile}
           collapsed={layout.collapsed}
           collapse={collapse}
           logo={logo}
+          menus={menus}
           permissions={permissions}
         />
         <Layout style={{ minHeight: '100vh' }}>
