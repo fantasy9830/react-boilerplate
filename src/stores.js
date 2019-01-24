@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import moment from 'moment';
+import dayjs from 'dayjs'
 import jwtDecode from 'jwt-decode';
 
 import { types } from './redux/user';
@@ -31,7 +31,7 @@ if (token) {
   const decoded = jwtDecode(token);
 
   // token過期
-  if (moment.unix(decoded.exp).isBefore(moment())) {
+  if (dayjs.unix(decoded.exp).isBefore(dayjs())) {
     stores.dispatch({
       type: types.LOG_OUT,
     });
