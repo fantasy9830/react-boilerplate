@@ -1,10 +1,12 @@
 import React from 'react';
-import { withNamespaces } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Top, Header, HeaderLink, Logo, Title, Desc } from './style';
 
 import logo from './../../assets/images/logo.png';
 
-const LoginHeader = ({ t }) => {
+const LoginHeader = () => {
+  const [t] = useTranslation('auth');
+
   return (
     <Top>
       <Header>
@@ -18,4 +20,4 @@ const LoginHeader = ({ t }) => {
   );
 };
 
-export default withNamespaces('auth')(LoginHeader);
+export default LoginHeader;

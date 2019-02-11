@@ -1,6 +1,6 @@
 import React from 'react';
 import container from './container';
-import { withNamespaces } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Icon } from 'antd';
 import { Notification } from './style';
 
@@ -8,63 +8,60 @@ import noticeImage from './images/notice.svg';
 import messageImage from './images/message.svg';
 import todoImage from './images/todo.svg';
 
-class Notice extends React.Component {
-  handleItemClick = (item, tabProps) => {
+const Notice = ({ data, clearNotice }) => {
+  const [t] = useTranslation('layout');
+
+  function handleItemClick(item, tabProps) {
     // console.log(item, tabProps);
   };
 
-  handleClear = tabTitle => {
+  function handleClear(tabTitle) {
     let type = '';
-    if (tabTitle === this.props.t('notice.notice')) {
+    if (tabTitle === t('notice.notice')) {
       type = 'notice';
-    } else if (tabTitle === this.props.t('notice.message')) {
+    } else if (tabTitle === t('notice.message')) {
       type = 'message';
-    } else if (tabTitle === this.props.t('notice.todo')) {
+    } else if (tabTitle === t('notice.todo')) {
       type = 'todo';
     }
 
-    this.props.clearNotice(type);
+    clearNotice(type);
   };
 
-  render() {
-    const { t } = this.props;
-    const noticeData = this.props.data;
+  return (
+    <Notification
+      bell={<Icon type="bell" style={{ fontSize: '20px' }} />}
+      count={data.length}
+      onItemClick={handleItemClick}
+      onClear={handleClear}
+      locale={{ emptyText: t('notice.emptyText'), clear: t('notice.clear') }}
+      popupAlign={{ offset: [20, -16] }}
+    >
+      {/* 通知事項 */}
+      <Notification.Tab
+        list={data['notice']}
+        title={t('notice.notice')}
+        emptyText={t('notice.noticeEmpty')}
+        emptyImage={noticeImage}
+      />
 
-    return (
-      <Notification
-        bell={<Icon type="bell" style={{ fontSize: '20px' }} />}
-        count={this.props.data.length}
-        onItemClick={this.handleItemClick}
-        onClear={this.handleClear}
-        locale={{ emptyText: t('notice.emptyText'), clear: t('notice.clear') }}
-        popupAlign={{ offset: [20, -16] }}
-      >
-        {/* 通知事項 */}
-        <Notification.Tab
-          list={noticeData['notice']}
-          title={t('notice.notice')}
-          emptyText={t('notice.noticeEmpty')}
-          emptyImage={noticeImage}
-        />
+      {/* 訊息 */}
+      <Notification.Tab
+        list={data['message']}
+        title={t('notice.message')}
+        emptyText={t('notice.messageEmpty')}
+        emptyImage={messageImage}
+      />
 
-        {/* 訊息 */}
-        <Notification.Tab
-          list={noticeData['message']}
-          title={t('notice.message')}
-          emptyText={t('notice.messageEmpty')}
-          emptyImage={messageImage}
-        />
+      {/* 待辦事項 */}
+      <Notification.Tab
+        list={data['todo']}
+        title={t('notice.todo')}
+        emptyText={t('notice.todoEmpty')}
+        emptyImage={todoImage}
+      />
+    </Notification>
+  );
+};
 
-        {/* 待辦事項 */}
-        <Notification.Tab
-          list={noticeData['todo']}
-          title={t('notice.todo')}
-          emptyText={t('notice.todoEmpty')}
-          emptyImage={todoImage}
-        />
-      </Notification>
-    );
-  }
-}
-
-export default withNamespaces('layout')(container(Notice));
+export default container(Notice);

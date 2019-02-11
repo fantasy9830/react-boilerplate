@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from 'antd';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import GlobalHeader from './GlobalHeader';
@@ -10,53 +10,50 @@ import menus from './menus';
 import logo from './../assets/images/logo.png';
 import { Content } from './style';
 
-let isMobile = false;
-enquireScreen(mobile => (isMobile = mobile));
+const Basic = ({ user, layout, collapse }) => {
+  let isMobile = false;
+  let enquireHandler = null;
+  const permissions = user.permissions ? user.permissions.read : [];
 
-class Basic extends React.Component {
-  state = { isMobile };
+  enquireScreen(mobile => (isMobile = mobile));
 
-  componentDidMount() {
-    this.enquireHandler = enquireScreen(mobile =>
-      this.setState(() => ({ isMobile: mobile })),
-    );
-  }
+  const [mobileState, setMobileState] = useState(isMobile);
+  isMobile = mobileState;
 
-  componentWillUnmount() {
-    unenquireScreen(this.enquireHandler);
-  }
+  useEffect(() => {
+    enquireHandler = enquireScreen(mobile => setMobileState(mobile === true));
 
-  render() {
-    const { user, layout, collapse } = this.props;
-    const permissions = user.permissions ? user.permissions.read : [];
+    return () => {
+      unenquireScreen(enquireHandler);
+    };
+  }, []);
 
-    return (
-      <Layout>
-        <GlobalSider
-          isMobile={this.state.isMobile}
+  return (
+    <Layout>
+      <GlobalSider
+        isMobile={isMobile}
+        collapsed={layout.collapsed}
+        collapse={collapse}
+        logo={logo}
+        menus={menus}
+        permissions={permissions}
+      />
+      <Layout style={{ minHeight: '100vh' }}>
+        <GlobalHeader
+          isMobile={isMobile}
           collapsed={layout.collapsed}
           collapse={collapse}
           logo={logo}
-          menus={menus}
-          permissions={permissions}
         />
-        <Layout style={{ minHeight: '100vh' }}>
-          <GlobalHeader
-            isMobile={this.state.isMobile}
-            collapsed={layout.collapsed}
-            collapse={collapse}
-            logo={logo}
-          />
 
-          <Content>
-            <ContentScreen menus={menus} permissions={permissions} />
-          </Content>
+        <Content>
+          <ContentScreen menus={menus} permissions={permissions} />
+        </Content>
 
-          <GlobalFooter />
-        </Layout>
+        <GlobalFooter />
       </Layout>
-    );
-  }
-}
+    </Layout>
+  );
+};
 
 export default container(Basic);

@@ -5,32 +5,30 @@ import LogoBox from './../LogoBox';
 import BaseMenu from './BaseMenu';
 import container from './container';
 
-class SiderMenu extends React.Component {
-  static propTypes = {
-    logo: PropTypes.string.isRequired,
-  };
+const SiderMenu = props => {
+  const { isMobile, collapsed, collapse, logo } = props;
 
-  render() {
-    const { isMobile, collapsed, collapse, logo } = this.props;
+  return (
+    <Sider
+      breakpoint="md"
+      collapsible
+      collapsed={collapsed}
+      onCollapse={collapse}
+      trigger={null}
+      width={256}
+    >
+      <LogoBox
+        image={logo}
+        title="Logo"
+        onClick={isMobile ? () => collapse(true) : undefined}
+      />
+      <BaseMenu {...props} />
+    </Sider>
+  );
+};
 
-    return (
-      <Sider
-        breakpoint="md"
-        collapsible
-        collapsed={collapsed}
-        onCollapse={collapse}
-        trigger={null}
-        width={256}
-      >
-        <LogoBox
-          image={logo}
-          title="Logo"
-          onClick={isMobile ? () => collapse(true) : undefined}
-        />
-        <BaseMenu {...this.props} />
-      </Sider>
-    );
-  }
-}
+SiderMenu.propTypes = {
+  logo: PropTypes.string.isRequired,
+};
 
 export default container(SiderMenu);

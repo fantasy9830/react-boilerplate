@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert } from 'antd';
 import { Login } from 'ant-design-pro';
-import { withNamespaces } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
 import { Main } from './style';
 import container from './container';
@@ -10,88 +10,79 @@ import 'nprogress/nprogress.css';
 
 const { UserName, Password, Submit } = Login;
 
-class LoginForm extends React.Component {
-  state = {
-    notice: '',
-    loading: false,
-  };
+const LoginForm = props => {
+  let loginForm = null;
+  const [t] = useTranslation('auth');
+  const [notice, setNotice] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  handleSubmit = async (err, { username, password }) => {
+  useEffect(() => {
+    if (props.user.login) {
+      props.history.push('/');
+    }
+  }, []);
+
+  async function handleSubmit(err, { username, password }) {
     if (!err) {
       NProgress.start();
-      this.setState(() => ({ loading: true }));
+      setLoading(true);
 
-      const res = await this.props.login(username, password);
+      const { status, statusText } = await props.login(username, password);
 
-      this.setState(() => ({ loading: false }));
+      setLoading(false);
       NProgress.done();
 
-      if (this.props.user.login) {
+      if (status === 200) {
         const pathname =
-          (this.props.location.state.from &&
-            this.props.location.state.from.pathname) ||
+          (props.location.state.from && props.location.state.from.pathname) ||
           '/';
 
-        this.props.history.push(pathname);
-      } else if (res) {
-        this.setState(() => ({ notice: res.statusText }));
+        props.history.push(pathname);
+      } else if (statusText) {
+        setNotice(statusText);
       }
     }
   };
 
-  handleClose = () => this.setState(() => ({ notice: '' }));
+  function handleClose() {
+    setNotice('');
+  };
 
-  componentDidMount() {
-    if (this.props.user.login) {
-      this.props.history.push('/');
-    }
-  }
-
-  render() {
-    const { t } = this.props;
-    const { notice, loading } = this.state;
-
-    return (
-      <Main>
-        <Login
-          onSubmit={this.handleSubmit}
-          ref={form => {
-            this.loginForm = form;
-          }}
-        >
-          {notice && (
-            <Alert
-              style={{ marginBottom: 24 }}
-              message={notice}
-              type="error"
-              showIcon
-              closable
-              onClose={this.handleClose}
-            />
-          )}
-          <UserName
-            name="username"
-            placeholder={t('username')}
-            readOnly={loading}
+  return (
+    <Main>
+      <Login
+        onSubmit={handleSubmit}
+        ref={form => {
+          loginForm = form;
+        }}
+      >
+        {notice && (
+          <Alert
+            style={{ marginBottom: 24 }}
+            message={notice}
+            type="error"
+            showIcon
+            closable
+            onClose={handleClose}
           />
-          <Password
-            name="password"
-            placeholder={t('password')}
-            readOnly={loading}
-            onPressEnter={() =>
-              this.loginForm.validateFields(this.handleSubmit)
-            }
-          />
-          <Submit
-            loading={loading}
-            style={{ width: '100%', marginTop: '16px' }}
-          >
-            {t('submit')}
-          </Submit>
-        </Login>
-      </Main>
-    );
-  }
-}
+        )}
+        <UserName
+          name="username"
+          placeholder={t('username')}
+          readOnly={loading}
+        />
+        <Password
+          name="password"
+          placeholder={t('password')}
+          readOnly={loading}
+          onPressEnter={() => loginForm.validateFields(handleSubmit)}
+        />
+        <Submit loading={loading} style={{ width: '100%', marginTop: '16px' }}>
+          {t('submit')}
+        </Submit>
+      </Login>
+    </Main>
+  );
+};
 
-export default withNamespaces('auth')(withRouter(container(LoginForm)));
+export default withRouter(container(LoginForm));
