@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Avatar, Menu, Icon } from 'antd';
+import { Dropdown, Avatar, Menu } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
@@ -15,7 +15,7 @@ const SettingMenu = props => {
   const MenuItem = (
     <Menu onClick={handleMenuClick} onTouchStart={handleMenuClick}>
       <Item key="logout">
-        <Icon component={FaSignOutAlt} />
+        <FaSignOutAlt style={{ marginRight: '8px' }} />
         <span>{t('setting.logout')}</span>
       </Item>
     </Menu>
@@ -33,13 +33,13 @@ const SettingMenu = props => {
   }
 
   return (
-    <IconContext.Provider value={{ style: { verticalAlign: 'unset' } }}>
+    <IconContext.Provider value={{ style: { fontSize: '20px' } }}>
       <Dropdown overlay={MenuItem} trigger={['click']} placement="bottomRight">
         <Action>
           <Avatar style={{ marginRight: '8px' }}>
-            <FaUserAlt style={{ verticalAlign: 'middle' }} />
+            <FaUserAlt />
           </Avatar>
-          <span style={{ verticalAlign: 'middle' }}>{props.user.name}</span>
+          <span>{props.user.name}</span>
         </Action>
       </Dropdown>
     </IconContext.Provider>
