@@ -38,5 +38,5 @@
 * [x] 權限管理功能
 * [x] husky + lint-staged + prettier
 * [x] Code Splitting(React Loadable)
-* [ ] TypeScript
+* [x] TypeScript
 * [ ] ~~RxJS + redux-observable~~
