@@ -13,7 +13,7 @@ export type CLEAR_OPENKEYS = typeof CLEAR_OPENKEYS;
 export type COLLAPSE = typeof COLLAPSE;
 export type SET_OPENKEYS = typeof SET_OPENKEYS;
 
-export type Types =
+export type ActionTypes =
   | CHANGE_ACTIVE
   | CLEAR_NOTICE
   | CLEAR_OPENKEYS
@@ -86,7 +86,7 @@ const initialState = {
 // reducer
 export default (
   state: StoreState.ILayout = initialState,
-  action: IAction<Types>,
+  action: IAction<ActionTypes>,
 ): StoreState.ILayout => {
   switch (action.type) {
     case SET_OPENKEYS:

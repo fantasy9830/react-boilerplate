@@ -1,4 +1,4 @@
-import auth from '../requests/auth';
+import auth from './../requests/auth';
 import jwtDecode from 'jwt-decode';
 import StoreState from 'StoreState';
 
@@ -13,8 +13,8 @@ export type LOG_OUT = typeof LOG_OUT;
 export type SET_ROLES = typeof SET_ROLES;
 export type SET_PERMISSIONS = typeof SET_PERMISSIONS;
 
-export type Types = LOG_IN | LOG_OUT | SET_ROLES | SET_PERMISSIONS;
-export type Dispatch = IDispatch<IAction<Types>>;
+export type ActionTypes = LOG_IN | LOG_OUT | SET_ROLES | SET_PERMISSIONS;
+export type Dispatch = IDispatch<IAction<ActionTypes>>;
 
 // Action Creators
 export const actions = {
@@ -113,7 +113,7 @@ export const actions = {
 };
 
 const initialState = {
-  login: false,
+  loggedIn: false,
   id: 0,
   name: '',
   username: '',
@@ -127,14 +127,14 @@ const initialState = {
 // reducer
 export default (
   state: StoreState.IUser = initialState,
-  action: IAction<Types>,
+  action: IAction<ActionTypes>,
 ): StoreState.IUser => {
   switch (action.type) {
     case LOG_IN:
       return {
         ...state,
         id: action.id,
-        login: true,
+        loggedIn: true,
         name: action.name,
         username: action.username,
         email: action.email,
@@ -148,7 +148,7 @@ export default (
       return {
         ...state,
         id: 0,
-        login: false,
+        loggedIn: false,
         name: '',
         username: '',
         email: '',

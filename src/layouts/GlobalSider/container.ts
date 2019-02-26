@@ -1,6 +1,6 @@
 import Redux, { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from '../../redux/layout';
+import { actions } from './../../redux/layout';
 
 const mapStateToProps = (state: IStoreState) => ({
   current: state.layout.current,

@@ -30,7 +30,7 @@ const LoginForm = (props: IProps) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (props.user.login) {
+    if (props.user.loggedIn) {
       props.history.push('/');
     }
   }, []);

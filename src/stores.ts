@@ -1,4 +1,4 @@
-import { applyMiddleware, compose, createStore } from 'redux';
+import Redux, { applyMiddleware, compose, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import dayjs from 'dayjs';
@@ -6,8 +6,6 @@ import jwtDecode from 'jwt-decode';
 
 import { LOG_IN, LOG_OUT } from './redux/user';
 import reducers from './reducers';
-
-import Redux from 'redux';
 
 // middlewares
 let middlewares: Array<Redux.Middleware> = [thunk];

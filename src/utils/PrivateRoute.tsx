@@ -1,13 +1,12 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import StoreState from 'StoreState';
 
-const PrivateRoute = ({ component: Component, login, ...rest }: any) => (
+const PrivateRoute = ({ component: Component, loggedIn, ...rest }: any) => (
   <Route
     {...rest}
     render={props =>
-      login ? (
+      loggedIn ? (
         <Component {...props} />
       ) : (
         <Redirect
@@ -18,6 +17,6 @@ const PrivateRoute = ({ component: Component, login, ...rest }: any) => (
   />
 );
 
-export default connect((state: any) => ({ login: state.user.login }))(
+export default connect((state: any) => ({ loggedIn: state.user.loggedIn }))(
   PrivateRoute,
 );

@@ -1,6 +1,6 @@
 import Loadable from 'react-loadable';
 import PageLoading from './PageLoading';
-import locales from '../locales';
+import locales from './../locales';
 import { FaHome, FaChartLine, FaCogs } from 'react-icons/fa';
 
 const menus: Array<IMenus> = [
@@ -15,7 +15,7 @@ const menus: Array<IMenus> = [
         icon: 'star',
         path: '/sidermenu1-1',
         component: Loadable({
-          loader: () => import('../screens/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -25,7 +25,7 @@ const menus: Array<IMenus> = [
         icon: 'star',
         path: '/sidermenu1-2',
         component: Loadable({
-          loader: () => import('../screens/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -40,7 +40,7 @@ const menus: Array<IMenus> = [
             icon: 'rocket',
             path: '/sidermenu1-3-1',
             component: Loadable({
-              loader: () => import('../screens/Demo'),
+              loader: () => import('./../screens/Demo'),
               loading: PageLoading,
             }),
           },
@@ -50,7 +50,7 @@ const menus: Array<IMenus> = [
             icon: 'rocket',
             path: '/sidermenu1-3-2',
             component: Loadable({
-              loader: () => import('../screens/Demo'),
+              loader: () => import('./../screens/Demo'),
               loading: PageLoading,
             }),
           },
@@ -69,7 +69,7 @@ const menus: Array<IMenus> = [
         icon: 'star',
         path: '/sidermenu2-1',
         component: Loadable({
-          loader: () => import('../screens/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -79,7 +79,7 @@ const menus: Array<IMenus> = [
         icon: 'star',
         path: '/sidermenu2-2',
         component: Loadable({
-          loader: () => import('../screens/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -89,7 +89,7 @@ const menus: Array<IMenus> = [
         icon: 'star',
         path: '/sidermenu2-3',
         component: Loadable({
-          loader: () => import('../screens/Demo'),
+          loader: () => import('./../screens/Demo'),
           loading: PageLoading,
         }),
       },
@@ -101,7 +101,7 @@ const menus: Array<IMenus> = [
     icon: FaCogs,
     path: '/sidermenu3',
     component: Loadable({
-      loader: () => import('../screens/Demo'),
+      loader: () => import('./../screens/Demo'),
       loading: PageLoading,
     }),
   },
