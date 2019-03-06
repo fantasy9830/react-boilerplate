@@ -1,6 +1,6 @@
 import Redux, { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from './../../../redux/user';
+import { logout } from './../../../redux/user';
 
 const mapStateToProps = (state: IStoreState) => ({
   user: state.user,
@@ -9,7 +9,7 @@ const mapStateToProps = (state: IStoreState) => ({
 const mapDispatchToProps = (dispatch: Redux.Dispatch) =>
   bindActionCreators(
     {
-      logout: actions.logout,
+      logout,
     },
     dispatch,
   );

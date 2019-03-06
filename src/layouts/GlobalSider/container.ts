@@ -1,6 +1,6 @@
 import Redux, { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from './../../redux/layout';
+import { changeActive, setOpenKeys, clearOpenKeys } from './../../redux/layout';
 
 const mapStateToProps = (state: IStoreState) => ({
   current: state.layout.current,
@@ -10,9 +10,9 @@ const mapStateToProps = (state: IStoreState) => ({
 const mapDispatchToProps = (dispatch: Redux.Dispatch) =>
   bindActionCreators(
     {
-      changeActive: actions.changeActive,
-      setOpenKeys: actions.setOpenKeys,
-      clearOpenKeys: actions.clearOpenKeys,
+      changeActive,
+      setOpenKeys,
+      clearOpenKeys,
     },
     dispatch,
   );

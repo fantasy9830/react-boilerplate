@@ -1,6 +1,6 @@
 import Redux, { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from './../../../redux/layout';
+import { clearNotice } from './../../../redux/layout';
 
 const mapStateToProps = (state: IStoreState) => ({
   data: state.layout.notice,
@@ -9,7 +9,7 @@ const mapStateToProps = (state: IStoreState) => ({
 const mapDispatchToProps = (dispatch: Redux.Dispatch) =>
   bindActionCreators(
     {
-      clearNotice: actions.clearNotice,
+      clearNotice,
     },
     dispatch,
   );

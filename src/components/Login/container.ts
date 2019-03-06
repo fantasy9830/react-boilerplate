@@ -1,6 +1,6 @@
 import Redux, { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from './../../redux/user';
+import { login } from './../../redux/user';
 
 const mapStateToProps = (state: IStoreState) => ({
   user: state.user,
@@ -9,7 +9,7 @@ const mapStateToProps = (state: IStoreState) => ({
 const mapDispatchToProps = (dispatch: Redux.Dispatch) =>
   bindActionCreators(
     {
-      login: actions.login,
+      login,
     },
     dispatch,
   );

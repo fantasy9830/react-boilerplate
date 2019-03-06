@@ -1,6 +1,6 @@
 import Redux, { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actions } from './../redux/layout';
+import { collapse } from './../redux/layout';
 
 const mapStateToProps = (state: IStoreState) => ({
   layout: state.layout,
@@ -10,7 +10,7 @@ const mapStateToProps = (state: IStoreState) => ({
 const mapDispatchToProps = (dispatch: Redux.Dispatch) =>
   bindActionCreators(
     {
-      collapse: actions.collapse,
+      collapse: collapse,
     },
     dispatch,
   );

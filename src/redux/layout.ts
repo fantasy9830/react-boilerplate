@@ -21,61 +21,60 @@ export type ActionTypes =
   | SET_OPENKEYS;
 
 // Action Creators
-export const actions = {
-  /**
-   * 設定sider menu目前展開的欄位
-   * @param keys - 目前展開的欄位值
-   */
-  setOpenKeys(keys: string[]) {
-    return {
-      type: SET_OPENKEYS,
-      keys,
-    };
-  },
-
-  /**
-   * 清空sider menu展開的欄位
-   */
-  clearOpenKeys() {
-    return {
-      type: CLEAR_OPENKEYS,
-    };
-  },
-
-  /**
-   * 改變sidebar所在的位置
-   * @param current - 現在頁面所在位置
-   */
-  changeActive(current: string) {
-    return {
-      type: CHANGE_ACTIVE,
-      current,
-    };
-  },
-
-  /**
-   * 摺疊sidebar
-   * @param collapsed - 是否摺疊
-   */
-  collapse(collapsed: boolean) {
-    return {
-      type: COLLAPSE,
-      collapsed,
-    };
-  },
-
-  /**
-   * 清空通知訊息
-   * @param noticeType - 類型 notice/message/todo
-   */
-  clearNotice(noticeType: string) {
-    return {
-      type: CLEAR_NOTICE,
-      noticeType,
-    };
-  },
+/**
+ * 設定sider menu目前展開的欄位
+ * @param keys - 目前展開的欄位值
+ */
+export const setOpenKeys = (keys: string[]) => {
+  return {
+    type: SET_OPENKEYS,
+    keys,
+  };
 };
 
+/**
+ * 清空sider menu展開的欄位
+ */
+export const clearOpenKeys = () => {
+  return {
+    type: CLEAR_OPENKEYS,
+  };
+};
+
+/**
+ * 改變sidebar所在的位置
+ * @param current - 現在頁面所在位置
+ */
+export const changeActive = (current: string) => {
+  return {
+    type: CHANGE_ACTIVE,
+    current,
+  };
+};
+
+/**
+ * 摺疊sidebar
+ * @param collapsed - 是否摺疊
+ */
+export const collapse = (collapsed: boolean) => {
+  return {
+    type: COLLAPSE,
+    collapsed,
+  };
+};
+
+/**
+ * 清空通知訊息
+ * @param noticeType - 類型 notice/message/todo
+ */
+export const clearNotice = (noticeType: string) => {
+  return {
+    type: CLEAR_NOTICE,
+    noticeType,
+  };
+};
+
+// state
 const initialState = {
   collapsed: false,
   notice: [],

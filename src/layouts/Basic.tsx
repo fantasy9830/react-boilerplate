@@ -23,7 +23,7 @@ const Basic = ({ user, layout, collapse }: IProps) => {
   return (
     <Media query="(max-width: 599px)">
       {isMobile => (
-        <Layout>
+        <Layout tagName="section">
           <GlobalSider
             isMobile={isMobile}
             collapsed={layout.collapsed}
@@ -32,7 +32,7 @@ const Basic = ({ user, layout, collapse }: IProps) => {
             menus={menus}
             permissions={permissions}
           />
-          <Layout style={{ minHeight: '100vh' }}>
+          <Layout style={{ minHeight: '100vh' }} tagName="section">
             <GlobalHeader
               isMobile={isMobile}
               collapsed={layout.collapsed}
@@ -40,7 +40,7 @@ const Basic = ({ user, layout, collapse }: IProps) => {
               logo={logo}
             />
 
-            <Content>
+            <Content tagName="main">
               <ContentScreen menus={menus} permissions={permissions} />
             </Content>
 

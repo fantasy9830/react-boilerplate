@@ -17,101 +17,100 @@ export type ActionTypes = LOG_IN | LOG_OUT | SET_ROLES | SET_PERMISSIONS;
 export type Dispatch = IDispatch<IAction<ActionTypes>>;
 
 // Action Creators
-export const actions = {
-  /**
-   * 登入
-   * @param username - 帳號
-   * @param password - 密碼
-   */
-  login(username: string, password: string) {
-    return async (dispatch: Dispatch) => {
-      try {
-        const res = await auth.post('/login', { username, password });
+/**
+ * 登入
+ * @param username - 帳號
+ * @param password - 密碼
+ */
+export const login = (username: string, password: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const res = await auth.post('/login', { username, password });
 
-        if (res.data && res.data.token) {
-          const decoded: IClaims = jwtDecode(res.data.token);
+      if (res.data && res.data.token) {
+        const decoded: IClaims = jwtDecode(res.data.token);
 
-          dispatch({
-            type: LOG_IN,
-            id: decoded.jti,
-            name: decoded.name,
-            username: decoded.username,
-            email: decoded.email,
-            address: decoded.address,
-            token: res.data.token,
-            roles: decoded.roles,
-            permissions: decoded.permissions,
-          });
+        dispatch({
+          type: LOG_IN,
+          id: decoded.jti,
+          name: decoded.name,
+          username: decoded.username,
+          email: decoded.email,
+          address: decoded.address,
+          token: res.data.token,
+          roles: decoded.roles,
+          permissions: decoded.permissions,
+        });
 
-          localStorage.setItem('@Ricky:token', res.data.token);
+        localStorage.setItem('@Ricky:token', res.data.token);
 
-          return {
-            status: res.status,
-            statusText: res.statusText,
-          };
-        }
-      } catch (error) {
-        if (error.response) {
-          return {
-            status: error.response.status,
-            statusText: error.response.data.message,
-          };
-        } else if (error.request) {
-          return {
-            status: error.request.status,
-            statusText: error.request.statusText === '' && 'no response',
-          };
-        }
+        return {
+          status: res.status,
+          statusText: res.statusText,
+        };
       }
-    };
-  },
-
-  /**
-   * 登出
-   */
-  logout() {
-    return (dispatch: Dispatch) => {
-      dispatch({
-        type: LOG_OUT,
-      });
-
-      localStorage.removeItem('@Ricky:token');
-    };
-  },
-
-  /**
-   * Get Roles
-   */
-  getRoles() {
-    return async (dispatch: Dispatch) => {
-      const { data } = await auth.get(
-        `/roles/${process.env.REACT_APP_SYSTEM_NAME}`,
-      );
-
-      dispatch({
-        type: SET_ROLES,
-        roles: data.roles,
-      });
-    };
-  },
-
-  /**
-   * Get Permissions
-   */
-  getPermissions() {
-    return async (dispatch: Dispatch) => {
-      const { data } = await auth.get(
-        `/permissions/${process.env.REACT_APP_SYSTEM_NAME}`,
-      );
-
-      dispatch({
-        type: SET_PERMISSIONS,
-        permissions: data.permissions,
-      });
-    };
-  },
+    } catch (error) {
+      if (error.response) {
+        return {
+          status: error.response.status,
+          statusText: error.response.data.message,
+        };
+      } else if (error.request) {
+        return {
+          status: error.request.status,
+          statusText: error.request.statusText === '' && 'no response',
+        };
+      }
+    }
+  };
 };
 
+/**
+ * 登出
+ */
+export const logout = () => {
+  return (dispatch: Dispatch) => {
+    dispatch({
+      type: LOG_OUT,
+    });
+
+    localStorage.removeItem('@Ricky:token');
+  };
+};
+
+/**
+ * Get Roles
+ */
+export const getRoles = () => {
+  return async (dispatch: Dispatch) => {
+    const { data } = await auth.get(
+      `/roles/${process.env.REACT_APP_SYSTEM_NAME}`,
+    );
+
+    dispatch({
+      type: SET_ROLES,
+      roles: data.roles,
+    });
+  };
+};
+
+/**
+ * Get Permissions
+ */
+export const getPermissions = () => {
+  return async (dispatch: Dispatch) => {
+    const { data } = await auth.get(
+      `/permissions/${process.env.REACT_APP_SYSTEM_NAME}`,
+    );
+
+    dispatch({
+      type: SET_PERMISSIONS,
+      permissions: data.permissions,
+    });
+  };
+};
+
+// state
 const initialState = {
   loggedIn: false,
   id: 0,

@@ -4,7 +4,7 @@ import { Footer } from './style';
 
 const GlobalFooter = () => {
   return (
-    <Footer>
+    <Footer tagName="footer">
       Copyright <Icon type="copyright" /> Ricky. All rights reserved
     </Footer>
   );

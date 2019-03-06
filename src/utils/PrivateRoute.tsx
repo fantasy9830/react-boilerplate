@@ -17,6 +17,6 @@ const PrivateRoute = ({ component: Component, loggedIn, ...rest }: any) => (
   />
 );
 
-export default connect((state: any) => ({ loggedIn: state.user.loggedIn }))(
+export default connect((state: IStoreState) => ({ loggedIn: state.user.loggedIn }))(
   PrivateRoute,
 );
