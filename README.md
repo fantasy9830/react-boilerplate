@@ -37,6 +37,6 @@
 * [x] 登入認證功能(JWT)
 * [x] 權限管理功能
 * [x] husky + lint-staged + prettier
-* [x] Code Splitting(React Loadable)
+* [x] Code Splitting(React.lazy)
 * [x] TypeScript
 * [ ] ~~RxJS + redux-observable~~

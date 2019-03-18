@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router } from 'react-router';
 import { Switch, Route } from 'react-router-dom';
-import PrivateRoute from './utils/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute';
 import history from './history';
 
 import Login from './screens/Login';

@@ -4,7 +4,7 @@ import Media from 'react-media';
 import GlobalHeader from './GlobalHeader';
 import GlobalSider from './GlobalSider';
 import GlobalFooter from './GlobalFooter';
-import ContentScreen from './../screens/Content';
+import ContentRouter from './ContentRouter';
 import container from './container';
 import menus from './menus';
 import logo from './../assets/images/logo.png';
@@ -23,7 +23,7 @@ const Basic = ({ user, layout, collapse }: IProps) => {
   return (
     <Media query="(max-width: 599px)">
       {isMobile => (
-        <Layout tagName="section">
+        <Layout>
           <GlobalSider
             isMobile={isMobile}
             collapsed={layout.collapsed}
@@ -32,7 +32,7 @@ const Basic = ({ user, layout, collapse }: IProps) => {
             menus={menus}
             permissions={permissions}
           />
-          <Layout style={{ minHeight: '100vh' }} tagName="section">
+          <Layout style={{ minHeight: '100vh' }}>
             <GlobalHeader
               isMobile={isMobile}
               collapsed={layout.collapsed}
@@ -40,8 +40,8 @@ const Basic = ({ user, layout, collapse }: IProps) => {
               logo={logo}
             />
 
-            <Content tagName="main">
-              <ContentScreen menus={menus} permissions={permissions} />
+            <Content>
+              <ContentRouter menus={menus} permissions={permissions} />
             </Content>
 
             <GlobalFooter />

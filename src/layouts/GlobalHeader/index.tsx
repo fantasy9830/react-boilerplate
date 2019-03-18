@@ -13,7 +13,7 @@ export interface IProps {
 
 const GlobalHeader = ({ isMobile, collapsed, collapse, logo }: IProps) => {
   return (
-    <Header tagName="header">
+    <Header>
       {isMobile && <MobileLogo image={logo} />}
       <MenuBar
         type={collapsed ? 'menu-unfold' : 'menu-fold'}

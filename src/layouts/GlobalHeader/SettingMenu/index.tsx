@@ -13,8 +13,10 @@ const { Item } = Menu;
 
 export interface IProps {
   user: StoreState.IUser;
-  logout: any;
   history: any;
+  logout(): void;
+  clearOpenKeys(): void;
+  changeActive(current: string): void;
 }
 
 const SettingMenu = (props: IProps) => {
@@ -33,6 +35,8 @@ const SettingMenu = (props: IProps) => {
     switch (key) {
       case 'logout':
         props.logout();
+        props.clearOpenKeys();
+        props.changeActive('home');
         props.history.push('/');
         break;
       default:
