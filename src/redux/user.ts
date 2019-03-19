@@ -1,7 +1,7 @@
 import auth from './../requests/auth';
 import jwtDecode from 'jwt-decode';
 import StoreState from 'StoreState';
-import { TOKEN_KEY, getUserState } from './../utils/auth';
+import { getUserState, Storage } from './../utils/auth';
 
 // Action Type
 export const LOG_IN = 'user/LOG_IN';
@@ -43,7 +43,7 @@ export const login = (username: string, password: string) => {
           permissions: decoded.permissions,
         });
 
-        localStorage.setItem(TOKEN_KEY, res.data.token);
+        Storage.setToken(res.data.token);
 
         return {
           status: res.status,
@@ -75,7 +75,7 @@ export const logout = () => {
       type: LOG_OUT,
     });
 
-    localStorage.removeItem(TOKEN_KEY);
+    Storage.removeToken();
   };
 };
 
