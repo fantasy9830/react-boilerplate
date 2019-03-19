@@ -1,6 +1,6 @@
 import React from 'react';
 import SiderMenu from './SiderMenu';
-import { setAuthority } from './../../utils/permission';
+import { setAuthority } from './../../utils/auth';
 import container from './container';
 import { MobileDrawer } from './style';
 

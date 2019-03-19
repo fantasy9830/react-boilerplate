@@ -1,6 +1,7 @@
 import auth from './../requests/auth';
 import jwtDecode from 'jwt-decode';
 import StoreState from 'StoreState';
+import { TOKEN_KEY, getUserState } from './../utils/auth';
 
 // Action Type
 export const LOG_IN = 'user/LOG_IN';
@@ -42,7 +43,7 @@ export const login = (username: string, password: string) => {
           permissions: decoded.permissions,
         });
 
-        localStorage.setItem('@Ricky:token', res.data.token);
+        localStorage.setItem(TOKEN_KEY, res.data.token);
 
         return {
           status: res.status,
@@ -74,7 +75,7 @@ export const logout = () => {
       type: LOG_OUT,
     });
 
-    localStorage.removeItem('@Ricky:token');
+    localStorage.removeItem(TOKEN_KEY);
   };
 };
 
@@ -111,17 +112,17 @@ export const getPermissions = () => {
 };
 
 // state
-const initialState = {
+const initialState = getUserState({
   loggedIn: false,
   id: 0,
   name: '',
   username: '',
   email: '',
   address: '',
-  token: null,
-  roles: [],
+  token: '',
+  roles: [] as string[],
   permissions: {},
-};
+});
 
 // reducer
 export default (
@@ -152,7 +153,7 @@ export default (
         username: '',
         email: '',
         address: '',
-        token: null,
+        token: '',
         roles: [],
         permissions: {},
       };

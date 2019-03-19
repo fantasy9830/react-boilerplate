@@ -13,7 +13,7 @@ declare module 'StoreState' {
     username: string;
     email: string;
     address: string;
-    token: null;
+    token: string | null;
     roles: string[];
     permissions: object;
   }
