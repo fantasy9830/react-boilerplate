@@ -2,14 +2,14 @@ import dayjs from 'dayjs';
 import jwtDecode from 'jwt-decode';
 import StoreState from 'StoreState';
 
-export class Storage {
+export class TokenStorage {
   public static readonly key = '@Ricky:token';
 
   /**
    * get token
    */
   public static getToken(): string | null {
-    return localStorage.getItem(Storage.key);
+    return localStorage.getItem(TokenStorage.key);
   }
 
 
@@ -18,14 +18,14 @@ export class Storage {
    * @param token - token
    */
   public static setToken(token: string): void {
-    localStorage.setItem(Storage.key, token);
+    localStorage.setItem(TokenStorage.key, token);
   }
 
   /**
    * remove token
    */
   public static removeToken(): void {
-    localStorage.removeItem(Storage.key);
+    localStorage.removeItem(TokenStorage.key);
   }
 }
 
@@ -58,13 +58,13 @@ export const setAuthority = (
 export const getUserState = <T extends StoreState.IUser>(
   initialState: T,
 ): T => {
-  const token = Storage.getToken();
+  const token = TokenStorage.getToken();
   if (token) {
     const decoded: IClaims = jwtDecode(token);
 
     // token過期
     if (dayjs.unix(decoded.exp).isBefore(dayjs())) {
-      Storage.removeToken();
+      TokenStorage.removeToken();
     } else {
       initialState.loggedIn = true;
       initialState.id = decoded.jti;
