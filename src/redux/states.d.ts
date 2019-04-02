@@ -7,7 +7,7 @@ declare module 'StoreState' {
   }
 
   export interface IUser {
-    loggedIn: boolean;
+    isLogged: boolean;
     id: number;
     name: string;
     username: string;

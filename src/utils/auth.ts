@@ -66,7 +66,7 @@ export const getUserState = <T extends StoreState.IUser>(
     if (dayjs.unix(decoded.exp).isBefore(dayjs())) {
       TokenStorage.removeToken();
     } else {
-      initialState.loggedIn = true;
+      initialState.isLogged = true;
       initialState.id = decoded.jti;
       initialState.name = decoded.name;
       initialState.username = decoded.username;

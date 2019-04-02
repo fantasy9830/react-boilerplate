@@ -113,7 +113,7 @@ export const getPermissions = () => {
 
 // state
 const initialState = getUserState({
-  loggedIn: false,
+  isLogged: false,
   id: 0,
   name: '',
   username: '',
@@ -134,7 +134,7 @@ export default (
       return {
         ...state,
         id: action.id,
-        loggedIn: true,
+        isLogged: true,
         name: action.name,
         username: action.username,
         email: action.email,
@@ -148,7 +148,7 @@ export default (
       return {
         ...state,
         id: 0,
-        loggedIn: false,
+        isLogged: false,
         name: '',
         username: '',
         email: '',

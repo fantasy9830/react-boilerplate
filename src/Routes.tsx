@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router,Switch, Route } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute';
+import LoggedInRoute from './components/LoggedInRoute';
 
 import Login from './screens/Login';
 import Layout from './layouts';
@@ -8,10 +8,10 @@ import Layout from './layouts';
 const Routes = () => (
   <Router>
     <Switch>
-      {/* public */}
+      {/* Not logged in */}
       <Route exact path="/login" component={Login} />
-      {/* private */}
-      <PrivateRoute component={Layout} />
+      {/* Logged in */}
+      <LoggedInRoute component={Layout} />
     </Switch>
   </Router>
 );
