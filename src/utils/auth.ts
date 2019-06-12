@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import jwtDecode from 'jwt-decode';
 import StoreState from 'StoreState';
 
@@ -11,7 +10,6 @@ export class TokenStorage {
   public static getToken(): string | null {
     return localStorage.getItem(TokenStorage.key);
   }
-
 
   /**
    * set token
@@ -62,20 +60,12 @@ export const getUserState = <T extends StoreState.IUser>(
   if (token) {
     const decoded: IClaims = jwtDecode(token);
 
-    // token過期
-    if (dayjs.unix(decoded.exp).isBefore(dayjs())) {
-      TokenStorage.removeToken();
-    } else {
-      initialState.isLogged = true;
-      initialState.id = decoded.jti;
-      initialState.name = decoded.name;
-      initialState.username = decoded.username;
-      initialState.email = decoded.email;
-      initialState.address = decoded.address;
-      initialState.token = token;
-      initialState.roles = decoded.roles;
-      initialState.permissions = decoded.permissions;
-    }
+    initialState.isLogged = true;
+    initialState.id = decoded.sub;
+    initialState.nickname = decoded.nickname;
+    initialState.token = token;
+    initialState.roles = decoded.roles;
+    initialState.permissions = decoded.permissions;
   }
 
   return initialState;

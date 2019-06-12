@@ -1,86 +1,44 @@
 import { lazy } from 'react';
 import locales from './../locales';
-import { FaHome, FaChartLine, FaCogs } from 'react-icons/fa';
+import { FaChartBar, FaTasks, FaUsers, FaUser, FaBan } from 'react-icons/fa';
 
 const Demo = lazy(() => import('./../screens/Demo'));
 
 const menus: Array<IMenus> = [
   {
-    key: 'sidermenu1',
-    name: locales.t('menu:sidermenu1'),
-    icon: FaHome,
-    children: [
-      {
-        key: 'sidermenu1-1',
-        name: locales.t('menu:sidermenu1-1'),
-        icon: 'star',
-        path: '/sidermenu1-1',
-        component: Demo,
-      },
-      {
-        key: 'sidermenu1-2',
-        name: locales.t('menu:sidermenu1-2'),
-        icon: 'star',
-        path: '/sidermenu1-2',
-        component: Demo,
-      },
-      {
-        key: 'sidermenu1-3',
-        name: locales.t('menu:sidermenu1-3'),
-        icon: 'star',
-        children: [
-          {
-            key: 'sidermenu1-3-1',
-            name: locales.t('menu:sidermenu1-3-1'),
-            icon: 'rocket',
-            path: '/sidermenu1-3-1',
-            component: Demo,
-          },
-          {
-            key: 'sidermenu1-3-2',
-            name: locales.t('menu:sidermenu1-3-2'),
-            icon: 'rocket',
-            path: '/sidermenu1-3-2',
-            component: Demo,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    key: 'sidermenu2',
-    name: locales.t('menu:sidermenu2'),
-    icon: FaChartLine,
-    children: [
-      {
-        key: 'sidermenu2-1',
-        name: locales.t('menu:sidermenu2-1'),
-        icon: 'star',
-        path: '/sidermenu2-1',
-        component: Demo,
-      },
-      {
-        key: 'sidermenu2-2',
-        name: locales.t('menu:sidermenu2-2'),
-        icon: 'star',
-        path: '/sidermenu2-2',
-        component: Demo,
-      },
-      {
-        key: 'sidermenu2-3',
-        name: locales.t('menu:sidermenu2-3'),
-        icon: 'star',
-        path: '/sidermenu2-3',
-        component: Demo,
-      },
-    ],
-  },
-  {
-    key: 'sidermenu3',
-    name: locales.t('menu:sidermenu3'),
-    icon: FaCogs,
-    path: '/sidermenu3',
+    key: 'dashboard',
+    name: locales.t('menu:dashboard'),
+    icon: FaChartBar,
+    path: '/',
     component: Demo,
+  },
+  {
+    key: 'admin',
+    name: locales.t('menu:admin'),
+    icon: FaTasks,
+    children: [
+      {
+        key: 'users',
+        name: locales.t('menu:users'),
+        icon: FaUsers,
+        path: '/admin/users',
+        component: Demo,
+      },
+      {
+        key: 'roles',
+        name: locales.t('menu:roles'),
+        icon: FaUser,
+        path: '/admin/roles',
+        component: Demo,
+      },
+      {
+        key: 'permission',
+        name: locales.t('menu:permission'),
+        icon: FaBan,
+        path: '/admin/permission',
+        component: Demo,
+      },
+    ],
   },
 ];
 

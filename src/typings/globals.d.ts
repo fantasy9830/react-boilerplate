@@ -18,14 +18,15 @@ declare interface IStoreState {
 }
 
 declare interface IClaims {
-  jti: number;
-  name: string;
-  username: string;
-  email: string;
-  address: string;
+  iss: string;
+  jti: string;
+  nickname: string;
+  sub: number;
+  iat: number;
+  exp: number;
+  nbf: number;
   roles: string[];
   permissions: object;
-  exp: number;
 }
 
 declare interface IMenus {

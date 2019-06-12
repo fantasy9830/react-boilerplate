@@ -51,7 +51,7 @@ const SettingMenu = (props: IProps) => {
           <Avatar style={{ marginRight: '8px' }}>
             <FaUserAlt />
           </Avatar>
-          <span>{props.user.name}</span>
+          <span>{props.user.nickname}</span>
         </Action>
       </Dropdown>
     </IconContext.Provider>

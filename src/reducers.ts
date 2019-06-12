@@ -5,4 +5,4 @@ const reducers: object = {
   ...redux,
 };
 
-export default combineReducers(reducers);
+export default combineReducers<object>(reducers);

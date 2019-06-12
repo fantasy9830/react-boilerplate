@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Alert } from 'antd';
 import { Login } from 'ant-design-pro';
 import { useTranslation } from 'react-i18next';
@@ -28,10 +28,11 @@ const LoginForm = (props: IProps) => {
   const [t] = useTranslation('auth');
   const [notice, setNotice] = useState('');
   const [loading, setLoading] = useState(false);
+  const prevProps = useRef(props);
 
   useEffect(() => {
-    if (props.user.isLogged) {
-      props.history.push('/');
+    if (prevProps.current.user.isLogged) {
+      prevProps.current.history.push('/');
     }
   }, []);
 

@@ -1,8 +1,9 @@
+import { refreshToken, logout } from './../redux/user';
 import axios from 'axios';
 import stores from './../stores';
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_AUTH_API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 // http request interceptors
@@ -17,14 +18,20 @@ instance.interceptors.request.use(config => {
 
 // http response interceptors
 instance.interceptors.response.use(
-  response => response,
+  response => {
+    const token = response.headers.authorization;
+    if (token) {
+      stores.dispatch(refreshToken(token));
+    }
+    return response;
+  },
   error => {
-    if (error.response && error.response.data && error.response.data.location) {
+    if (error.response) {
       if (error.response.status === 302) {
         // window.location.href = error.response.data.location
       }
       if (error.response.status === 401) {
-        // window.location.href = error.response.data.location
+        stores.dispatch(logout());
       }
     }
 

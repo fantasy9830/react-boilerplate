@@ -1,4 +1,4 @@
-import auth from './../requests/auth';
+import api from './../requests/api';
 import jwtDecode from 'jwt-decode';
 import StoreState from 'StoreState';
 import { getUserState, TokenStorage } from './../utils/auth';
@@ -8,13 +8,20 @@ export const LOG_IN = 'user/LOG_IN';
 export const LOG_OUT = 'user/LOG_OUT';
 export const SET_ROLES = 'user/SET_ROLES';
 export const SET_PERMISSIONS = 'user/SET_PERMISSIONS';
+export const REFRESH_TOKEN = 'user/REFRESH_TOKEN';
 
 export type LOG_IN = typeof LOG_IN;
 export type LOG_OUT = typeof LOG_OUT;
 export type SET_ROLES = typeof SET_ROLES;
 export type SET_PERMISSIONS = typeof SET_PERMISSIONS;
+export type REFRESH_TOKEN = typeof REFRESH_TOKEN;
 
-export type ActionTypes = LOG_IN | LOG_OUT | SET_ROLES | SET_PERMISSIONS;
+export type ActionTypes =
+  | LOG_IN
+  | LOG_OUT
+  | SET_ROLES
+  | SET_PERMISSIONS
+  | REFRESH_TOKEN;
 export type Dispatch = IDispatch<IAction<ActionTypes>>;
 
 // Action Creators
@@ -26,24 +33,25 @@ export type Dispatch = IDispatch<IAction<ActionTypes>>;
 export const login = (username: string, password: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      const res = await auth.post('/login', { username, password });
+      const res = await api.post('/auth/token', {
+        grant_type: 'password',
+        username,
+        password,
+      });
 
-      if (res.data && res.data.token) {
-        const decoded: IClaims = jwtDecode(res.data.token);
+      if (res.data && res.data.access_token) {
+        const decoded: IClaims = jwtDecode(res.data.access_token);
 
         dispatch({
           type: LOG_IN,
-          id: decoded.jti,
-          name: decoded.name,
-          username: decoded.username,
-          email: decoded.email,
-          address: decoded.address,
-          token: res.data.token,
+          id: decoded.sub,
+          nickname: decoded.nickname,
+          token: res.data.access_token,
           roles: decoded.roles,
           permissions: decoded.permissions,
         });
 
-        TokenStorage.setToken(res.data.token);
+        TokenStorage.setToken(res.data.access_token);
 
         return {
           status: res.status,
@@ -80,34 +88,30 @@ export const logout = () => {
 };
 
 /**
- * Get Roles
+ * 更新 Token
+ * @param token - JWT Token
  */
-export const getRoles = () => {
+export const refreshToken = (token: string) => {
   return async (dispatch: Dispatch) => {
-    const { data } = await auth.get(
-      `/roles/${process.env.REACT_APP_SYSTEM_NAME}`,
-    );
-
-    dispatch({
-      type: SET_ROLES,
-      roles: data.roles,
+    const res = await api.post('/auth/token', {
+      grant_type: 'refresh_token',
+      refresh_token: token,
     });
-  };
-};
 
-/**
- * Get Permissions
- */
-export const getPermissions = () => {
-  return async (dispatch: Dispatch) => {
-    const { data } = await auth.get(
-      `/permissions/${process.env.REACT_APP_SYSTEM_NAME}`,
-    );
+    if (res.data && res.data.access_token) {
+      const decoded: IClaims = jwtDecode(res.data.access_token);
 
-    dispatch({
-      type: SET_PERMISSIONS,
-      permissions: data.permissions,
-    });
+      dispatch({
+        type: REFRESH_TOKEN,
+        id: decoded.sub,
+        nickname: decoded.nickname,
+        token: res.data.access_token,
+        roles: decoded.roles,
+        permissions: decoded.permissions,
+      });
+
+      TokenStorage.setToken(res.data.access_token);
+    }
   };
 };
 
@@ -115,10 +119,7 @@ export const getPermissions = () => {
 const initialState = getUserState({
   isLogged: false,
   id: 0,
-  name: '',
-  username: '',
-  email: '',
-  address: '',
+  nickname: '',
   token: '',
   roles: [] as string[],
   permissions: {},
@@ -135,10 +136,7 @@ export default (
         ...state,
         id: action.id,
         isLogged: true,
-        name: action.name,
-        username: action.username,
-        email: action.email,
-        address: action.address,
+        nickname: action.nickname,
         token: action.token,
         roles: action.roles,
         permissions: action.permissions,
@@ -149,24 +147,19 @@ export default (
         ...state,
         id: 0,
         isLogged: false,
-        name: '',
-        username: '',
-        email: '',
-        address: '',
+        nickname: '',
         token: '',
         roles: [],
         permissions: {},
       };
 
-    case SET_ROLES:
+    case REFRESH_TOKEN:
       return {
         ...state,
+        id: action.id,
+        nickname: action.nickname,
+        token: action.token,
         roles: action.roles,
-      };
-
-    case SET_PERMISSIONS:
-      return {
-        ...state,
         permissions: action.permissions,
       };
 
