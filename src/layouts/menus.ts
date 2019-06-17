@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import locales from './../locales';
 import { FaChartBar, FaTasks, FaUsers, FaUser, FaBan } from 'react-icons/fa';
 
-const Demo = lazy(() => import('./../screens/Demo'));
+const Demo = lazy(() => import('./../pages/Demo'));
 
 const menus: Array<IMenus> = [
   {

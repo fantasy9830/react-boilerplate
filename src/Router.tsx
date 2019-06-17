@@ -1,19 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoggedInRoute from './components/LoggedInRoute';
 
-import Login from './screens/Login';
+import Login from './pages/Login';
 import Layout from './layouts';
 
-const Routes = () => (
-  <Router>
+const Router = () => (
+  <BrowserRouter>
     <Switch>
       {/* Not logged in */}
       <Route exact path="/login" component={Login} />
       {/* Logged in */}
       <LoggedInRoute component={Layout} />
     </Switch>
-  </Router>
+  </BrowserRouter>
 );
 
-export default Routes;
+export default Router;

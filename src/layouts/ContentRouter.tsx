@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import RenderAuthorized from 'ant-design-pro/lib/Authorized';
-import { flatten } from '../utils';
-import PageLoading from '../components/PageLoading';
-import HomeScreen from '../screens/Home';
-import NoMatch from '../components/Exception/NoMatch';
-import Forbidden from '../components/Exception/Forbidden';
+import { flatten } from './../utils';
+import PageLoading from './../components/PageLoading';
+import HomeScreen from './../pages/Home';
+import NoMatch from './../components/Exception/NoMatch';
+import Forbidden from './../components/Exception/Forbidden';
 
 export interface IProps {
   menus: IMenus[];
