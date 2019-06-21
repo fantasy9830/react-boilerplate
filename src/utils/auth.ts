@@ -1,4 +1,4 @@
-import jwtDecode from 'jwt-decode';
+import Cookies from 'js-cookie';
 import StoreState from 'StoreState';
 
 export class TokenStorage {
@@ -7,8 +7,8 @@ export class TokenStorage {
   /**
    * get token
    */
-  public static getToken(): string | null {
-    return localStorage.getItem(TokenStorage.key);
+  public static getToken(): string | undefined {
+    return Cookies.get(TokenStorage.key);
   }
 
   /**
@@ -16,14 +16,14 @@ export class TokenStorage {
    * @param token - token
    */
   public static setToken(token: string): void {
-    localStorage.setItem(TokenStorage.key, token);
+    return Cookies.set(TokenStorage.key, token);
   }
 
   /**
    * remove token
    */
   public static removeToken(): void {
-    localStorage.removeItem(TokenStorage.key);
+    return Cookies.remove(TokenStorage.key);
   }
 }
 
@@ -58,14 +58,8 @@ export const getUserState = <T extends StoreState.IUser>(
 ): T => {
   const token = TokenStorage.getToken();
   if (token) {
-    const decoded: IClaims = jwtDecode(token);
-
     initialState.isLogged = true;
-    initialState.id = decoded.sub;
-    initialState.nickname = decoded.nickname;
     initialState.token = token;
-    initialState.roles = decoded.roles;
-    initialState.permissions = decoded.permissions;
   }
 
   return initialState;

@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { Layout } from 'antd';
-import dayjs from 'dayjs';
-import jwtDecode from 'jwt-decode';
 import Media from 'react-media';
 import GlobalHeader from './GlobalHeader';
 import GlobalSider from './GlobalSider';
@@ -17,20 +15,15 @@ export interface IProps {
   user: any;
   layout: StoreState.ILayout;
   collapse(collapsed: boolean): void;
-  refreshToken(token: string): void;
+  getProfile(): void;
 }
 
-const Basic = ({ user, layout, collapse, refreshToken }: IProps) => {
+const Basic = ({ user, layout, collapse, getProfile }: IProps) => {
   const permissions = user.permissions ? Object.keys(user.permissions) : [];
 
   useEffect(() => {
-    if (user.token) {
-      const decoded: IClaims = jwtDecode(user.token);
-
-      // token過期
-      if (dayjs.unix(decoded.exp).isBefore(dayjs())) {
-        refreshToken(user.token);
-      }
+    if (user.token && user.id === 0) {
+      getProfile();
     }
   });
 

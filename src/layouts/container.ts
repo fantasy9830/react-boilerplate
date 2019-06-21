@@ -1,7 +1,7 @@
 import Redux, { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { collapse } from './../redux/layout';
-import { refreshToken } from './../redux/user';
+import { getProfile } from './../redux/user';
 
 const mapStateToProps = (state: IStoreState) => ({
   layout: state.layout,
@@ -11,8 +11,8 @@ const mapStateToProps = (state: IStoreState) => ({
 const mapDispatchToProps = (dispatch: Redux.Dispatch) =>
   bindActionCreators(
     {
-      collapse: collapse,
-      refreshToken: refreshToken,
+      collapse,
+      getProfile,
     },
     dispatch,
   );

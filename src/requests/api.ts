@@ -21,14 +21,15 @@ instance.interceptors.response.use(
   response => {
     const token = response.headers.authorization;
     if (token) {
-      stores.dispatch(refreshToken(token));
+      stores.dispatch(refreshToken(token.replace(/Bearer/gi, '').trim()));
     }
+
     return response;
   },
   error => {
     if (error.response) {
       if (error.response.status === 302) {
-        // window.location.href = error.response.data.location
+        //
       }
       if (error.response.status === 401) {
         stores.dispatch(logout());

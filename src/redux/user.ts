@@ -1,17 +1,18 @@
-import api from './../requests/api';
-import jwtDecode from 'jwt-decode';
+import { token, refresh, profile } from './../api/user';
 import StoreState from 'StoreState';
 import { getUserState, TokenStorage } from './../utils/auth';
 
 // Action Type
 export const LOG_IN = 'user/LOG_IN';
 export const LOG_OUT = 'user/LOG_OUT';
+export const GET_PROFILE = 'user/GET_PROFILE';
 export const SET_ROLES = 'user/SET_ROLES';
 export const SET_PERMISSIONS = 'user/SET_PERMISSIONS';
 export const REFRESH_TOKEN = 'user/REFRESH_TOKEN';
 
 export type LOG_IN = typeof LOG_IN;
 export type LOG_OUT = typeof LOG_OUT;
+export type GET_PROFILE = typeof GET_PROFILE;
 export type SET_ROLES = typeof SET_ROLES;
 export type SET_PERMISSIONS = typeof SET_PERMISSIONS;
 export type REFRESH_TOKEN = typeof REFRESH_TOKEN;
@@ -19,6 +20,7 @@ export type REFRESH_TOKEN = typeof REFRESH_TOKEN;
 export type ActionTypes =
   | LOG_IN
   | LOG_OUT
+  | GET_PROFILE
   | SET_ROLES
   | SET_PERMISSIONS
   | REFRESH_TOKEN;
@@ -33,25 +35,25 @@ export type Dispatch = IDispatch<IAction<ActionTypes>>;
 export const login = (username: string, password: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      const res = await api.post('/auth/token', {
-        grant_type: 'password',
-        username,
-        password,
-      });
+      const res = await token(username, password);
 
       if (res.data && res.data.access_token) {
-        const decoded: IClaims = jwtDecode(res.data.access_token);
-
         dispatch({
           type: LOG_IN,
-          id: decoded.sub,
-          nickname: decoded.nickname,
           token: res.data.access_token,
-          roles: decoded.roles,
-          permissions: decoded.permissions,
         });
 
         TokenStorage.setToken(res.data.access_token);
+
+        const response = await profile();
+
+        dispatch({
+          type: GET_PROFILE,
+          id: response.data.id,
+          nickname: response.data.nickname,
+          roles: response.data.roles,
+          permissions: response.data.permissions,
+        });
 
         return {
           status: res.status,
@@ -91,27 +93,48 @@ export const logout = () => {
  * 更新 Token
  * @param token - JWT Token
  */
-export const refreshToken = (token: string) => {
-  return async (dispatch: Dispatch) => {
-    const res = await api.post('/auth/token', {
-      grant_type: 'refresh_token',
-      refresh_token: token,
-    });
+export const refreshToken = (token?: string) => {
+  return async (dispatch: Dispatch, getState: () => IStoreState) => {
+    if (!token) {
+      const res = await refresh(getState().user.token);
+      token = res.data.access_token;
+    }
 
-    if (res.data && res.data.access_token) {
-      const decoded: IClaims = jwtDecode(res.data.access_token);
-
+    if (token) {
       dispatch({
         type: REFRESH_TOKEN,
-        id: decoded.sub,
-        nickname: decoded.nickname,
-        token: res.data.access_token,
-        roles: decoded.roles,
-        permissions: decoded.permissions,
+        token,
       });
 
-      TokenStorage.setToken(res.data.access_token);
+      TokenStorage.setToken(token);
+
+      const response = await profile();
+
+      dispatch({
+        type: GET_PROFILE,
+        id: response.data.id,
+        nickname: response.data.nickname,
+        roles: response.data.roles,
+        permissions: response.data.permissions,
+      });
     }
+  };
+};
+
+/**
+ * 取得個人資料
+ */
+export const getProfile = () => {
+  return async (dispatch: Dispatch) => {
+    const response = await profile();
+
+    dispatch({
+      type: GET_PROFILE,
+      id: response.data.id,
+      nickname: response.data.nickname,
+      roles: response.data.roles,
+      permissions: response.data.permissions,
+    });
   };
 };
 
@@ -134,12 +157,8 @@ export default (
     case LOG_IN:
       return {
         ...state,
-        id: action.id,
         isLogged: true,
-        nickname: action.nickname,
         token: action.token,
-        roles: action.roles,
-        permissions: action.permissions,
       };
 
     case LOG_OUT:
@@ -153,14 +172,20 @@ export default (
         permissions: {},
       };
 
-    case REFRESH_TOKEN:
+    case GET_PROFILE:
       return {
         ...state,
         id: action.id,
         nickname: action.nickname,
-        token: action.token,
         roles: action.roles,
         permissions: action.permissions,
+      };
+
+    case REFRESH_TOKEN:
+      return {
+        ...state,
+        isLogged: true,
+        token: action.token,
       };
 
     default:
