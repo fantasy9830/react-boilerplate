@@ -99,4 +99,4 @@ const LoginForm = (props: IProps) => {
   );
 };
 
-export default withRouter<any>(container(LoginForm));
+export default withRouter(container(LoginForm));

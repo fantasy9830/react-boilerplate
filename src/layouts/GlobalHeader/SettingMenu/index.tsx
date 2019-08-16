@@ -58,4 +58,4 @@ const SettingMenu = (props: IProps) => {
   );
 };
 
-export default withRouter<any>(container(SettingMenu));
+export default withRouter(container(SettingMenu));
