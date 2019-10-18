@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import RenderAuthorized from 'ant-design-pro/lib/Authorized';
 import { flatten } from './../utils';
+import { authorized } from './../utils/auth';
 import PageLoading from './../components/PageLoading';
 import HomeScreen from './../pages/Home';
 import NoMatch from './../components/Exception/NoMatch';
@@ -18,7 +18,7 @@ const ContentRouter = ({ menus, permissions }: IProps) => {
       <Switch>
         <Route exact path="/" component={HomeScreen} />
         {flatten(menus).map((route: IMenus) => {
-          const { check } = RenderAuthorized(route.key);
+          const check = authorized(route.key);
 
           return (
             <Route

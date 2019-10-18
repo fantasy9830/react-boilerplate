@@ -1,0 +1,15 @@
+{
+  "users": {
+    "columns": {
+      "id": "ID",
+      "username": "帳號",
+      "name": "姓名",
+      "nickname": "暱稱",
+      "gender": "性別",
+      "email": "Email",
+      "action": "操作"
+    }
+  },
+  "roles": {},
+  "permission": {}
+}

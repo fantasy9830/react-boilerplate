@@ -22,10 +22,10 @@ const Basic = ({ user, layout, collapse, getProfile }: IProps) => {
   const permissions = user.permissions ? Object.keys(user.permissions) : [];
 
   useEffect(() => {
-    if (user.token && user.id === 0) {
+    if (user.id === 0) {
       getProfile();
     }
-  });
+  }, [user, getProfile]);
 
   return (
     <Media query="(max-width: 599px)">
@@ -48,7 +48,9 @@ const Basic = ({ user, layout, collapse, getProfile }: IProps) => {
             />
 
             <Content>
-              <ContentRouter menus={menus} permissions={permissions} />
+              {user.id > 0 && (
+                <ContentRouter menus={menus} permissions={permissions} />
+              )}
             </Content>
 
             <GlobalFooter />

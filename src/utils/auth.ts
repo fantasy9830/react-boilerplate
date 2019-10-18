@@ -64,3 +64,9 @@ export const getUserState = <T extends StoreState.IUser>(
 
   return initialState;
 };
+
+export const authorized = (authority: string) => {
+  return (permissions: string[], component: JSX.Element, exception: any) => {
+    return permissions.indexOf(authority) > -1 ? component : exception;
+  };
+};

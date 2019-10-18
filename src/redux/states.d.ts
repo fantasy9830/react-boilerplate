@@ -14,4 +14,10 @@ declare module 'StoreState' {
     roles: string[];
     permissions: object;
   }
+
+  export interface IAdmin {
+    users: object[];
+    roles: object[];
+    permissions: object[];
+  }
 }
