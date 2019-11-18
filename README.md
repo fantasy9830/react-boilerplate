@@ -20,11 +20,11 @@
 
 ### Routing
 
-* `/src/layouts/menus.ts`
+* `/src/layouts/menus.js`
 
 ### Auth
 
-* 使用後端 ~~[go-boilerplate](https://github.com/fantasy9830/go-boilerplate) 或是~~ [laravel-boilerplate](https://github.com/fantasy9830/laravel-boilerplate) 設定權限，對應`/src/layouts/menus.ts`的key值。
+* 使用後端 ~~[go-boilerplate](https://github.com/fantasy9830/go-boilerplate) 或是~~ [laravel-boilerplate](https://github.com/fantasy9830/laravel-boilerplate) 設定權限，對應`/src/layouts/menus.js`的key值。
 
 ## Features
 
@@ -38,5 +38,5 @@
 * [x] 權限管理功能
 * [x] husky + lint-staged + prettier
 * [x] Code Splitting(React.lazy)
-* [x] TypeScript
+* [x] ~~TypeScript~~
 * [ ] ~~RxJS + redux-observable~~
