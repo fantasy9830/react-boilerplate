@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { collapse } from '../redux/layout';
-import { getProfile } from '../redux/user';
+import { setProfile } from '../redux/user';
 
 const mapStateToProps = state => ({
   layout: state.layout,
@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       collapse,
-      getProfile,
+      setProfile,
     },
     dispatch,
   );

@@ -1,18 +1,18 @@
 import api from '../requests/api';
 
-// 抓取 user list
+// fetch user list
 export const fetchUsers = async () => await api.get('/users');
 
-// 抓取 role list
+// fetch role list
 export const fetchRoles = async () => await api.get('/roles');
 
-// 抓取 permission list
+// fetch permission list
 export const fetchPermissions = async () => await api.get('/permissions');
 
-// 抓取 user 的 role 相關資料
+// fetch user role
 export const fetchUserRoles = async id => await api.get(`/users/${id}/roles`);
 
-// 抓取 user 的 permission 相關資料
+// fetch user permission
 export const fetchUserPermissions = async id =>
   await api.get(`/users/${id}/permissions`);
 

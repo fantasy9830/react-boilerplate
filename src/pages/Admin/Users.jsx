@@ -8,38 +8,35 @@ import { fetchUserRoles, syncUserRoles } from '../../api/admin';
 
 const { confirm } = Modal;
 
-const Users = ({ admin, getUsers, getRoles, getPermissions }) => {
+const Users = ({ admin, setUsers, setRoles, setPermissions }) => {
   const [t] = useTranslation('admin');
   const [loading, setLoading] = useState(false);
   const [spinning, setSpinning] = useState(false);
-  const [user, setUser] = useState({
-    id: 0,
-    username: '',
-  });
-  const [roles, setRoles] = useState([]);
+  const [user, setUserState] = useState({ id: 0, username: '' });
+  const [roles, setRolesState] = useState([]);
   const [rolesVisible, setRolesVisible] = useState(false);
   //const [permissionVisible, setPermissionVisible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      await Promise.all([getUsers(), getRoles(), getPermissions()]);
+      await Promise.all([setUsers(), setRoles(), setPermissions()]);
       setLoading(false);
     };
 
     fetchData();
-  }, [getUsers, getRoles, getPermissions]);
+  }, [setUsers, setRoles, setPermissions]);
 
   const handleRoles = async record => {
-    setUser(record);
+    setUserState(record);
     setRolesVisible(true);
     setSpinning(true);
     const { data } = await fetchUserRoles(record.id);
-    setRoles(data.map(v => v.toString()));
+    setRolesState(data.map(v => v.toString()));
     setSpinning(false);
   };
 
-  const handleChange = targetKeys => setRoles(targetKeys);
+  const handleChange = targetKeys => setRolesState(targetKeys);
 
   const handleSave = () => {
     confirm({
@@ -147,9 +144,9 @@ Users.prototype = {
     users: PropTypes.arrayOf(PropTypes.object).isRequired,
     roles: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  getUsers: PropTypes.func.isRequired,
-  getRoles: PropTypes.func.isRequired,
-  getPermissions: PropTypes.func.isRequired,
+  setUsers: PropTypes.func.isRequired,
+  setRoles: PropTypes.func.isRequired,
+  setPermissions: PropTypes.func.isRequired,
 };
 
 export default container(Users);

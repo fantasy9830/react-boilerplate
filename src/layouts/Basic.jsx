@@ -11,14 +11,14 @@ import menus from './menus';
 import logo from './../assets/images/logo.png';
 import { Content } from './style';
 
-const Basic = ({ user, layout, collapse, getProfile }) => {
+const Basic = ({ user, layout, collapse, setProfile }) => {
   const permissions = user.permissions ? Object.keys(user.permissions) : [];
 
   useEffect(() => {
     if (user.id === 0) {
-      getProfile();
+      setProfile();
     }
-  }, [user, getProfile]);
+  }, [user, setProfile]);
 
   return (
     <Media query="(max-width: 599px)">
@@ -63,7 +63,7 @@ Basic.propTypes = {
     collapsed: PropTypes.bool.isRequired,
   }),
   collapse: PropTypes.func.isRequired,
-  getProfile: PropTypes.func.isRequired,
+  setProfile: PropTypes.func.isRequired,
 };
 
 export default container(Basic);

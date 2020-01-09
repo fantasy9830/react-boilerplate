@@ -1,10 +1,10 @@
-import { token, refresh, profile } from '../api/user';
+import { token, refresh, getProfile } from '../api/user';
 import { getUserState, TokenStorage } from '../utils/auth';
 
 // Action Type
 export const LOG_IN = 'user/LOG_IN';
 export const LOG_OUT = 'user/LOG_OUT';
-export const GET_PROFILE = 'user/GET_PROFILE';
+export const SET_PROFILE = 'user/SET_PROFILE';
 export const SET_ROLES = 'user/SET_ROLES';
 export const SET_PERMISSIONS = 'user/SET_PERMISSIONS';
 export const REFRESH_TOKEN = 'user/REFRESH_TOKEN';
@@ -28,10 +28,10 @@ export const login = (username, password) => {
 
         TokenStorage.setToken(res.data.access_token);
 
-        const response = await profile();
+        const response = await getProfile();
 
         dispatch({
-          type: GET_PROFILE,
+          type: SET_PROFILE,
           id: response.data.id,
           nickname: response.data.nickname,
           roles: response.data.roles,
@@ -91,10 +91,10 @@ export const refreshToken = token => {
 
       TokenStorage.setToken(token);
 
-      const response = await profile();
+      const response = await getProfile();
 
       dispatch({
-        type: GET_PROFILE,
+        type: SET_PROFILE,
         id: response.data.id,
         nickname: response.data.nickname,
         roles: response.data.roles,
@@ -107,12 +107,12 @@ export const refreshToken = token => {
 /**
  * 取得個人資料
  */
-export const getProfile = () => {
+export const setProfile = () => {
   return async dispatch => {
-    const response = await profile();
+    const response = await getProfile();
 
     dispatch({
-      type: GET_PROFILE,
+      type: SET_PROFILE,
       id: response.data.id,
       nickname: response.data.nickname,
       roles: response.data.roles,
@@ -152,7 +152,7 @@ export default (state = initialState, action) => {
         permissions: {},
       };
 
-    case GET_PROFILE:
+    case SET_PROFILE:
       return {
         ...state,
         id: action.id,

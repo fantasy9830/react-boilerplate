@@ -13,4 +13,4 @@ export const refresh = async token =>
     refresh_token: token,
   });
 
-export const profile = async () => await api.get('/user/profile');
+export const getProfile = async () => await api.get('/user/profile');

@@ -1,48 +1,48 @@
 import { fetchUsers, fetchRoles, fetchPermissions } from '../api/admin';
 
 // Action Type
-export const GET_USERS = 'admin/GET_USERS';
-export const GET_ROLES = 'admin/GET_ROLES';
-export const GET_PERMISSIONS = 'admin/GET_PERMISSIONS';
+export const SET_USERS = 'admin/SET_USERS';
+export const SET_ROLES = 'admin/SET_ROLES';
+export const SET_PERMISSIONS = 'admin/SET_PERMISSIONS';
 
 // Action Creators
 /**
- * 抓取user list
+ * set user list
  */
-export const getUsers = () => {
+export const setUsers = () => {
   return async dispatch => {
     const { data } = await fetchUsers();
 
     dispatch({
-      type: GET_USERS,
+      type: SET_USERS,
       users: data,
     });
   };
 };
 
 /**
- * 抓取roles list
+ * set roles list
  */
-export const getRoles = () => {
+export const setRoles = () => {
   return async dispatch => {
     const { data } = await fetchRoles();
 
     dispatch({
-      type: GET_ROLES,
+      type: SET_ROLES,
       roles: data,
     });
   };
 };
 
 /**
- * 抓取permissions list
+ * set permissions list
  */
-export const getPermissions = () => {
+export const setPermissions = () => {
   return async dispatch => {
     const { data } = await fetchPermissions();
 
     dispatch({
-      type: GET_PERMISSIONS,
+      type: SET_PERMISSIONS,
       permissions: data,
     });
   };
@@ -58,19 +58,19 @@ const initialState = {
 // reducer
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_USERS:
+    case SET_USERS:
       return {
         ...state,
         users: action.users,
       };
 
-    case GET_ROLES:
+    case SET_ROLES:
       return {
         ...state,
         roles: action.roles,
       };
 
-    case GET_PERMISSIONS:
+    case SET_PERMISSIONS:
       return {
         ...state,
         permissions: action.permissions,
