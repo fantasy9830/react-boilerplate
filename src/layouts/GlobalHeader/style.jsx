@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
+import Icon from '@ant-design/icons';
 
 export const Header = styled(Layout.Header)`
   height: ${props => props.height || '64px'} !important;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import container from './container';
 import { useTranslation } from 'react-i18next';
-import { Icon } from 'antd';
+import { BellOutlined } from '@ant-design/icons';
 import { Notification } from './style';
 
 import noticeImage from './images/notice.svg';
@@ -31,7 +31,7 @@ const Notice = ({ data, clearNotice }) => {
 
   return (
     <Notification
-      bell={<Icon type="bell" style={{ fontSize: '20px' }} />}
+      bell={<BellOutlined style={{ fontSize: '20px' }} />}
       count={data.length}
       onItemClick={handleItemClick}
       onClear={handleClear}

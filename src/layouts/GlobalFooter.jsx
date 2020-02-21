@@ -1,11 +1,11 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { CopyrightOutlined } from '@ant-design/icons';
 import { Footer } from './style';
 
 const GlobalFooter = () => {
   return (
     <Footer>
-      Copyright <Icon type="copyright" /> Ricky. All rights reserved
+      Copyright <CopyrightOutlined /> Ricky. All rights reserved
     </Footer>
   );
 };

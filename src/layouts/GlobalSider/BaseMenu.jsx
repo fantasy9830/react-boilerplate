@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Menu, Icon } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import Icon from '@ant-design/icons';
+import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import container from './container';
 
@@ -20,7 +22,7 @@ const BaseMenu = props => {
     const iconStyle = { fontSize: '20px' };
 
     if (typeof icon === 'string') {
-      return <Icon type={icon} style={iconStyle} />;
+      return <LegacyIcon type={icon} style={iconStyle} />;
     }
 
     return <Icon component={icon} style={iconStyle} />;
