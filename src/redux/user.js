@@ -47,7 +47,7 @@ export const login = (username, password) => {
       if (error.response) {
         return {
           status: error.response.status,
-          statusText: error.response.data.message,
+          statusText: error.response.data.error_description,
         };
       } else if (error.request) {
         return {

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Table, Card, Divider, Button, Modal, Spin, message } from 'antd';
 import { useTranslation } from 'react-i18next';
-import container from './components/container';
 import RolesTransfer from './components/RolesTransfer';
-import { fetchUserRoles, syncUserRoles } from '../../api/admin';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUsers, setRoles, setPermissions } from './../../redux/admin';
+import { fetchUserRoles, syncUserRoles } from './../../api/admin';
 
 const { confirm } = Modal;
 
-const Users = ({ admin, setUsers, setRoles, setPermissions }) => {
+const Users = () => {
+  const dispatch = useDispatch();
+  const admin = useSelector(state => state.admin);
+
   const [t] = useTranslation('admin');
   const [loading, setLoading] = useState(false);
   const [spinning, setSpinning] = useState(false);
@@ -20,12 +23,16 @@ const Users = ({ admin, setUsers, setRoles, setPermissions }) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      await Promise.all([setUsers(), setRoles(), setPermissions()]);
+      await Promise.all([
+        dispatch(setUsers()),
+        dispatch(setRoles()),
+        dispatch(setPermissions()),
+      ]);
       setLoading(false);
     };
 
     fetchData();
-  }, [setUsers, setRoles, setPermissions]);
+  }, [dispatch]);
 
   const handleRoles = async record => {
     setUserState(record);
@@ -139,14 +146,4 @@ const Users = ({ admin, setUsers, setRoles, setPermissions }) => {
   );
 };
 
-Users.prototype = {
-  admin: PropTypes.shape({
-    users: PropTypes.arrayOf(PropTypes.object).isRequired,
-    roles: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-  setUsers: PropTypes.func.isRequired,
-  setRoles: PropTypes.func.isRequired,
-  setPermissions: PropTypes.func.isRequired,
-};
-
-export default container(Users);
+export default Users;

@@ -1,16 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon as LegacyIcon } from '@ant-design/compatible';
 import Icon from '@ant-design/icons';
 import { Menu } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import container from './container';
+import { changeActive, setOpenKeys, clearOpenKeys } from '../../redux/layout';
 
 const { SubMenu, Item } = Menu;
 
 const BaseMenu = props => {
-  const { menus, current, collapsed } = props;
-  const menuProps = collapsed ? {} : { openKeys: props.openKeys };
+  const dispatch = useDispatch();
+  const { current, openKeys } = useSelector(state => ({
+    current: state.layout.current,
+    openKeys: state.layout.openKeys,
+  }));
+
+  const { menus, collapsed } = props;
+  const menuProps = collapsed ? {} : { openKeys };
 
   function isMainMenu(openKey) {
     return props.menus.some(
@@ -20,10 +26,6 @@ const BaseMenu = props => {
 
   function getIcon(icon) {
     const iconStyle = { fontSize: '20px' };
-
-    if (typeof icon === 'string') {
-      return <LegacyIcon type={icon} style={iconStyle} />;
-    }
 
     return <Icon component={icon} style={iconStyle} />;
   }
@@ -92,16 +94,16 @@ const BaseMenu = props => {
       const moreThanOne =
         openKeys.filter(openKey => isMainMenu(openKey)).length > 1;
 
-      props.setOpenKeys(moreThanOne ? [openKeys.pop()] : [...openKeys]);
+      dispatch(setOpenKeys(moreThanOne ? [openKeys.pop()] : [...openKeys]));
     }
   }
 
   function handleItemClick({ key, keyPath }) {
-    props.changeActive(key);
+    dispatch(changeActive(key));
     if (keyPath.length === 1) {
-      props.clearOpenKeys();
+      dispatch(clearOpenKeys());
     } else {
-      props.setOpenKeys(keyPath);
+      dispatch(setOpenKeys(keyPath));
     }
   }
 
@@ -121,8 +123,6 @@ const BaseMenu = props => {
 };
 
 BaseMenu.prototype = {
-  current: PropTypes.string.isRequired,
-  openKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
   logo: PropTypes.string.isRequired,
   menus: PropTypes.arrayOf(
     PropTypes.shape({
@@ -138,9 +138,6 @@ BaseMenu.prototype = {
   collapsed: PropTypes.bool.isRequired,
   isMobile: PropTypes.bool.isRequired,
   collapse: PropTypes.func.isRequired,
-  changeActive: PropTypes.func.isRequired,
-  setOpenKeys: PropTypes.func.isRequired,
-  clearOpenKeys: PropTypes.func.isRequired,
 };
 
-export default container(BaseMenu);
+export default BaseMenu;

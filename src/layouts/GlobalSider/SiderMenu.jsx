@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Sider } from './style';
 import LogoBox from '../LogoBox';
 import BaseMenu from './BaseMenu';
-import container from './container';
 
 const SiderMenu = props => {
   const { isMobile, collapsed, collapse, logo } = props;
@@ -45,4 +44,4 @@ SiderMenu.prototype = {
   collapse: PropTypes.func.isRequired,
 };
 
-export default container(SiderMenu);
+export default SiderMenu;

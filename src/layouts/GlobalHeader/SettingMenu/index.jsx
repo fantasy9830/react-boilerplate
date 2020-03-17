@@ -1,16 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Dropdown, Avatar, Menu } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { IconContext } from 'react-icons';
 import { FaSignOutAlt, FaUserAlt } from 'react-icons/fa';
 import { Action } from './style';
-import container from './container';
+import { changeActive, clearOpenKeys } from './../../../redux/layout';
+import { logout } from './../../../redux/user';
 
 const { Item } = Menu;
 
-const SettingMenu = props => {
+const SettingMenu = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const history = useHistory();
   const [t] = useTranslation('layout');
 
   const MenuItem = (
@@ -25,10 +29,10 @@ const SettingMenu = props => {
   function handleMenuClick({ key }) {
     switch (key) {
       case 'logout':
-        props.logout();
-        props.clearOpenKeys();
-        props.changeActive('home');
-        props.history.push('/');
+        dispatch(logout());
+        dispatch(clearOpenKeys());
+        dispatch(changeActive('home'));
+        history.push('/');
         break;
       default:
         break;
@@ -42,20 +46,11 @@ const SettingMenu = props => {
           <Avatar style={{ marginRight: '8px' }}>
             <FaUserAlt />
           </Avatar>
-          <span>{props.user.nickname}</span>
+          <span>{user.nickname}</span>
         </Action>
       </Dropdown>
     </IconContext.Provider>
   );
 };
 
-SettingMenu.prototype = {
-  user: PropTypes.shape({
-    nickname: PropTypes.string.isRequired,
-  }).isRequired,
-  logout: PropTypes.func.isRequired,
-  clearOpenKeys: PropTypes.func.isRequired,
-  changeActive: PropTypes.func.isRequired,
-};
-
-export default withRouter(container(SettingMenu));
+export default SettingMenu;

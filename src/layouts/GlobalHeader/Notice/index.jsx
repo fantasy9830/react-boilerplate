@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import container from './container';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearNotice } from './../../../redux/layout';
 import { useTranslation } from 'react-i18next';
 import { BellOutlined } from '@ant-design/icons';
 import { Notification } from './style';
@@ -9,7 +9,9 @@ import noticeImage from './images/notice.svg';
 import messageImage from './images/message.svg';
 import todoImage from './images/todo.svg';
 
-const Notice = ({ data, clearNotice }) => {
+const Notice = () => {
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.layout.notice);
   const [t] = useTranslation('layout');
 
   function handleItemClick(item, tabProps) {
@@ -26,7 +28,7 @@ const Notice = ({ data, clearNotice }) => {
       type = 'todo';
     }
 
-    clearNotice(type);
+    dispatch(clearNotice(type));
   }
 
   return (
@@ -65,9 +67,4 @@ const Notice = ({ data, clearNotice }) => {
   );
 };
 
-Notice.prototype = {
-  data: PropTypes.arrayOf(PropTypes.any).isRequired,
-  clearNotice: PropTypes.func.isRequired,
-};
-
-export default container(Notice);
+export default Notice;

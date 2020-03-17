@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SiderMenu from './SiderMenu';
 import { setAuthority } from '../../utils/auth';
-import container from './container';
 import { MobileDrawer } from './style';
 
 const GlobalSider = ({ menus, permissions, ...props }) =>
@@ -41,4 +40,4 @@ GlobalSider.prototype = {
   collapse: PropTypes.func.isRequired,
 };
 
-export default container(GlobalSider);
+export default GlobalSider;

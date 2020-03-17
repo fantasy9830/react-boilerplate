@@ -1,48 +1,44 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Alert } from 'antd';
-import { Login } from 'ant-design-pro';
+import { Alert, Form, Input, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Main } from './style';
-import container from './container';
+import { login } from './../../../redux/user';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-const { UserName, Password, Submit } = Login;
-
-const LoginForm = props => {
-  let loginForm = null;
+const LoginForm = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const location = useLocation();
   const [t] = useTranslation('auth');
   const [notice, setNotice] = useState('');
   const [loading, setLoading] = useState(false);
-  const prevProps = useRef(props);
+  const prevUser = useRef(user);
 
   useEffect(() => {
-    if (prevProps.current.user.isLogged) {
-      prevProps.current.history.push('/');
+    if (prevUser.current.isLogged) {
+      history.push('/');
     }
-  }, []);
+  }, [history, user]);
 
-  async function handleSubmit(err, { username, password }) {
-    if (!err) {
-      NProgress.start();
-      setLoading(true);
+  async function handleSubmit({ username, password }) {
+    NProgress.start();
+    setLoading(true);
+    const { status, statusText } = await dispatch(login(username, password));
+    setLoading(false);
+    NProgress.done();
 
-      const { status, statusText } = await props.login(username, password);
+    if (status === 200) {
+      const pathname =
+        (location.state.from && location.state.from.pathname) || '/';
 
-      setLoading(false);
-      NProgress.done();
-
-      if (status === 200) {
-        const pathname =
-          (props.location.state.from && props.location.state.from.pathname) ||
-          '/';
-
-        props.history.push(pathname);
-      } else if (statusText) {
-        setNotice(statusText);
-      }
+      history.push(pathname);
+    } else if (statusText) {
+      setNotice(statusText);
     }
   }
 
@@ -52,12 +48,7 @@ const LoginForm = props => {
 
   return (
     <Main>
-      <Login
-        onSubmit={handleSubmit}
-        ref={form => {
-          loginForm = form;
-        }}
-      >
+      <Form name="loginform" onFinish={handleSubmit}>
         {notice && (
           <Alert
             style={{ marginBottom: 24 }}
@@ -68,21 +59,31 @@ const LoginForm = props => {
             onClose={handleClose}
           />
         )}
-        <UserName
+
+        <Form.Item
           name="username"
-          placeholder={t('username')}
-          readOnly={loading}
-        />
-        <Password
+          rules={[{ required: true, message: t('username') }]}
+        >
+          <Input placeholder={t('username')} readOnly={loading} />
+        </Form.Item>
+
+        <Form.Item
           name="password"
-          placeholder={t('password')}
-          readOnly={loading}
-          onPressEnter={() => loginForm.validateFields(handleSubmit)}
-        />
-        <Submit loading={loading} style={{ width: '100%', marginTop: '16px' }}>
-          {t('submit')}
-        </Submit>
-      </Login>
+          rules={[{ required: true, message: t('password') }]}
+        >
+          <Input.Password placeholder={t('password')} readOnly={loading} />
+        </Form.Item>
+
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ width: '100%', marginTop: '16px' }}
+          >
+            {t('submit')}
+          </Button>
+        </Form.Item>
+      </Form>
     </Main>
   );
 };
@@ -91,4 +92,4 @@ LoginForm.prototype = {
   login: PropTypes.func.isRequired,
 };
 
-export default withRouter(container(LoginForm));
+export default LoginForm;

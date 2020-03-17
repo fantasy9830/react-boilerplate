@@ -1,24 +1,30 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { Layout } from 'antd';
 import Media from 'react-media';
 import GlobalHeader from './GlobalHeader';
 import GlobalSider from './GlobalSider';
 import GlobalFooter from './GlobalFooter';
 import ContentRouter from './ContentRouter';
-import container from './container';
+import { collapse } from './../redux/layout';
+import { setProfile } from './../redux/user';
 import menus from './menus';
 import logo from './../assets/images/logo.png';
 import { Content } from './style';
 
-const Basic = ({ user, layout, collapse, setProfile }) => {
+const Basic = () => {
+  const dispatch = useDispatch();
+  const { layout, user } = useSelector(state => ({
+    layout: state.layout,
+    user: state.user,
+  }));
   const permissions = user.permissions ? Object.keys(user.permissions) : [];
 
   useEffect(() => {
     if (user.id === 0) {
-      setProfile();
+      dispatch(setProfile());
     }
-  }, [user, setProfile]);
+  }, [user, dispatch]);
 
   return (
     <Media query="(max-width: 599px)">
@@ -27,7 +33,7 @@ const Basic = ({ user, layout, collapse, setProfile }) => {
           <GlobalSider
             isMobile={isMobile}
             collapsed={layout.collapsed}
-            collapse={collapse}
+            collapse={v => dispatch(collapse(v))}
             logo={logo}
             menus={menus}
             permissions={permissions}
@@ -36,7 +42,7 @@ const Basic = ({ user, layout, collapse, setProfile }) => {
             <GlobalHeader
               isMobile={isMobile}
               collapsed={layout.collapsed}
-              collapse={collapse}
+              collapse={v => dispatch(collapse(v))}
               logo={logo}
             />
 
@@ -54,16 +60,4 @@ const Basic = ({ user, layout, collapse, setProfile }) => {
   );
 };
 
-Basic.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    permissions: PropTypes.object,
-  }),
-  layout: PropTypes.shape({
-    collapsed: PropTypes.bool.isRequired,
-  }),
-  collapse: PropTypes.func.isRequired,
-  setProfile: PropTypes.func.isRequired,
-};
-
-export default container(Basic);
+export default Basic;
