@@ -9,10 +9,7 @@ const GlobalHeader = ({ isMobile, collapsed, collapse, logo }) => {
   return (
     <Header>
       {isMobile && <MobileLogo image={logo} />}
-      <MenuBar
-        type={collapsed ? 'menu-unfold' : 'menu-fold'}
-        onClick={() => collapse(!collapsed)}
-      />
+      <MenuBar collapsed={collapsed} onClick={() => collapse(!collapsed)} />
       <Right>
         <Notice />
         <SettingMenu />

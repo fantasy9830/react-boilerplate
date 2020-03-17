@@ -1,6 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 import { Layout } from 'antd';
-import Icon from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 export const Header = styled(Layout.Header)`
   height: ${props => props.height || '64px'} !important;
@@ -9,6 +10,9 @@ export const Header = styled(Layout.Header)`
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   position: relative;
 `;
+
+const Icon = ({ collapsed, ...rest }) =>
+  collapsed ? <MenuUnfoldOutlined {...rest} /> : <MenuFoldOutlined {...rest} />;
 
 export const MenuBar = styled(Icon)`
   font-size: 20px;
