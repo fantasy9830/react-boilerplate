@@ -8,7 +8,7 @@ const instance = axios.create({
 });
 
 // http request interceptors
-instance.interceptors.request.use(config => {
+instance.interceptors.request.use((config) => {
   //const token = stores.getState().user.token;
   const token = TokenStorage.getToken();
   if (token) {
@@ -20,7 +20,7 @@ instance.interceptors.request.use(config => {
 
 // http response interceptors
 instance.interceptors.response.use(
-  response => {
+  (response) => {
     const token = response.headers.authorization;
     if (token) {
       stores.dispatch(refreshToken(token.replace(/Bearer/gi, '').trim()));
@@ -28,7 +28,7 @@ instance.interceptors.response.use(
 
     return response;
   },
-  error => {
+  (error) => {
     if (error.response) {
       if (error.response.status === 302) {
         //

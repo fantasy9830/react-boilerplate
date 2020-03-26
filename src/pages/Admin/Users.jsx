@@ -10,7 +10,7 @@ const { confirm } = Modal;
 
 const Users = () => {
   const dispatch = useDispatch();
-  const admin = useSelector(state => state.admin);
+  const admin = useSelector((state) => state.admin);
 
   const [t] = useTranslation('admin');
   const [loading, setLoading] = useState(false);
@@ -34,16 +34,16 @@ const Users = () => {
     fetchData();
   }, [dispatch]);
 
-  const handleRoles = async record => {
+  const handleRoles = async (record) => {
     setUserState(record);
     setRolesVisible(true);
     setSpinning(true);
     const { data } = await fetchUserRoles(record.id);
-    setRolesState(data.map(v => v.toString()));
+    setRolesState(data.map((v) => v.toString()));
     setSpinning(false);
   };
 
-  const handleChange = targetKeys => setRolesState(targetKeys);
+  const handleChange = (targetKeys) => setRolesState(targetKeys);
 
   const handleSave = () => {
     confirm({

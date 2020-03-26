@@ -14,7 +14,7 @@ import { Content } from './style';
 
 const Basic = () => {
   const dispatch = useDispatch();
-  const { layout, user } = useSelector(state => ({
+  const { layout, user } = useSelector((state) => ({
     layout: state.layout,
     user: state.user,
   }));
@@ -28,12 +28,12 @@ const Basic = () => {
 
   return (
     <Media query="(max-width: 599px)">
-      {isMobile => (
+      {(isMobile) => (
         <Layout>
           <GlobalSider
             isMobile={isMobile}
             collapsed={layout.collapsed}
-            collapse={v => dispatch(collapse(v))}
+            collapse={(v) => dispatch(collapse(v))}
             logo={logo}
             menus={menus}
             permissions={permissions}
@@ -42,7 +42,7 @@ const Basic = () => {
             <GlobalHeader
               isMobile={isMobile}
               collapsed={layout.collapsed}
-              collapse={v => dispatch(collapse(v))}
+              collapse={(v) => dispatch(collapse(v))}
               logo={logo}
             />
 

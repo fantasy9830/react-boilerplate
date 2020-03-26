@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Image, MobileLink } from './style';
 import { changeActive, clearOpenKeys } from './../../redux/layout';
 
-const MobileLogo = props => {
+const MobileLogo = (props) => {
   const dispatch = useDispatch();
 
   return (

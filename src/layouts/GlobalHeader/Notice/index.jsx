@@ -11,7 +11,7 @@ import todoImage from './images/todo.svg';
 
 const Notice = () => {
   const dispatch = useDispatch();
-  const data = useSelector(state => state.layout.notice);
+  const data = useSelector((state) => state.layout.notice);
   const [t] = useTranslation('layout');
 
   function handleItemClick(item, tabProps) {
@@ -42,7 +42,7 @@ const Notice = () => {
     >
       {/* 通知事項 */}
       <Notification.Tab
-        list={data.filter(item => item.type === 'notice')}
+        list={data.filter((item) => item.type === 'notice')}
         title={t('notice.notice')}
         emptyText={t('notice.noticeEmpty')}
         emptyImage={noticeImage}
@@ -50,7 +50,7 @@ const Notice = () => {
 
       {/* 訊息 */}
       <Notification.Tab
-        list={data.filter(item => item.type === 'message')}
+        list={data.filter((item) => item.type === 'message')}
         title={t('notice.message')}
         emptyText={t('notice.messageEmpty')}
         emptyImage={messageImage}
@@ -58,7 +58,7 @@ const Notice = () => {
 
       {/* 待辦事項 */}
       <Notification.Tab
-        list={data.filter(item => item.type === 'todo')}
+        list={data.filter((item) => item.type === 'todo')}
         title={t('notice.todo')}
         emptyText={t('notice.todoEmpty')}
         emptyImage={todoImage}

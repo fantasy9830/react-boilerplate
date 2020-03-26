@@ -4,12 +4,12 @@ import { Transfer } from 'antd';
 
 const RolesTransfer = ({ source, target, onChange }) => (
   <Transfer
-    dataSource={source.map(item => ({
+    dataSource={source.map((item) => ({
       key: item.id.toString(),
       title: item.name,
     }))}
     titles={['Source', 'Target']}
-    render={item => item.title}
+    render={(item) => item.title}
     targetKeys={target}
     onChange={onChange}
   />

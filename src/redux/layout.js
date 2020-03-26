@@ -10,7 +10,7 @@ export const SET_OPENKEYS = 'layout/SET_OPENKEYS';
  * 設定sider menu目前展開的欄位
  * @param keys - 目前展開的欄位值
  */
-export const setOpenKeys = keys => {
+export const setOpenKeys = (keys) => {
   return {
     type: SET_OPENKEYS,
     keys,
@@ -30,7 +30,7 @@ export const clearOpenKeys = () => {
  * 改變sidebar所在的位置
  * @param current - 現在頁面所在位置
  */
-export const changeActive = current => {
+export const changeActive = (current) => {
   return {
     type: CHANGE_ACTIVE,
     current,
@@ -41,7 +41,7 @@ export const changeActive = current => {
  * 摺疊sidebar
  * @param collapsed - 是否摺疊
  */
-export const collapse = collapsed => {
+export const collapse = (collapsed) => {
   return {
     type: COLLAPSE,
     collapsed,
@@ -52,7 +52,7 @@ export const collapse = collapsed => {
  * 清空通知訊息
  * @param noticeType - 類型 notice/message/todo
  */
-export const clearNotice = noticeType => {
+export const clearNotice = (noticeType) => {
   return {
     type: CLEAR_NOTICE,
     noticeType,
@@ -97,7 +97,7 @@ export default (state = initialState, action) => {
     case CLEAR_NOTICE:
       return {
         ...state,
-        notice: state.notice.filter(item => item.type !== action.noticeType),
+        notice: state.notice.filter((item) => item.type !== action.noticeType),
       };
 
     default:

@@ -44,7 +44,7 @@ export const resize = (file, maxWidth = 1024, maxHeight = 1024) => {
       context.drawImage(image, 0, 0, targetWidth, targetHeight);
 
       canvas.toBlob(
-        blob => resolve(new File([blob], file.name, { type: file.type })),
+        (blob) => resolve(new File([blob], file.name, { type: file.type })),
         file.type,
       );
     };

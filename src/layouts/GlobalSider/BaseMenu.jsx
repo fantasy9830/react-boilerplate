@@ -8,9 +8,9 @@ import { changeActive, setOpenKeys, clearOpenKeys } from '../../redux/layout';
 
 const { SubMenu, Item } = Menu;
 
-const BaseMenu = props => {
+const BaseMenu = (props) => {
   const dispatch = useDispatch();
-  const { current, openKeys } = useSelector(state => ({
+  const { current, openKeys } = useSelector((state) => ({
     current: state.layout.current,
     openKeys: state.layout.openKeys,
   }));
@@ -20,7 +20,7 @@ const BaseMenu = props => {
 
   function isMainMenu(openKey) {
     return props.menus.some(
-      item => item.key === openKey || item.path === openKey,
+      (item) => item.key === openKey || item.path === openKey,
     );
   }
 
@@ -33,16 +33,16 @@ const BaseMenu = props => {
   function getNavMenuItems(menus) {
     if (menus) {
       return menus
-        .filter(item => item.key && item.authority)
-        .map(item => getSubMenuOrItem(item))
-        .filter(item => !!item);
+        .filter((item) => item.key && item.authority)
+        .map((item) => getSubMenuOrItem(item))
+        .filter((item) => !!item);
     } else {
       return [];
     }
   }
 
   function getSubMenuOrItem(item) {
-    if (item.children && item.children.some(child => child.key)) {
+    if (item.children && item.children.some((child) => child.key)) {
       return (
         <SubMenu
           key={item.key}
@@ -92,7 +92,7 @@ const BaseMenu = props => {
   function handleOpenChange(openKeys) {
     if (!props.collapsed) {
       const moreThanOne =
-        openKeys.filter(openKey => isMainMenu(openKey)).length > 1;
+        openKeys.filter((openKey) => isMainMenu(openKey)).length > 1;
 
       dispatch(setOpenKeys(moreThanOne ? [openKeys.pop()] : [...openKeys]));
     }

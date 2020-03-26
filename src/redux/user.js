@@ -16,7 +16,7 @@ export const REFRESH_TOKEN = 'user/REFRESH_TOKEN';
  * @param password - 密碼
  */
 export const login = (username, password) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const res = await token(username, password);
 
@@ -63,7 +63,7 @@ export const login = (username, password) => {
  * 登出
  */
 export const logout = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
       type: LOG_OUT,
     });
@@ -76,7 +76,7 @@ export const logout = () => {
  * 更新 Token
  * @param token - JWT Token
  */
-export const refreshToken = token => {
+export const refreshToken = (token) => {
   return async (dispatch, getState) => {
     if (!token) {
       const res = await refresh(getState().user.token);
@@ -108,7 +108,7 @@ export const refreshToken = token => {
  * 取得個人資料
  */
 export const setProfile = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const response = await getProfile();
 
     dispatch({

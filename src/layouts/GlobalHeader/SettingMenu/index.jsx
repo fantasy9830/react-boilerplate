@@ -13,7 +13,7 @@ const { Item } = Menu;
 
 const SettingMenu = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const history = useHistory();
   const [t] = useTranslation('layout');
 

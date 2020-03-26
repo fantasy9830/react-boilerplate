@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 export const Header = styled(Layout.Header)`
-  height: ${props => props.height || '64px'} !important;
+  height: ${(props) => props.height || '64px'} !important;
   padding: 0 !important;
   background: #fff !important;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
@@ -16,7 +16,7 @@ const Icon = ({ collapsed, ...rest }) =>
 
 export const MenuBar = styled(Icon)`
   font-size: 20px;
-  height: ${props => props.height || '64px'} !important;
+  height: ${(props) => props.height || '64px'} !important;
   cursor: pointer;
   transition: all 0.3s, padding 0s;
   padding: 22px 24px;

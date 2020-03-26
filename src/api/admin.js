@@ -10,10 +10,10 @@ export const fetchRoles = async () => await api.get('/roles');
 export const fetchPermissions = async () => await api.get('/permissions');
 
 // fetch user role
-export const fetchUserRoles = async id => await api.get(`/users/${id}/roles`);
+export const fetchUserRoles = async (id) => await api.get(`/users/${id}/roles`);
 
 // fetch user permission
-export const fetchUserPermissions = async id =>
+export const fetchUserPermissions = async (id) =>
   await api.get(`/users/${id}/permissions`);
 
 // 設定 user 的 role 相關資料

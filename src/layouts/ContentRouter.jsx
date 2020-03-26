@@ -13,7 +13,7 @@ const ContentRouter = ({ menus, permissions }) => {
     <React.Suspense fallback={<PageLoading />}>
       <Switch>
         <Route exact path="/" component={HomeScreen} />
-        {flatten(menus).map(route => {
+        {flatten(menus).map((route) => {
           const check = authorized(route.key);
 
           return (

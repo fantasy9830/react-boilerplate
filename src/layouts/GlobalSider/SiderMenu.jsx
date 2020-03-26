@@ -4,7 +4,7 @@ import { Sider } from './style';
 import LogoBox from '../LogoBox';
 import BaseMenu from './BaseMenu';
 
-const SiderMenu = props => {
+const SiderMenu = (props) => {
   const { isMobile, collapsed, collapse, logo } = props;
 
   return (

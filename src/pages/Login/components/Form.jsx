@@ -12,7 +12,7 @@ import 'nprogress/nprogress.css';
 const LoginForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   const location = useLocation();
   const [t] = useTranslation('auth');
   const [notice, setNotice] = useState('');

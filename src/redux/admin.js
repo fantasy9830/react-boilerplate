@@ -10,7 +10,7 @@ export const SET_PERMISSIONS = 'admin/SET_PERMISSIONS';
  * set user list
  */
 export const setUsers = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const { data } = await fetchUsers();
 
     dispatch({
@@ -24,7 +24,7 @@ export const setUsers = () => {
  * set roles list
  */
 export const setRoles = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const { data } = await fetchRoles();
 
     dispatch({
@@ -38,7 +38,7 @@ export const setRoles = () => {
  * set permissions list
  */
 export const setPermissions = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     const { data } = await fetchPermissions();
 
     dispatch({

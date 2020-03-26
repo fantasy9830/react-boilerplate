@@ -7,7 +7,7 @@ export const flatten = (tree = []) => {
     if (node.path && node.component) {
       list.push(node);
     } else if (node.children) {
-      flatten(node.children).forEach(leaf => list.push(leaf));
+      flatten(node.children).forEach((leaf) => list.push(leaf));
     }
 
     return list;
