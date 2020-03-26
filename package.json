@@ -36,8 +36,8 @@
     "babel-plugin-import": "1.13.0",
     "customize-cra": "0.9.1",
     "husky": "4.2.3",
-    "lint-staged": "10.0.8",
-    "prettier": "1.19.1",
+    "lint-staged": "10.0.9",
+    "prettier": "2.0.2",
     "react-app-rewired": "2.1.5"
   },
   "scripts": {
@@ -69,7 +69,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,ts,mjs,jsx,tsx,json,css,scss,md}": [
-      "prettier --single-quote --trailingComma all --write",
+      "prettier --single-quote --trailing-comma all --write",
       "git add"
     ]
   }
