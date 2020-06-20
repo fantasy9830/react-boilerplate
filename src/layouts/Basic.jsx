@@ -18,7 +18,14 @@ const Basic = () => {
     layout: state.layout,
     user: state.user,
   }));
-  const permissions = user.permissions ? Object.keys(user.permissions) : [];
+
+  const permissions = user.permissions
+    ? [
+        ...new Set(
+          user.permissions.map((permission) => permission.split('_').pop()),
+        ),
+      ]
+    : [];
 
   useEffect(() => {
     if (user.id === 0) {

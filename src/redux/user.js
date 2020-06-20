@@ -128,7 +128,7 @@ const initialState = getUserState({
   nickname: '',
   token: '',
   roles: [],
-  permissions: {},
+  permissions: [],
 });
 
 // reducer
