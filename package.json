@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "ant-design-pro": "2.2.1",
     "antd": "4.0.3",
-    "axios": "0.19.2",
+    "axios": "1.8.2",
     "dayjs": "1.8.23",
     "i18next": "19.3.2",
     "i18next-browser-languagedetector": "4.0.2",
